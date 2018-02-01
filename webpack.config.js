@@ -64,6 +64,33 @@ module.exports = {
             }
           }]
         })
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            mimetype: 'image/png',
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]?[hash]',
+                outputPath: 'media/images/'
+              }
+            }
+          }
+        }]
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]?[hash]',
+            outputPath: 'media/fonts/'
+          }
+        }]
       }
     ]
   },
