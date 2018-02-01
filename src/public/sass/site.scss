@@ -1,15 +1,13 @@
-.container {
-    display: flex;
-    justify-content: center;
-}
+@charset "utf-8";
 
-div.tooltip {   
-    position: absolute;           
-    text-align: center;           
-    padding: 1em;             
-    font: 1.2em sans-serif;        
-    background: lightsteelblue;   
-    border: 0;      
-    border-radius: 8px;           
-    pointer-events: none;         
-}
+
+@import
+       "dependencies",
+       "typography",
+       "layout",
+       "components",
+       "formfields",
+       "navigation",
+       "nivoslider",
+       "vendor"
+;

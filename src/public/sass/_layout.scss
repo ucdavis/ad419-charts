@@ -1,0 +1,222 @@
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+  position:relative;
+  min-height: 100%;
+  height:inherit;
+}
+body {
+  padding:0px;
+  margin:0px;
+  margin-bottom:180px;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: inherit;
+    width:98%;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: inherit;
+    width:95%;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: inherit;
+    width:90%;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1400px;
+    width:88%;
+  }
+}
+header {
+  // background-color: $primary-color;
+  padding-top:24px;
+  padding-bottom:4px;
+  h1 {
+    img {
+      padding-bottom:6px;
+    }
+    color:#002855;
+    font-size:3.6rem;
+    margin-bottom:0px;
+  }
+  p {
+    font-style: italic;
+    color:$primary-color;
+    font-size:2.2rem;
+  }
+}
+header.header-home {
+  h1 {
+    color:#fff;
+
+  }
+  p {
+    color:#fff;
+    margin-bottom:-8px;
+  }
+  p a {
+    color:#fff;
+    font-style:normal;
+    font-size:1.8rem;
+    font-weight:600;
+    &:hover {
+      color:$secondary-color;
+    }
+  }
+  background: url(/media/home-banner.jpg) center top/cover no-repeat;
+  .banner-cta {
+    margin-top:21%;
+    margin-bottom:4%;
+  }
+  .banner-contents {
+    width:40%;
+    @include breakpoint(tablet) {
+      width:100%;
+    }
+  }
+}
+.head_bleed {
+  background: #1e3a5b;
+    background: -moz-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+    background: -webkit-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+    background: linear-gradient(to right,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$gradient-one',endColorstr='$gradient-two',GradientType=1);
+}
+.head_divider {
+    background: url(/media/gunrock_banner_final.svg) center top/cover no-repeat;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.annoucnements p {
+  margin-bottom:0px;
+}
+.main-cta {
+  border-bottom:1px solid $accent;
+  border-top:1px solid $accent;
+  margin:20px 0px 56px 0px;
+  .left-col {
+    border-right:1px solid $accent;
+    @include breakpoint(tablet) {
+      border-right:none;
+      border-bottom:1px solid $accent;
+    }
+  }
+  .event-left {
+    margin-left:48px;
+    @include breakpoint(tablet) {
+      margin-left:0px;
+    }
+  }
+  p {
+    font-size:1.8rem;
+  }
+  .col-md-6 {
+    padding:80px 0px;
+  }
+
+}
+.calendar-wrapper {
+  text-align: center;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  .calendar-top {
+    background-color: $unitrans-red;
+    color:#fff;
+    font-size:2.6rem;
+  }
+  .calendar-bot {
+    font-size:4.2rem;
+    font-family: $sans-bold;
+    padding:10px 0px;
+  }
+}
+.cta-descrip {
+  margin:24px 0px;
+}
+.custom-col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+.col-md-8 {
+  padding-top:16px;
+  @include breakpoint(rufus) {
+    padding-right:56px;
+    // border-right:1px solid $bg-color;
+    padding-bottom:40px;
+    min-height:582px;
+  }
+}
+// .sidebar .col-md-4 {
+//   padding-top:24px;
+//   @include breakpoint(rufus) {
+//     padding-left:32px;
+//   }
+//
+// }
+.event-sidebar {
+  padding-top:26px;
+  p {
+    color:$secondary-font;
+  }
+}
+.event-collection {
+  .lead {
+    margin-bottom:24px;
+  }
+  .col-md-4 {
+    img {
+      width:100%;
+    }
+  }
+}
+.flex-apart {
+  display:flex;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  height:180px;
+  .foot-border {
+      border-top:1px solid $tertiary-color;
+      padding-top:20px;
+  }
+  // p a {
+  //   color:$tertiary-color;
+  // }
+  .footer-divider {
+    text-align:center;
+    img {
+    z-index: 99;
+    border-right: 20px solid #fff;
+    border-left: 20px solid #fff;
+    background-color: #fff;
+    position: relative;
+    bottom:-55px;
+    @include breakpoint (mdbreak) {
+      display:none;
+    }
+    }
+  }
+    @include breakpoint (smbreak) {
+        .col-sm:nth-child(3), .col-sm:nth-child(4) {
+          text-align:right;
+        }
+  }
+}
