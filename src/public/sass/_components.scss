@@ -184,7 +184,9 @@ ol.breadcrumb {
 .m-b {
   margin-bottom: 16px;
 }
-
+.align-items-center {
+  align-items:center
+}
 .align-center {
   align-self: center;
 }
@@ -203,6 +205,10 @@ ol.breadcrumb {
 
 .t-center {
   text-align: center;
+}
+
+.spacer {
+  padding:12% 0% 9% 0%;
 }
 
 .card-nobrdr {
