@@ -2,6 +2,8 @@
 
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
   <link rel="stylesheet" href="./css/app.css">
 </head>
 
@@ -14,13 +16,11 @@
             <img src="/media/ucdavislogo.svg" alt="UC Davis Logo">
           </div>
         </div>
-<div class="row">
-  <div class="col t-center spacer">
-    <img src="/media/AES-Logo.svg" alt="AES font">
-  </div>
-</div>
-
-
+        <div class="row">
+          <div class="col t-center spacer">
+            <img src="/media/AES-Logo.svg" alt="AES font">
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -41,13 +41,13 @@
     </div>
   </div>
 
-  <div id="lead_carousel">
-    <div><h3>1</h3></div>
-    <div><h3>2</h3></div>
-    <div><h3>3</h3></div>
-    <div><h3>4</h3></div>
-    <div><h3>5</h3></div>
-    <div><h3>6</h3></div>
+  <div class="lead_carousel" >
+    <img src="http://via.placeholder.com/351x150" alt="kitten" height="150">
+    <img src="http://via.placeholder.com/352x150" alt="kitten" height="150">
+    <img src="http://via.placeholder.com/353x150" alt="kitten" height="150">
+    <img src="http://via.placeholder.com/354x150" alt="kitten" height="150">
+    <img src="http://via.placeholder.com/355x150" alt="kitten" height="150">
+    <img src="http://via.placeholder.com/356x150" alt="kitten" height="150">
   </div>
 
   <div class="container">
@@ -57,32 +57,13 @@
   <script src="./js/app.js"></script>
   <script src="./js/map.js"></script>
   <script>
-    $('#lead_carousel').slick({
-    centerMode: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: '40px',
-          slidesToShow: 1
-        }
-      }
-    ]
-  });
+    $('.lead_carousel').slick({
+      adaptiveHeight: true,
+      variableWidth: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 3000
+    });
   </script>
 </body>
-
 </html>
