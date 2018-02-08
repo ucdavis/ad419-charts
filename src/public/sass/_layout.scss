@@ -72,6 +72,12 @@ font-family: $sans-bold;
 
   }
 }
+.lead_carousel {
+  .slick-slide {
+    height: inherit;
+  }
+}
+
 footer {
   position: absolute;
   bottom: 0;
