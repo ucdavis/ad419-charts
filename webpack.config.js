@@ -2,6 +2,7 @@ const path = require('path');
 // `CheckerPlugin` is optional. Use it if you want async error reporting.
 // We need this plugin to detect a `--watch` mode. It may be removed later
 // after https://github.com/webpack/webpack/issues/3460 will be resolved.
+const { ProvidePlugin } = require('webpack');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -25,7 +26,10 @@ module.exports = {
 
   // Currently we need to add '.ts' to the resolve.extensions array.
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      jquery: "jquery/src/jquery"
+    }
   },
  
   // Source maps support ('inline-source-map' also works)
@@ -96,6 +100,10 @@ module.exports = {
   },
   plugins: [
     new CheckerPlugin(),
+    new ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
     new CopyWebpackPlugin(
       assets.map(a => {
         return {
