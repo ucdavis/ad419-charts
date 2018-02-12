@@ -284,3 +284,31 @@ table.dataTable tr.even td {
 .a-color {
   color:$a-link;
 }
+
+.double-dot:after, .double-dot:before {
+    content:"\A";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background: #D8D8D8;
+    display:inline-block;
+    margin:0 21px;
+}
+.double-dot-after:after {
+    content:"\A";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background: #D8D8D8;
+    display:inline-block;
+    margin:0 21px;
+}
+.double-dot-before:before {
+    content:"\A";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background: #D8D8D8;
+    display:inline-block;
+    margin:0 21px;
+}

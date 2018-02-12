@@ -75,6 +75,16 @@ padding:1% 0% 3% 0%;
     max-width:650px;
   }
 }
+.topics {
+  text-align: center;
+  box-shadow:0 2px 1px rgba(0,40,85,0.15);
+  padding-top:40px;
+  padding-bottom:60px;
+  .topics-container {
+    width:80%;
+    margin: 0 auto;
+  }
+}
 .lead_carousel {
   .slick-slide {
     height: inherit;
