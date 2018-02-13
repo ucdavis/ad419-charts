@@ -36,15 +36,34 @@
   </div>
   <div class="topics">
     <div class="container">
-      <div class="flexer align-items-center flex-between">
-        <div class="topic-icon double-dot-after"><img src="/media/greentopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot"><img src="/media/orangetopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot"><img src="/media/yellowtopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot"><img src="/media/redtopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot"><img src="/media/pinktopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot"><img src="/media/purpletopic.svg" alt="icon"></div>
-        <div class="topic-icon double-dot-before"><img src="/media/bluetopic.svg" alt="icon"></div>
-      </div>
+      <ul class="topic-nav">
+        <li class="topic-item col"><img src="/media/greentopic.svg" alt="icon">
+        <p class="topic-title">Sustainability</p></li>
+        <li class="topic-item col"><img src="/media/orangetopic.svg" alt="icon">
+        <p class="topic-title">Genetics</p></li>
+        <li class="topic-item col"><img src="/media/yellowtopic.svg" alt="icon">
+        <p class="topic-title">Environmental</p></li>
+        <li class="topic-item col"><img src="/media/redtopic.svg" alt="icon">
+          <p class="topic-title color-unitrans">Animal Science</p>
+        </li>
+        <li class="topic-item col"><img src="/media/pinktopic.svg" alt="icon">
+        <p class="topic-title">Human Development</p></li>
+        <li class="topic-item col"><img src="/media/purpletopic.svg" alt="icon">
+        <p class="topic-title">Viticulture</p></li>
+        <li class="topic-item col"><img src="/media/bluetopic.svg" alt="icon">
+        <p class="topic-title">Water Management</p></li>
+      </ul>
+      <!-- <div class="row align-items-top flex-between">
+        <div class="col topic-item"><img src="/media/greentopic.svg" alt="icon"></div>
+        <div class="col topic-item"><img src="/media/orangetopic.svg" alt="icon"></div>
+        <div class="col topic-item"><img src="/media/yellowtopic.svg" alt="icon"></div>
+        <div class="col topic-item active-topic"><img src="/media/redtopic.svg" alt="icon">
+          <p class="topic-title color-unitrans t-center">Animal Science</p>
+        </div>
+        <div class="col topic-item"><img src="/media/pinktopic.svg" alt="icon"></div>
+        <div class="col topic-item"><img src="/media/purpletopic.svg" alt="icon"></div>
+        <div class="col topic-item"><img src="/media/bluetopic.svg" alt="icon"></div>
+      </div> -->
     </div>
 
   </div>
@@ -54,32 +73,55 @@
     <div id="map"></div>
   </div>
   <div class="research_profile">
+    <h1 class="t-center">Research Profiles </h1>
     <div class="container">
-      <img src="/media/article-shot.jpg" alt="">
-      <div class="research-title">
-        <div class="research-title-inner bg-unitrans">
-          <h2>Animal Science</h2>
-          <img src="/media/cow-white.svg" alt="cow icon">
-        </div>
-        <div class="research-title-more">
-          <a href="/" class="btn-border border-unitrans color-unitrans">Learn More</a>
-          <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-          <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
-        </div>
-        <div class="research-details">
-          <p>
-          <span class="secondary-font">Professor:</span> Ed DePeters <br>
-<span class="secondary-font">Geography:</span> Central Valley</p>
+      <div class="row">
+        <div class="col t-right"><img src="/media/article-shot.jpg" alt=""></div>
+        <div class="col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-unitrans">
+                <h2>Animal Sciences</h2>
+                <img src="/media/cow-white.svg" alt="cow icon">
+              </div>
+              <div class="research-title-more">
+                <a href="/" class="btn-border border-unitrans color-unitrans">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Ed DePeters <br>
+                <span class="secondary-font">Geography:</span> Central Valley</p>
+              <h2>Impact</h2>
+              <p>Milk quality starts on the farm. Dairy management involves nutrition, environmental sustainability, animal welfare, genetics and herd health.</p>
+              <p>
+                DePeters works directly with farmers to improve dairy-cow nutrition, evaluate byproduct feedstuffs and enhance the nutritional profile of milk, specifically milk proteins and fatty acids</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="lead_carousel">
-    <div class="carousel_item"><img src="/media/carousel1.jpg" alt="kitten"></div>
-    <div class="carousel_item"><img src="/media/carousel2.jpg" alt="kitten"></div>
-    <div class="carousel_item"><img src="/media/carousel3.jpg" alt="kitten"></div>
-    <div class="carousel_item"><img src="/media/carousel4.jpg" alt="kitten"></div>
-    <div class="carousel_item"><img src="/media/carousel5.jpg" alt="kitten"></div>
+    <div class="carousel-wrapper">
+      <div class="carousel_item bg-sunny-grass"><img src="/media/carousel1.jpg" alt="kitten"></div>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel_item active-article bg-unitrans"><img src="/media/carousel2.jpg" alt="kitten"></div>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel_item bg-recpool"><img src="/media/carousel3.jpg" alt="kitten"></div>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel_item bg-golden-lupine"><img src="/media/carousel4.jpg" alt="kitten"></div>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel_item bg-winegrape"><img src="/media/carousel5.jpg" alt="kitten"></div>
+    </div>
   </div>
   <script src="./js/app.js"></script>
   <script src="./js/map.js"></script>

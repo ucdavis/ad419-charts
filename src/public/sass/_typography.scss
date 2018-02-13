@@ -68,6 +68,12 @@ p {
     color:$primary-font;
     font-size:1.4rem;
   }
+  &.topic-title  {
+    font-size: 1.8rem;
+    font-family: $sans-bold;
+    margin-top:24px;
+    color:$secondary-font;
+  }
 
 }
 h1,
@@ -76,7 +82,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: $primary-color;
+    color: $primary-font;
     font-family:$sans-bold;
     // margin: 1.6rem 0rem 1rem 0rem;
 }
@@ -86,6 +92,12 @@ h4 {
   margin-top:1.5rem;
   &.card-title {
     margin-top:0px;
+  }
+}
+h1 {
+  font-size:4rem;
+  .research_profile & {
+    margin-bottom:80px;
   }
 }
 table {
