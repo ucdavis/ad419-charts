@@ -286,6 +286,24 @@ table.dataTable tr.even td {
 .color-unitrans {
   color:$unitrans-red !important;
 }
+.color-sunny-grass {
+  color:$sunny-grass;
+}
+.color-golden-lupine {
+  color:$golden-lupine;
+}
+.color-winegrape {
+  color: $wine-grape;
+}
+.color-western-redbud {
+  color:$western-redbud;
+}
+.color-poppy {
+  color:$california-poppy;
+}
+.color-skyblue {
+  color:$sky-blue;
+}
 .primary-color {
   color:$primary-color;
 }
@@ -298,7 +316,15 @@ table.dataTable tr.even td {
 .a-color {
   color:$a-link;
 }
-
+.topic-spacer {
+  margin-right:22px;
+}
+.topic-separator {
+  img {
+    margin-top:36px;
+  }
+}
+//
 // .double-dot:after, .double-dot:before {
 //     content:"\A";
 //     width:8px;
