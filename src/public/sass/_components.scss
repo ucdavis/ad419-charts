@@ -352,6 +352,11 @@ table.dataTable tr.even td {
 //     display:inline-block;
 //     margin:0 24px;
 // }
+.chart-card {
+  border: 1px solid $borders;
+  padding:26px 24px 16px 24px;
+  font-family: $sans-bold;
+}
 .sans-bold {
   font-family: $sans-bold;
 }

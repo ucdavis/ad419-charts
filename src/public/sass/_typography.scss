@@ -49,6 +49,9 @@ ul, ol {
       margin:4px 0px;
     }
   }
+  &.funding-list {
+    font-family: $sans-bold;
+  }
   font-family: $sans-reg;
   li {
     font-size:1.6rem;
