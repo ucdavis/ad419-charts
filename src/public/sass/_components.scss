@@ -47,18 +47,23 @@ p a.action-btn {
   transition: all 0.15s ease;
   border: none;
   font-family: $sans-bold;
-
   &:active,
   &:focus {
     background-color: darken($primary-color, 5);
   }
-
   &:hover {
     color: #fff !important;
     transform: translateY(-1px);
     box-shadow: 0 -3px 0 rgba(0, 0, 0, 0.15) inset, 0 3px 6px rgba(0,0,0,.08);
     background-color: lighten($primary-color, 5);
   }
+}
+.btn-border {
+  border:2px solid $borders;
+  font-size:1.6rem;
+  padding:8px 16px;
+font-family: $sans-bold;
+background-color: #fff;
 }
 
 .btn-register {
@@ -185,7 +190,10 @@ ol.breadcrumb {
   margin-bottom: 16px;
 }
 .align-items-center {
-  align-items:center
+  align-items:center;
+}
+.align-items-top {
+  align-items:top;
 }
 .align-center {
   align-self: center;
@@ -272,6 +280,30 @@ table.dataTable tr.even td {
 .bg-winegrape {
   background-color:$wine-grape;
 }
+.border-unitrans {
+  border-color:$unitrans-red;
+}
+.color-unitrans {
+  color:$unitrans-red !important;
+}
+.color-sunny-grass {
+  color:$sunny-grass;
+}
+.color-golden-lupine {
+  color:$golden-lupine;
+}
+.color-winegrape {
+  color: $wine-grape;
+}
+.color-western-redbud {
+  color:$western-redbud;
+}
+.color-poppy {
+  color:$california-poppy;
+}
+.color-skyblue {
+  color:$sky-blue;
+}
 .primary-color {
   color:$primary-color;
 }
@@ -283,4 +315,51 @@ table.dataTable tr.even td {
 }
 .a-color {
   color:$a-link;
+}
+.topic-spacer {
+  margin-right:22px;
+}
+.topic-separator {
+  img {
+    margin-top:36px;
+  }
+}
+//
+// .double-dot:after, .double-dot:before {
+//     content:"\A";
+//     width:8px;
+//     height:8px;
+//     border-radius:50%;
+//     background: #D8D8D8;
+//     display:inline-block;
+//     margin:0 24px;
+// }
+// .double-dot-after:after {
+//     content:"\A";
+//     width:8px;
+//     height:8px;
+//     border-radius:50%;
+//     background: #D8D8D8;
+//     display:inline-block;
+//     margin:0 24px;
+// }
+// .double-dot-before:before {
+//     content:"\A";
+//     width:8px;
+//     height:8px;
+//     border-radius:50%;
+//     background: #D8D8D8;
+//     display:inline-block;
+//     margin:0 24px;
+// }
+.chart-card {
+  border: 1px solid $borders;
+  padding:26px 24px 16px 24px;
+  font-family: $sans-bold;
+}
+.sans-bold {
+  font-family: $sans-bold;
+}
+.secondary-font {
+  color:$secondary-font;
 }

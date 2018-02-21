@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="22px" viewBox="0 0 11 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>facebook</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="phase2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1045.000000, -3156.000000)">
+        <g id="Articles" transform="translate(100.000000, 2965.000000)" fill="#BA0C2F">
+            <g id="profile-AS" transform="translate(0.000000, 141.000000)">
+                <g id="more-options" transform="translate(829.000000, 45.000000)">
+                    <path d="M118.75,27 L118.75,16.9166667 L116,16.9166667 L116,13.25 L118.75,13.25 L118.75,10.0416667 C118.75,7.44444444 120.37963,5 124.25,5 C125.803241,5 127,5.2037037 127,5.2037037 L126.847222,8.66666667 L124.479167,8.66666667 C123.078704,8.66666667 122.875,9.43055556 122.875,10.5 L122.875,13.25 L127,13.25 L126.719907,16.9166667 L122.875,16.9166667 L122.875,27 L118.75,27 Z" id="facebook"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
