@@ -356,6 +356,9 @@ table.dataTable tr.even td {
   border: 1px solid $borders;
   padding:26px 24px 16px 24px;
   font-family: $sans-bold;
+  display: inline-block;
+  max-width:280px;
+  text-align: left;
 }
 .sans-bold {
   font-family: $sans-bold;
