@@ -72,7 +72,7 @@ const positions = data.features
 circles.selectAll("circle")
     .data(data.features as any)
     .enter().append("svg:circle")
-    .attr("fill", "#004B85")
+    .attr("fill", "#ba0c2f")
     .attr("fill-opacity", "0.8")
     .attr("cx", (d, i) => { return positions[i][0]; })
     .attr("cy", (d, i) => { return positions[i][1]; })
