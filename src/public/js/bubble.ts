@@ -98,7 +98,7 @@ function getCircleStroke(index: number): string {
     .hex();
 }
 
-function getCircleRadius(total) {
+function getCircleRadius(total: number) {
   return Math.sqrt(total) / scale;
 }
 
