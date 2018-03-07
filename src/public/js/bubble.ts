@@ -3,10 +3,16 @@ import * as force from "d3-force";
 import * as Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 
-let data: any[] = require("./projects.json");
+import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject } from "./data";
 
-const sumTotal = data.reduce((prev, d) => prev + d.total, 0);
-const maxTotal = data.reduce((prev, d) => Math.max(prev, d.total), 0);
+interface IProjectDatam extends IProject, SimulationNodeDatum {
+  categoryIndex: number;
+}
+
+const projects = getProjects();
+
+const sumTotal = projects.reduce((prev, d) => prev + d.total, 0);
+const maxTotal = projects.reduce((prev, d) => Math.max(prev, d.total), 0);
 
 const chartSelector = "#bubble";
 const width = 800;
@@ -17,79 +23,35 @@ const center = {
 };
 const scale = 50;
 
-const categories = [
-  {
-    name: "Animals",
-    color: "#ba0c2f",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Human",
-    color: "#c6007e",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Biology",
-    color: "#ed8800",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Food",
-    color: "#ffcd00",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Agriculture",
-    color: "#78be20",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Environment",
-    color: "#008eaa",
-    departments: new Set(),
-    total: 0,
-  },
-  {
-    name: "Viticulture",
-    color: "#642667",
-    departments: new Set(),
-    total: 0,
-  },
-];
+const categories = getCategories();
 
-let selectedCategory = -1;
-
-// assign departments and category
-data.forEach(d => {
-  const index = categories.findIndex((c) => c.name === d.category);
+// assign category index
+const data: IProjectDatam[] = projects.map(p => {
+  const index = categories.findIndex((c) => c.name === p.category);
   const category = categories[index];
 
-  d.category = category;
-  d.categoryIndex = index;
-
-  category.departments.add(d.dept);
-  category.total += d.total;
+  return {
+    ...p,
+    categoryIndex: index,
+  };
 });
 
 // sort by total, limit
 data.sort((a, b) => b.total - a.total);
-// data = data.slice(0, 100);
 
 function getCircleColor(index: number): string {
+  const defaultColor = "#C7C8CC";
+
+  const selectedCategory = getSelectedCategory();
   if (selectedCategory < 0) {
-    return categories[index].color;
+    return categories[index].color || defaultColor;
   }
 
   if (index === selectedCategory) {
-      return categories[index].color;
+      return categories[index].color || defaultColor;
   }
 
-  return "#C7C8CC";
+  return defaultColor;
 }
 
 function getCircleStroke(index: number): string {
@@ -112,7 +74,8 @@ function getTargetY(categoryIndex: number): number {
     + center.y;
 }
 
-function getTargetRadius(d: any): number {
+function getTargetRadius(d: IProjectDatam): number {
+  const selectedCategory = getSelectedCategory();
   if (selectedCategory < 0) {
     return 0;
   }
@@ -124,12 +87,12 @@ function getTargetRadius(d: any): number {
   return (width / 3);
 }
 
-function getStrengthMultiplier(d: any) {
+function getStrengthMultiplier(d: IProjectDatam) {
   return 2 + (d.total / maxTotal);
 }
 
 // build chart
-const svg: d3.Selection<Element, any, Element, any> = d3
+const svg: d3.Selection<Element, {}, Element, {}> = d3
   .select(chartSelector)
   .append("svg")
   .attr("width", width)
@@ -144,49 +107,50 @@ const circles = svg
   .data(data)
   .enter()
   .append("svg:circle")
-  .attr("fill", (d: any) => getCircleColor(d.categoryIndex))
-  .attr("stroke", (d: any) => getCircleStroke(d.categoryIndex))
+  .attr("fill", (d) => getCircleColor(d.categoryIndex))
+  .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
   .attr("stroke-width", "1")
-  .attr("cx", (d: any) => getTargetX(d.categoryIndex))
-  .attr("cy", (d: any) => getTargetY(d.categoryIndex))
-  .attr("r", (d: any) => getCircleRadius(d.total));
+  .attr("cx", (d) => getTargetX(d.categoryIndex))
+  .attr("cy", (d) => getTargetY(d.categoryIndex))
+  .attr("r", (d) => getCircleRadius(d.total));
 
 // mouse over thick border
 circles
-    .on("mouseover", function (d: any, i) {
-      d3.select(this as Element)
+    .on("mouseover", function() {
+      d3.select<Element, IProjectDatam>(this as Element)
         .transition()
         .duration(100)
         .attr("stroke", "#1d1d1d")
         .attr("stroke-width", "2");
     })
     .on("mouseout", function() {
-      d3.select(this as Element)
+      d3.select<Element, IProjectDatam>(this as Element)
         .transition()
         .duration(100)
-        .attr("stroke", (d: any) => getCircleStroke(d.categoryIndex))
+        .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
         .attr("stroke-width", "1");
     });
 
-let simulation: force.Simulation<any, any>;
+let simulation: force.Simulation<IProjectDatam, any>;
 function buildSimulation() {
+  const selectedCategory = getSelectedCategory();
 
   // build forces
   simulation = force
     .forceSimulation<any, any>(data)
     // .alphaDecay(1 - Math.pow(0.001, 1 / 1000))
-    .force("collision", force.forceCollide((d: any) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
+    .force("collision", force.forceCollide((d: IProjectDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
     .force("center", force.forceCenter(center.x, center.y));
 
   if (selectedCategory >= 0) {
     // use radial positioning
     simulation
-      .force("r", force.forceRadial((d: any) => getTargetRadius(d), center.x, center.y).strength((d: any) => 0.1 * getStrengthMultiplier(d)));
+      .force("r", force.forceRadial((d: IProjectDatam) => getTargetRadius(d), center.x, center.y).strength((d: IProjectDatam) => 0.1 * getStrengthMultiplier(d)));
   } else {
     // use x/y positioning
     simulation
-      .force("x", force.forceX((d: any) => getTargetX(d.categoryIndex)).strength((d: any) => 0.05 * getStrengthMultiplier(d)))
-      .force("y", force.forceY((d: any) => getTargetY(d.categoryIndex)).strength((d: any) => 0.05 * getStrengthMultiplier(d)));
+      .force("x", force.forceX((d: IProjectDatam) => getTargetX(d.categoryIndex)).strength((d: IProjectDatam) => 0.05 * getStrengthMultiplier(d)))
+      .force("y", force.forceY((d: IProjectDatam) => getTargetY(d.categoryIndex)).strength((d: IProjectDatam) => 0.05 * getStrengthMultiplier(d)));
   }
 
   // listen to ticks
@@ -194,10 +158,10 @@ function buildSimulation() {
     circles
       // .transition()
       // .duration(100)
-      .attr("cx", (d: SimulationNodeDatum) => {
+      .attr("cx", (d) => {
         return d.x as number;
       })
-      .attr("cy", (d: SimulationNodeDatum) => {
+      .attr("cy", (d) => {
         return d.y as number;
       });
   });
@@ -222,7 +186,7 @@ buildSimulation();
 let collisionTimer: d3.Timer;
 function easeCollision() {
   // slowly build collision strength
-  const forceCollide = simulation.force<force.ForceCollide<any>>("collision");
+  const forceCollide = simulation.force<force.ForceCollide<IProjectDatam>>("collision");
   if (forceCollide === undefined) return;
 
   const strength = forceCollide.strength();
@@ -239,21 +203,16 @@ function easeCollision() {
 }
 easeCollision();
 
-interval(() => {
-  // stop previous simulation
-  simulation.stop();
-  collisionTimer.stop();
+onSelectedCategoryChanged(() => {
+    // stop previous simulation
+    simulation.stop();
+    collisionTimer.stop();
 
-  // iterate
-  selectedCategory = (selectedCategory + 1) % categories.length;
+    // rebuild
+    buildSimulation();
+    easeCollision();
 
-  console.log("selecting new category", selectedCategory);
-
-  // rebuild
-  buildSimulation();
-  easeCollision();
-
-  // re-colorize
-  circles
-    .attr("fill", (d: any) => getCircleColor(d.categoryIndex));
-}, 5000);
+    // re-colorize
+    circles
+      .attr("fill", (d) => getCircleColor(d.categoryIndex));
+});
