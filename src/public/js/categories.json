@@ -1,22 +1,30 @@
-{
-  "ARE": "Agriculture",
-  "BAE": "Agriculture",
-  "PLS": "Agriculture",
-  "PLB": "Agriculture",
-  "PPA": "Agriculture",
-  "ASC": "Animals",
-  "HCE": "Human",
-  "TXC": "Human",
-  "ESP": "Environment",
-  "ENM": "Environment",
-  "ETX": "Environment",
-  "LAW": "Environment",
-  "WFB": "Environment",
-  "VIT": "Viticulture",
-  "FST": "Food",
-  "NTR": "Food",
-  "MCB": "Biology",
-  "EVE": "Biology",
-  "MIC": "Biology",
-  "NPB": "Biology"
-}
+[
+  {
+    "name": "Animals",
+    "color": "#ba0c2f"
+  },
+  {
+    "name": "Human",
+    "color": "#c6007e"
+  },
+  {
+    "name": "Biology",
+    "color": "#ed8800"
+  },
+  {
+    "name": "Food",
+    "color": "#ffcd00"
+  },
+  {
+    "name": "Agriculture",
+    "color": "#78be20"
+  },
+  {
+    "name": "Environment",
+    "color": "#008eaa"
+  },
+  {
+    "name": "Viticulture",
+    "color": "#642667"
+  }
+]
