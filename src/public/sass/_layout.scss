@@ -96,10 +96,39 @@ ul.topic-nav {
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
   padding-top: 40px;
   padding-bottom: 20px;
+  background-color: white;
 
   .topics-container {
     width: 80%;
     margin: 0 auto;
+  }
+
+  .topic-button {
+    cursor: pointer;
+
+    &:hover, &.active {
+      &[data-topic='Food'] .topic-title {
+        color: $california-poppy;
+      }
+      &[data-topic='Human'] .topic-title {
+        color: $western-redbud;
+      }
+      &[data-topic='Agriculture'] .topic-title {
+        color: $sunny-grass;
+      }
+      &[data-topic='Animals'] .topic-title {
+        color: $unitrans-red;
+      }
+      &[data-topic='Environment'] .topic-title {
+        color: $recpool-blue;
+      }
+      &[data-topic='Biology'] .topic-title {
+        color: $golden-lupine;
+      }
+      &[data-topic='Viticulture'] .topic-title {
+        color: $wine-grape;
+      }
+    }
   }
 }
 

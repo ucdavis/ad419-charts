@@ -371,3 +371,20 @@ table.dataTable tr.even td {
 .secondary-font {
   color:$secondary-font;
 }
+
+#sources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: flex-start;
+
+  width: 60%;
+  margin: 0 auto;
+
+  .chart-label {
+    font-family: $sans-bold;
+    font-size: 14px;
+    text-align: center;
+  }
+}
