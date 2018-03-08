@@ -1,6 +1,6 @@
-const departments = require("./departments.json");
-const categories = require("./categories.json");
-const projects = require("./projects.json");
+const departments: object = require("./departments.json");
+const categories: any[] = require("./categories.json");
+const projects: any[] = require("./projects.json");
 
 // transform into array
 let sources = require("./sources.json");
@@ -57,7 +57,8 @@ export function getSelectedCategory(): number {
     return selectedCategory;
 }
 
-export function setSelectedCategory(index: number): number {
+export function setSelectedCategory(category: string): number {
+    const index = categories.findIndex(c => c.name === category);
     selectedCategory = index;
 
     events.forEach(e => {
