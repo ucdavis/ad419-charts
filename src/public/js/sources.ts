@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import * as force from "d3-force";
 import * as Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
-
+import { debounce } from "../utils/common";
 import { getSources, getCategories, getSelectedCategory, onSelectedCategoryChanged, ISource, ICategory } from "./data";
 
 interface ISourceDatam extends ISource {
@@ -76,7 +76,7 @@ const data: ISourceDatam[] = sources.map((s, i) => {
     total: s.total,
     sourceIndex: i,
     width: Math.max(3 * getCircleRadius(s.total), 75),
-    height: getTargetHeight(s.total),
+    height: Math.max(3 * getCircleRadius(s.total), 100),
     categories: s.categories.map((c) => {
       return {
         name: c.name,
@@ -93,23 +93,25 @@ const svg = d3.select(chartSelector);
 
 // build individual charts
 const charts = svg
-  .selectAll(".source-chart")
+  .selectAll(".chart")
   .data(data)
   .enter()
+  .append("div")
+  .attr("class", "chart-container")
+  .attr("style", (d) => `min-height:${d.height}`)
   .append("svg")
   .attr("class", "chart")
   .attr("width", (d) => d.width)
-  .attr("height", (d) => d.height);
-
-
+  .attr("height", "100%");
 
 charts.each(function(source) {
+
+  const chart = d3.select(this as Element);
+
   const center = {
     x: (source.width / 2),
     y: (source.height / 2),
   };
-
-  const chart = d3.select(this as Element);
 
   // setup circles
   const circles = chart
@@ -117,10 +119,13 @@ charts.each(function(source) {
     .data(source.categories)
     .enter()
     .append("svg:circle")
+    .attr("class", "circle")
     .attr("fill", (d) => getCircleColor(d.categoryIndex))
     .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
     .attr("stroke-width", "1")
-    .attr("r", (d) => getCircleRadius(d.total));
+    .attr("r", (d) => getCircleRadius(d.total))
+    .attr("cx", center.x)
+    .attr("cy", center.y);
 
   // add labels
   const label = chart
@@ -148,24 +153,63 @@ charts.each(function(source) {
         .attr("stroke", (d: any) => getCircleStroke(d.categoryIndex))
         .attr("stroke-width", "1");
     });
-
-  // build forces
-  const simulation = force
-    .forceSimulation(source.categories)
-    .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
-    .force("center", force.forceCenter(center.x, center.y))
-    .force("x", force.forceX(center.x))
-    .force("y", force.forceY(center.y));
-
-  // listen to ticks
-  simulation.on("tick", () => {
-    circles
-      .attr("cx", (d) => {
-        return d.x as number;
-      })
-      .attr("cy", (d) => {
-        return d.y as number;
-      });
-  });
 });
 
+let simulations: d3.Simulation<ICategoryDatam, any>[] = [];
+const buildSimulation = debounce(() => {
+  // stop and clear simulations
+  simulations.forEach(s => s.stop);
+  simulations = [];
+
+  // iterate over charts
+  charts.each(function(source) {
+    const element = this as Element;
+    if (element === null) {
+      return;
+    }
+
+    // calculate height from container div
+    const parent = element.parentElement;
+    let height = source.height;
+    if (parent !== null) {
+      height = parent.clientHeight;
+    }
+    const center = {
+      x: (source.width / 2),
+      y: (height / 2),
+    };
+
+    // build forces
+    const simulation = force
+      .forceSimulation(source.categories)
+      .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
+      .force("x", force.forceX(center.x))
+      .force("y", force.forceY(center.y));
+
+    // listen to ticks
+    const chart = d3.select(element);
+    const circles = chart.selectAll<Element, ICategoryDatam>(".circle");
+    simulation.on("tick", () => {
+      circles
+        .attr("cx", (d) => {
+          return d.x as number;
+        })
+        .attr("cy", (d) => {
+          return d.y as number;
+        });
+    });
+
+    simulations.push(simulation);
+  });
+}, 500);
+
+timeout(buildSimulation, 500);
+
+window.addEventListener("resize", buildSimulation);
+
+onSelectedCategoryChanged(() => {
+  // re-colorize
+  charts
+    .selectAll<Element, ICategoryDatam>(".circle")
+    .attr("fill", (d: ICategoryDatam) => getCircleColor(d.categoryIndex));
+});
