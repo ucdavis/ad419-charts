@@ -62,7 +62,6 @@ function handleTopicChanged(topic: string) {
     }
 }
 
-window.addEventListener("load", setupTopicSelector);function setupScroll() {
 function setupScroll() {
     // get fixed position
     const topicBar = $("#topic-bar");
