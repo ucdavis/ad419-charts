@@ -155,8 +155,6 @@ function buildSimulation() {
   // listen to ticks
   simulation.on("tick", () => {
     circles
-      // .transition()
-      // .duration(100)
       .attr("cx", (d) => {
         return d.x as number;
       })
