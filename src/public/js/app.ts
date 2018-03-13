@@ -39,6 +39,7 @@ function setupTopicSelector() {
         };
     }
 }
+window.addEventListener("load", setupTopicSelector);
 
 function handleTopicChanged(topic: string) {
     setSelectedCategory(topic);
