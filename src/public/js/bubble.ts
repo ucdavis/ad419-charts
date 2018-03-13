@@ -138,7 +138,6 @@ function buildSimulation() {
   // build forces
   simulation = force
     .forceSimulation<any, any>(data)
-    // .alphaDecay(1 - Math.pow(0.001, 1 / 1000))
     .force("collision", force.forceCollide((d: IProjectDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
     .force("center", force.forceCenter(center.x, center.y));
 
@@ -156,8 +155,6 @@ function buildSimulation() {
   // listen to ticks
   simulation.on("tick", () => {
     circles
-      // .transition()
-      // .duration(100)
       .attr("cx", (d) => {
         return d.x as number;
       })

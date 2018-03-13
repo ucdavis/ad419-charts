@@ -17,27 +17,27 @@ function getTotal() {
     return total;
 }
 
-function getTextColor() {
+function getCategoryTopic() {
     const categoryIndex = getSelectedCategory();
     if (categoryIndex < 0) {
-        return "#";
+        return "";
     }
-    return "";
+    const category = categories[categoryIndex];
+    return category.name;
 }
 
-const spendSpan = document.getElementById("spend-total") as HTMLSpanElement;
-const sourceSpan = document.getElementById("source-total") as HTMLSpanElement;
-const mapSpan = document.getElementById("map-total") as HTMLSpanElement;
-const impactSpan = document.getElementById("impact-total") as HTMLSpanElement;
+const totalSpans = document.getElementsByClassName("total-span");
 
 function setTotals() {
     const total = getTotal();
     const millions = total / 1000000;
+    const topic = getCategoryTopic();
 
-    spendSpan.innerText = `$${millions.toFixed(1)} Million`;
-    sourceSpan.innerText = `$${millions.toFixed(1)} Million`;
-    mapSpan.innerText = `$${millions.toFixed(1)} Million`;
-    impactSpan.innerText = `$${millions.toFixed(1)} Million`;
+    for (let i = 0; i < totalSpans.length; i++) {
+        const span = totalSpans[i] as HTMLSpanElement;
+        span.innerText = `$${millions.toFixed(1)} Million`;
+        span.setAttribute("data-topic", topic);
+    }
 }
 
 window.addEventListener("load", setTotals);
