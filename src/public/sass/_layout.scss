@@ -96,7 +96,27 @@ ul.topic-nav {
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
   padding-top: 40px;
   padding-bottom: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   background-color: white;
+  transition: all linear 250ms;
+
+  .topic-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &.thin {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 60px;  // move extra height to bottom margin to reduce page jitter
+
+    .topic-title {
+      margin-top: 8px;
+      margin-bottom: 0;
+      transition: all linear 250ms;
+    }
+  }
 
   .topics-container {
     width: 80%;

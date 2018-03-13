@@ -61,4 +61,27 @@ function handleTopicChanged(topic: string) {
     }
 }
 
-window.addEventListener("load", setupTopicSelector);
+window.addEventListener("load", setupTopicSelector);function setupScroll() {
+function setupScroll() {
+    // get fixed position
+    const topicBar = $("#topic-bar");
+    const startTop = Math.ceil(topicBar.position().top) + 1;
+
+    // add sticky
+    topicBar.addClass("sticky-top");
+
+    // setup scroll spy
+    const handleScroll = () => {
+        const top = topicBar.position().top;
+        if (top > startTop) {
+            topicBar.addClass("thin");
+        } else {
+            topicBar.removeClass("thin");
+        }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    // prefire
+    handleScroll();
+}
+window.addEventListener("load", setupScroll);
