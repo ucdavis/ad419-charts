@@ -75,8 +75,8 @@ const data: ISourceDatam[] = sources.map((s, i) => {
     name: s.name,
     total: s.total,
     sourceIndex: i,
-    width: Math.max(3 * getCircleRadius(s.total), 75),
-    height: Math.max(3 * getCircleRadius(s.total), 100),
+    width: Math.max(3 * getCircleRadius(s.total), 75) + 50,
+    height: Math.max(3 * getCircleRadius(s.total), 150) + 40,
     categories: s.categories.map((c) => {
       return {
         name: c.name,
@@ -129,13 +129,17 @@ charts.each(function(source) {
 
   // add labels
   const label = chart
-    .append("text")
+    .append<SVGTextElement>("text")
     .attr("class", "chart-label")
     .attr("x", center.x)
-    .attr("y", 20)
-    .attr("alignment-baseline", "middle")
+    .attr("y", 10)
+    .attr("dy", "1.1em")
+    // .attr("alignment-baseline", "middle")
     .attr("text-anchor", "middle")
     .text(source.name);
+
+  // word wrap label
+  label.call(wrap, source.width - 30);
 
   // mouse over thick border
   circles
@@ -155,6 +159,43 @@ charts.each(function(source) {
     });
 });
 
+function wrap(text: d3.Selection<SVGTextElement, any, any, any>, width: number) {
+    const words: string[] = text.text().split(/\s+/).reverse();
+    let word: string;
+    let line: string[] = [];
+    let lineNumber = 0;
+    const lineHeight = 1.1; // ems
+    const x = text.attr("x");
+    const y = text.attr("y");
+    const dy = parseFloat(text.attr("dy"));
+
+    let tspan = text
+      .text("")                           // clear existing text
+      .append<SVGTSpanElement>("tspan")   // add new tspan items
+      .attr("x", x)
+      .attr("y", y)
+      .attr("dy", dy + "em");
+
+    while (word = words.pop() || "") {
+      line.push(word);
+      tspan.text(line.join(" "));
+
+      const node = tspan.node();
+      if (node !== null && node.getComputedTextLength() > width && line.length > 1) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text
+          .append<SVGTSpanElement>("tspan")
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", ++lineNumber * lineHeight + dy + "em")
+          .text(word);
+      }
+    }
+}
+
+
 let simulations: d3.Simulation<ICategoryDatam, any>[] = [];
 const buildSimulation = debounce(() => {
   // stop and clear simulations
@@ -167,6 +208,9 @@ const buildSimulation = debounce(() => {
     if (element === null) {
       return;
     }
+
+    // fetch category so we can "lift" active bubbles
+    const selectedCategory = getSelectedCategory();
 
     // calculate height from container div
     const parent = element.parentElement;
@@ -182,9 +226,9 @@ const buildSimulation = debounce(() => {
     // build forces
     const simulation = force
       .forceSimulation(source.categories)
-      .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
+      .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.3).iterations(3))
       .force("x", force.forceX(center.x))
-      .force("y", force.forceY(center.y));
+      .force("y", force.forceY((d: ICategoryDatam) => d.categoryIndex === selectedCategory ? center.y * 0.5 : center.y));
 
     // listen to ticks
     const chart = d3.select(element);
@@ -199,9 +243,28 @@ const buildSimulation = debounce(() => {
         });
     });
 
+    // ease collision
+    let collisionTimer: d3.Timer;
+    const forceCollide = simulation.force<force.ForceCollide<ICategoryDatam>>("collision");
+    if (forceCollide === undefined) return;
+
+    const strength = forceCollide.strength();
+    const endTime = 3500;
+    collisionTimer = timer(elapsed => {
+      const dt = elapsed / endTime;
+      // half default, half exp growth
+      const newStrength = (0.1 * strength) + (0.7 * Math.pow(dt, (endTime / 1000) * strength));
+      forceCollide.strength(newStrength);
+      if (dt >= 1.0) {
+        collisionTimer.stop();
+      }
+    });
+
     simulations.push(simulation);
   });
 }, 500);
+
+
 
 timeout(buildSimulation, 500);
 
@@ -212,4 +275,7 @@ onSelectedCategoryChanged(() => {
   charts
     .selectAll<Element, ICategoryDatam>(".circle")
     .attr("fill", (d: ICategoryDatam) => getCircleColor(d.categoryIndex));
+
+  // move bubbles a bit
+  buildSimulation();
 });
