@@ -1,24 +1,28 @@
 const departments: object = require("./departments.json");
-const categories: any[] = require("./categories.json");
-const projects: any[] = require("./projects.json");
+const categories: ICategory[] = require("./categories.json");
+const projects: IProject[] = require("./projects.json");
 
-// transform into array
-let sources = require("./sources.json");
-sources = Object.keys(sources).map((f) => {
+// combine info
+const sourcesLookup: any = require("./sources.json");
+const sourceData: any = require("./source-data.json");
+const sources = Object.keys(sourceData).map((f) => {
 
     // transform into array
-    const c = Object.keys(sources[f]).map(s => {
+    const c = Object.keys(sourceData[f]).map(s => {
         return {
             name: s,
-            total: sources[f][s],
+            total: sourceData[f][s],
         };
     });
 
+    // find lookup
+    const l = sourcesLookup[f];
+
     return {
-        name: f,
+        name: l.name,
         categories: c,
         total: c.reduce((prev, d) => prev + d.total, 0),
-    };
+    } as ISource;
 });
 
 export interface IProject {
