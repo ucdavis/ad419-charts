@@ -2,8 +2,8 @@ const path = require('path');
 // `CheckerPlugin` is optional. Use it if you want async error reporting.
 // We need this plugin to detect a `--watch` mode. It may be removed later
 // after https://github.com/webpack/webpack/issues/3460 will be resolved.
-const { ProvidePlugin } = require('webpack');
 const { CheckerPlugin } = require('awesome-typescript-loader')
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -117,7 +117,14 @@ module.exports = {
       { from: path.resolve(__dirname, './src/public') },
     ]),
     new ExtractTextPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].css',
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      sourceMap: true,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"',
     }),
   ]
 };
