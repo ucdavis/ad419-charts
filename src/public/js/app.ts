@@ -1,7 +1,6 @@
 import "../sass/app.scss";
 
 import * as $ from "jquery";
-import "slick-carousel";
 
 import "./totals";
 import "./bubble";
