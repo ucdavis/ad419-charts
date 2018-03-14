@@ -17,6 +17,7 @@ module.exports = {
     'sankey': './src/public/js/sankey.ts',
     'map':    './src/public/js/map.ts',
     'bubble': './src/public/js/bubble.ts',
+    // work: './src/public/js/work.ts',
   },
 
   output: {

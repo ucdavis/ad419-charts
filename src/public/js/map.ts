@@ -1,11 +1,12 @@
 import * as d3 from "d3";
 import * as geo from "d3-geo";
+import * as topojson from "topojson";
 import { Polygon, Point } from "geojson";
 import { Selection } from "d3-selection";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
-const counties_data = require("./map-counties.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Polygon, any>>;
+const counties_data = require("./map-counties-ca-topo.json") as topojson.Topology;
 
 const selector = "#map";
 const width = 500;
@@ -48,7 +49,7 @@ states.selectAll("path")
     .attr("d", path as any);
 
 counties.selectAll("path")
-    .data(counties_data.features.filter(f => f.properties.STATE === "06"))
+    .data(topojson.feature(counties_data, counties_data.objects.counties as topojson.GeometryCollection).features)
     .enter().append("svg:path")
     .attr("d", path as any)
     .attr("stroke-dasharray", function() {
