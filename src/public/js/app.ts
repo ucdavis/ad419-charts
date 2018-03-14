@@ -78,7 +78,7 @@ function setupScroll() {
             topicBar.removeClass("thin");
         }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // prefire
     handleScroll();
