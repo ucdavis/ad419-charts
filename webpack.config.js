@@ -33,7 +33,25 @@ module.exports = {
       jquery: 'jquery/src/jquery',
     },
   },
- 
+
+  externals: [
+    (context, request, callback) => {
+      if (/^(jquery|\$)$/i.test(request)) {
+        return callback(null, 'jQuery');
+      }
+
+      if (/^(d3|d3-.*)$/i.test(request)) {
+        return callback(null, 'd3');
+      }
+
+      if ('slick-carousel' === request) {
+        return callback(null, 'slick');
+      }
+
+      return callback();
+    },
+  ],
+
   // Source maps support ('inline-source-map' also works)
   devtool: 'source-map',
 
