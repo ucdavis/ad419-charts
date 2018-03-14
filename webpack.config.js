@@ -13,10 +13,7 @@ const assets = [
 module.exports = {
 
   entry: {
-    'app':    './src/public/js/app.ts',
-    'sankey': './src/public/js/sankey.ts',
-    'map':    './src/public/js/map.ts',
-    'bubble': './src/public/js/bubble.ts',
+    app: './src/public/js/app.ts',
     // work: './src/public/js/work.ts',
   },
 
