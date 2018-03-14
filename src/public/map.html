@@ -283,13 +283,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="./js/app.js"></script>
+
   <script>
-    $('.lead_carousel').slick({
-      adaptiveHeight: true,
-      variableWidth: true,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 3000
+    // setup carousel
+    $(function() {
+      $(".lead_carousel").slick({
+          adaptiveHeight: true,
+          variableWidth: true,
+          arrows: false,
+          autoplay: true,
+          autoplaySpeed: 3000
+        });
     });
   </script>
 </body>
