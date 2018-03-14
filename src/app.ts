@@ -12,4 +12,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 0 }));
 
-module.exports = app;
+export default app;

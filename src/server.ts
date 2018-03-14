@@ -1,6 +1,5 @@
 import * as errorHandler from "errorhandler";
-
-const app = require("./app");
+import app from "./app";
 
 /**
  * Error Handler. Provides full stack - remove for production
@@ -15,4 +14,4 @@ const server = app.listen(app.get("port"), () => {
   console.log("  Press CTRL-C to stop\n");
 });
 
-export = server;
+export default server;
