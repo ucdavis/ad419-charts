@@ -10,137 +10,145 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const assets = [
 ];
 
-module.exports = {
+module.exports = (env) => {
 
-  entry: {
-    app: './src/public/js/app.ts',
-    // work: './src/public/js/work.ts',
-  },
+  const isDevBuild = !(env && env.prod);
 
-  output: {
-    path: path.join(__dirname, './dist/public'),
-    filename: 'js/[name].js',
-    publicPath: '/',
-  },
+  const outputPath = isDevBuild
+    ? path.join(__dirname, './dist/public')
+    : path.join(__dirname, './docs');
 
-  // Currently we need to add '.ts' to the resolve.extensions array.
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    alias: {
-      jquery: 'jquery/src/jquery',
+  return {
+    entry: {
+      app: './src/public/js/app.ts',
+      // work: './src/public/js/work.ts',
     },
-  },
 
-  externals: [
-    (context, request, callback) => {
-      if (/^(jquery|\$)$/i.test(request)) {
-        return callback(null, 'jQuery');
-      }
-
-      if (/^(d3|d3-.*)$/i.test(request)) {
-        return callback(null, 'd3');
-      }
-
-      if ('slick-carousel' === request) {
-        return callback(null, 'slick');
-      }
-
-      return callback();
+    output: {
+      path: outputPath,
+      filename: 'js/[name].js',
+      publicPath: '/',
     },
-  ],
 
-  // Source maps support ('inline-source-map' also works)
-  devtool: 'source-map',
+    // Currently we need to add '.ts' to the resolve.extensions array.
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      alias: {
+        jquery: 'jquery/src/jquery',
+      },
+    },
 
-  // Add the loader for .ts files.
-  module: {
-    loaders: [
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [{
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              minimize: true,
-              sourceMap: true,
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-            }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          }],
-        }),
-      },
-      {
-        test: /\.(png|jpg|svg)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            mimetype: 'image/png',
-            fallback: {
-              loader: 'file-loader',
-              options: {
-                name: '[name].[ext]?[hash]',
-                outputPath: 'media/images/',
-              },
-            },
-          },
-        }],
-      },
-      {
-        test: /\.(woff|woff2)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]?[hash]',
-            outputPath: 'media/fonts/',
-          },
-        }],
+    externals: [
+      (context, request, callback) => {
+        if (/^(jquery|\$)$/i.test(request)) {
+          return callback(null, 'jQuery');
+        }
+
+        if (/^(d3|d3-.*)$/i.test(request)) {
+          return callback(null, 'd3');
+        }
+
+        if ('slick-carousel' === request) {
+          return callback(null, 'slick');
+        }
+
+        return callback();
       },
     ],
-  },
-  plugins: [
-    new CheckerPlugin(),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-    }),
-    new CopyWebpackPlugin(
-      assets.map(a => {
-        return {
-          from: path.resolve(__dirname, `./node_modules/${a}`),
-          to: path.resolve(__dirname, './dist/lib'),
-        };
-      })
-    ),
-    new CopyWebpackPlugin([
-      { from: path.resolve(__dirname, './src/public') },
-    ]),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      sourceMap: true,
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
-    }),
-  ],
+
+    // Source maps support ('inline-source-map' also works)
+    devtool: 'source-map',
+
+    // Add the loader for .ts files.
+    module: {
+      loaders: [
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+        },
+        {
+          test: /\.json$/,
+          loader: 'json-loader',
+        },
+        {
+          test: /\.scss$/,
+          use: ExtractTextPlugin.extract({
+            use: [{
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                minimize: true,
+                sourceMap: true,
+              }
+            }, {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+              }
+            }, {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              },
+            }],
+          }),
+        },
+        {
+          test: /\.(png|jpg|svg)$/,
+          use: [{
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              mimetype: 'image/png',
+              fallback: {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]?[hash]',
+                  outputPath: 'media/images/',
+                },
+              },
+            },
+          }],
+        },
+        {
+          test: /\.(woff|woff2)$/,
+          use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]?[hash]',
+              outputPath: 'media/fonts/',
+            },
+          }],
+        },
+      ],
+    },
+    plugins: [
+      new CheckerPlugin(),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+      }),
+      new CopyWebpackPlugin(
+        assets.map(a => {
+          return {
+            from: path.resolve(__dirname, `./node_modules/${a}`),
+            to: path.resolve(__dirname, './dist/lib'),
+          };
+        })
+      ),
+      new CopyWebpackPlugin([
+        { from: path.resolve(__dirname, './src/public') },
+      ]),
+      new ExtractTextPlugin({
+        filename: 'css/[name].css',
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false },
+        sourceMap: true,
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': isDevBuild ? '"development"' : '"production"',
+      }),
+    ],
+  };
 };
