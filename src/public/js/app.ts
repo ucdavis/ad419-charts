@@ -1,7 +1,6 @@
 import "../sass/app.scss";
 
 import * as $ from "jquery";
-import "slick-carousel";
 
 import "./totals";
 import "./bubble";
@@ -79,7 +78,7 @@ function setupScroll() {
             topicBar.removeClass("thin");
         }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // prefire
     handleScroll();

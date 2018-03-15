@@ -2,8 +2,8 @@ const path = require('path');
 // `CheckerPlugin` is optional. Use it if you want async error reporting.
 // We need this plugin to detect a `--watch` mode. It may be removed later
 // after https://github.com/webpack/webpack/issues/3460 will be resolved.
-const { ProvidePlugin } = require('webpack');
-const { CheckerPlugin } = require('awesome-typescript-loader')
+const webpack = require('webpack');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -11,12 +11,10 @@ const assets = [
 ];
 
 module.exports = {
- 
+
   entry: {
-    'app':    './src/public/js/app.ts',
-    'sankey': './src/public/js/sankey.ts',
-    'map':    './src/public/js/map.ts',
-    'bubble': './src/public/js/bubble.ts',
+    app: './src/public/js/app.ts',
+    // work: './src/public/js/work.ts',
   },
 
   output: {
@@ -29,23 +27,41 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      jquery: "jquery/src/jquery"
-    }
+      jquery: 'jquery/src/jquery',
+    },
   },
- 
+
+  externals: [
+    (context, request, callback) => {
+      if (/^(jquery|\$)$/i.test(request)) {
+        return callback(null, 'jQuery');
+      }
+
+      if (/^(d3|d3-.*)$/i.test(request)) {
+        return callback(null, 'd3');
+      }
+
+      if ('slick-carousel' === request) {
+        return callback(null, 'slick');
+      }
+
+      return callback();
+    },
+  ],
+
   // Source maps support ('inline-source-map' also works)
   devtool: 'source-map',
- 
+
   // Add the loader for .ts files.
   module: {
     loaders: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
       {
         test: /\.scss$/,
@@ -66,9 +82,9 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-            }
-          }]
-        })
+            },
+          }],
+        }),
       },
       {
         test: /\.(png|jpg|svg)$/,
@@ -81,11 +97,11 @@ module.exports = {
               loader: 'file-loader',
               options: {
                 name: '[name].[ext]?[hash]',
-                outputPath: 'media/images/'
-              }
-            }
-          }
-        }]
+                outputPath: 'media/images/',
+              },
+            },
+          },
+        }],
       },
       {
         test: /\.(woff|woff2)$/,
@@ -93,23 +109,23 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]?[hash]',
-            outputPath: 'media/fonts/'
-          }
-        }]
-      }
-    ]
+            outputPath: 'media/fonts/',
+          },
+        }],
+      },
+    ],
   },
   plugins: [
     new CheckerPlugin(),
-    new ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new CopyWebpackPlugin(
       assets.map(a => {
         return {
           from: path.resolve(__dirname, `./node_modules/${a}`),
-          to: path.resolve(__dirname, './dist/lib')
+          to: path.resolve(__dirname, './dist/lib'),
         };
       })
     ),
@@ -117,7 +133,14 @@ module.exports = {
       { from: path.resolve(__dirname, './src/public') },
     ]),
     new ExtractTextPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].css',
     }),
-  ]
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      sourceMap: true,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"',
+    }),
+  ],
 };
