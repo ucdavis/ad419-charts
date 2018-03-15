@@ -47,6 +47,26 @@ function getCircleColor(index: number): string {
   return defaultColor;
 }
 
+function getSelectedTotal(source: ISourceDatam): number {
+  const selectedCategory = getSelectedCategory();
+  if (selectedCategory < 0) {
+    return source.total;
+  }
+
+  return source.categories[selectedCategory].total;
+}
+
+function getTotalLabelColor(): string {
+  const selectedCategory = getSelectedCategory();
+  if (selectedCategory < 0) {
+    return "inherit";
+  }
+
+  return Color(categories[selectedCategory].color)
+    .darken(0.5)
+    .hex();
+}
+
 function getCircleStroke(index: number): string {
   return Color(categories[index].color)
     .darken(0.5)
@@ -141,17 +161,33 @@ charts.each(function(source) {
   // word wrap label
   label.call(wrap, source.width - 30);
 
+  const totals = label
+    .selectAll(".total-label")
+    .data([source])
+    .enter()
+    .append<SVGTSpanElement>("tspan")
+    .attr("class", "total-label")
+    .attr("x", center.x)
+    .attr("y", 10)
+    .attr("dy", function() {
+      const count = label.selectAll("tspan").size();
+      const dy = parseFloat(label.attr("dy"));
+      return count * dy + "em";
+    })
+    .text((d) => `$${ (getSelectedTotal(d) / 1000000).toFixed(1) }M`);
+
+
   // mouse over thick border
   circles
     .on("mouseover", function() {
-      d3.select(this as Element)
+      d3.select(this as SVGCircleElement)
         .transition()
         .duration(100)
         .attr("stroke", "#1d1d1d")
         .attr("stroke-width", "2");
     })
     .on("mouseout", function() {
-      d3.select(this as Element)
+      d3.select(this as SVGCircleElement)
         .transition()
         .duration(100)
         .attr("stroke", (d: any) => getCircleStroke(d.categoryIndex))
@@ -271,10 +307,16 @@ timeout(buildSimulation, 500);
 window.addEventListener("resize", buildSimulation);
 
 onSelectedCategoryChanged(() => {
-  // re-colorize
+  // re-colorize bubbles
   charts
-    .selectAll<Element, ICategoryDatam>(".circle")
+    .selectAll<SVGCircleElement, ICategoryDatam>(".circle")
     .attr("fill", (d: ICategoryDatam) => getCircleColor(d.categoryIndex));
+
+  // re-colorize labels
+  charts
+    .selectAll<SVGTSpanElement, ISourceDatam>(".total-label")
+    .attr("fill", getTotalLabelColor)
+    .text((d) => `$${ (getSelectedTotal(d) / 1000000).toFixed(1) }M`);
 
   // move bubbles a bit
   buildSimulation();
