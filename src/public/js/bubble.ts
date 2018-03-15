@@ -114,14 +114,33 @@ const circles = svg
   .attr("cy", (d) => getTargetY(d.categoryIndex))
   .attr("r", (d) => getCircleRadius(d.total));
 
-// mouse over thick border
+// mouse over thick border and project view
+const mouseoverChart = d3.select("#bubble-mouseover-chart");
+
 circles
     .on("mouseover", function() {
+      const project = d3.select<Element, IProjectDatam>(this as Element).datum();
+      const category = categories[project.categoryIndex];
+
       d3.select<Element, IProjectDatam>(this as Element)
         .transition()
         .duration(100)
         .attr("stroke", "#1d1d1d")
         .attr("stroke-width", "2");
+
+      // show the chart
+      mouseoverChart
+        .classed("opaque", false);
+
+      mouseoverChart.select("#bubble-mouseover-chart-icon");
+      mouseoverChart.select("#bubble-mouseover-chart-topic")
+        .text(category.name);
+
+      mouseoverChart.select("#bubble-mouseover-chart-title")
+        .text(project.project);
+
+      mouseoverChart.select("#bubble-mouseover-chart-total")
+        .text(`$${ (project.total / 1000000).toFixed(1) }M`);
     })
     .on("mouseout", function() {
       d3.select<Element, IProjectDatam>(this as Element)
@@ -129,6 +148,9 @@ circles
         .duration(100)
         .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
         .attr("stroke-width", "1");
+
+      mouseoverChart
+        .classed("opaque", true);
     });
 
 let simulation: force.Simulation<IProjectDatam, any>;

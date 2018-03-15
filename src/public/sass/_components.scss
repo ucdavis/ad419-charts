@@ -364,7 +364,22 @@ table.dataTable tr.even td {
   display: inline-block;
   max-width:280px;
   text-align: left;
+
+  opacity: 1;
+  transition: opacity 250ms;
+
+  &.opaque {
+    opacity: 0;
+    transition: opacity 250ms;
+  }
 }
+
+.row {
+  .chart-card + .chart-card {
+    margin-left: 1rem;
+  }
+}
+
 .sans-bold {
   font-family: $sans-bold;
 }
