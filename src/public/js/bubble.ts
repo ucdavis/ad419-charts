@@ -28,8 +28,6 @@ const categories = getCategories();
 // assign category index
 const data: IProjectDatam[] = projects.map(p => {
   const index = categories.findIndex((c) => c.name === p.category);
-  const category = categories[index];
-
   return {
     ...p,
     categoryIndex: index,
@@ -222,6 +220,8 @@ function easeCollision() {
 }
 easeCollision();
 
+const totalChart = d3.select("#bubble-summary-chart");
+
 onSelectedCategoryChanged(() => {
     // stop previous simulation
     simulation.stop();
@@ -234,4 +234,35 @@ onSelectedCategoryChanged(() => {
     // re-colorize
     circles
       .attr("fill", (d) => getCircleColor(d.categoryIndex));
+
+    // update chart
+    const selectedCategory = getSelectedCategory();
+    if (selectedCategory < 0) {
+      const total = sumTotal;
+      const count = data.length;
+
+      totalChart.select("#bubble-summary-chart-icon");
+      totalChart.select("#bubble-summary-chart-topic")
+        .text("");
+
+      totalChart.select("#bubble-summary-chart-total")
+        .text(`$${ (total / 1000000).toFixed(1) }M`);
+
+      totalChart.select("#bubble-summary-chart-count")
+        .text(count);
+    } else {
+      const category = categories[selectedCategory];
+      const total = data.reduce((prev, p) => p.categoryIndex !== selectedCategory ? prev : prev + p.total, 0);
+      const count = data.reduce((prev, p) => p.categoryIndex !== selectedCategory ? prev : prev + 1, 0);
+
+      totalChart.select("#bubble-summary-chart-icon");
+      totalChart.select("#bubble-summary-chart-topic")
+        .text(category.name);
+
+      totalChart.select("#bubble-summary-chart-total")
+        .text(`$${ (total / 1000000).toFixed(1) }M`);
+
+      totalChart.select("#bubble-summary-chart-count")
+        .text(count);
+    }
 });
