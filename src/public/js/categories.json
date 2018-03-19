@@ -1,30 +1,37 @@
 [
   {
     "name": "Animals",
-    "color": "#ba0c2f"
+    "color": "#ba0c2f",
+    "icon": "/media/animal-icon.svg"
   },
   {
     "name": "Human",
-    "color": "#c6007e"
+    "color": "#c6007e",
+    "icon": "/media/animal-icon.svg"
   },
   {
     "name": "Biology",
-    "color": "#ffcd00"
+    "color": "#ffcd00",
+    "icon": "/media/animal-icon.svg"
   },
   {
     "name": "Food",
-    "color": "#ed8800"
+    "color": "#ed8800",
+    "icon": "/media/animal-icon.svg"
   },
   {
     "name": "Agriculture",
-    "color": "#78be20"
+    "color": "#78be20",
+    "icon": "/media/wheat-icon.svg"
   },
   {
     "name": "Environment",
-    "color": "#008eaa"
+    "color": "#008eaa",
+    "icon": "/media/animal-icon.svg"
   },
   {
     "name": "Viticulture",
-    "color": "#642667"
+    "color": "#642667",
+    "icon": "/media/animal-icon.svg"
   }
 ]
