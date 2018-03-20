@@ -107,15 +107,28 @@
       </div>
       <div class="row">
         <div class="col">
-          <div class="chart-card">
-            <img src="/media/animal-icon.svg" alt="cow icon">
-            <h2 class="color-unitrans">Animals</h2>
-            <p class="sans-bold">Funding Information</p>
-            <p class="sans-bold">
-              <span class="secondary-font">Total Funding: </span> $7 Million<br>
-              <span class="secondary-font"># of Projects: </span> 24</p>
-            <p class="sans-bold"><span class="secondary-font">Departments</span><br> Animal Sciences <br> Entomology and Nematology
-            </p>
+          <div class="row">
+            <div id="bubble-summary-chart" class="chart-card">
+                <img id="bubble-summary-chart-icon" src="/media/animal-icon.svg" class="icon" alt="icon">
+                <h2 id="bubble-summary-chart-topic" class="topic-header">Animals</h2>
+                <p class="sans-bold">Funding Information</p>
+                <p class="sans-bold">
+                  <span class="secondary-font">Total Funding: </span> <span id="bubble-summary-chart-total">$7 Million</span><br>
+                  <span class="secondary-font"># of Projects: </span> <span id="bubble-summary-chart-count">24</span></p>
+                <p class="sans-bold">
+                  <span class="secondary-font">Departments</span><br>
+                  Animal Sciences<br>
+                  Entomology and Nematology
+                </p>
+              </div>
+              <div id="bubble-mouseover-chart" class="chart-card opaque">
+                  <img id="bubble-mouseover-chart-icon" src="/media/animal-icon.svg" class="icon" alt="icon">
+                  <h2 id="bubble-mouseover-chart-topic" class="topic-header">Animals</h2>
+                  <p id="bubble-mouseover-chart-title" class="sans-bold">Title</p>
+                  <p class="sans-bold">
+                    <span class="secondary-font">Funding: </span> <span id="bubble-mouseover-chart-total">$7 Million</span><br>
+                  </p>
+              </div>
           </div>
         </div>
         <div class="col">
