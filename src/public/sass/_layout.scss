@@ -45,8 +45,9 @@ body {
 }
 
 header {
-  background-color: $primary-color;
-  background: url("/media/plantbg.jpg") center top/cover no-repeat;
+  // background-color: $primary-color;
+  background: url("/media/head-bg.png") center top/cover no-repeat;
+  padding: 6% 0px;
 }
 
 .head_bleed {
@@ -59,7 +60,7 @@ header {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#cc1d3a5c', endColorstr='#ccdaba54',GradientType=1 );
   /* IE6-9 */
-  padding: 1% 0 3%;
+
 }
 
 .lead_content {
