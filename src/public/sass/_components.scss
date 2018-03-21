@@ -70,7 +70,16 @@ background-color: rgba(255,255,255,.66);
 }
 
 }
-
+.btn-discreet {
+  color:$tertiary-font;
+  font-size:1.8rem;
+  font-family: $sans-bold;
+  border:none;
+  cursor: pointer;
+  &:hover {
+    color:$primary-color;
+  }
+}
 .btn-register {
   width: 100%;
 }
