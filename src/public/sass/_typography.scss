@@ -27,6 +27,13 @@ a {
       background-color:$bg-color;
     }
   }
+  footer p & {
+    color:rgba(255,255,255,0.95);
+    text-decoration: none;
+    &:hover {
+      color:#fff;
+    }
+  }
 }
 p a {
   font-weight: 700;
@@ -70,8 +77,9 @@ p {
     margin-top:0px;
   }
   footer & {
-    color:$primary-font;
+    color:rgba(255,255,255,.95);
     font-size:1.4rem;
+    font-family: $sans-bold;
   }
   &.topic-title  {
     font-size: 1.8rem;

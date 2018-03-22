@@ -14,10 +14,11 @@ html {
 
 body {
   padding: 0;
-  margin: 0 0 180px;
+  margin: 0 0 170px;
 }
+
 .container {
-  width:90%;
+  width: 90%;
 }
 @media (min-width: 576px) {
   .container {
@@ -47,7 +48,7 @@ body {
 header {
   // background-color: $primary-color;
   background: url("/media/head-bg.png") center top/cover no-repeat;
-  padding: 6% 0px;
+  padding: 6% 0;
 }
 
 .head_bleed {
@@ -60,7 +61,6 @@ header {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#cc1d3a5c', endColorstr='#ccdaba54',GradientType=1 );
   /* IE6-9 */
-
 }
 
 .lead_content {
@@ -91,43 +91,66 @@ ul.topic-nav {
   justify-content: space-between;
   align-items: top;
 }
+
 .department_intro {
-  padding:8% 0px;
+  padding: 8% 0;
+
   p {
-    font-size:1.8rem;
+    font-size: 1.8rem;
     font-family: $sans-bold;
-    margin-top:8px;
+    margin-top: 8px;
   }
 }
+
 .topic-picker {
   text-align: right;
+
   p {
-    font-size:2.4rem;
+    font-size: 2.4rem;
     font-family: $sans-bold;
+    border-bottom: 2px solid $borders;
+    margin-top: 10px;
   }
 }
+
 .topics {
   text-align: center;
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
   padding-top: 40px;
   padding-bottom: 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   background-color: white;
+  border-bottom: 4px solid rgba(255,255,255,.0005);
+
+  body[data-topic='Environment'] & {
+    border-color: $sky-blue;
+  }
+
+  body[data-topic='Agriculture'] & {
+    border-color: $sunny-grass;
+  }
+
+  body[data-topic='Humans'] & {
+    border-color: $golden-lupine;
+  }
+
   .topic-item {
-    opacity: .25;
+    opacity: 0.25;
   }
 
   .topic-nav {
-  margin:0px;
-  padding:0px;
+    margin: 0;
+    padding: 0;
+    width: 488px;
+    margin-left: 52px;
   }
 
   &.thin {
     padding-top: 10px;
     padding-bottom: 10px;
-    margin-bottom: 60px;  // move extra height to bottom margin to reduce page jitter
-
+    margin-bottom: 60px;
+    // move extra height to bottom margin to reduce page jitter
     .topic-title {
       margin-top: 8px;
       margin-bottom: 0;
@@ -142,27 +165,35 @@ ul.topic-nav {
   .topic-button {
     cursor: pointer;
 
-    &:hover, &.active {
-  transition: all linear 100ms;
-      opacity:1;
+    &.active,
+    &:hover {
+      transition: all linear 100ms;
+      opacity: 1;
+
       &[data-topic='Food'] .topic-title {
         color: $california-poppy;
       }
+
       &[data-topic='Human'] .topic-title {
         color: $western-redbud;
       }
+
       &[data-topic='Agriculture'] .topic-title {
         color: $sunny-grass;
       }
+
       &[data-topic='Animals'] .topic-title {
         color: $unitrans-red;
       }
+
       &[data-topic='Environment'] .topic-title {
         color: $sky-blue;
       }
+
       &[data-topic='Biology'] .topic-title {
         color: $golden-lupine;
       }
+
       &[data-topic='Viticulture'] .topic-title {
         color: $wine-grape;
       }
@@ -174,21 +205,27 @@ ul.topic-nav {
   &[data-topic='Food'] {
     color: $california-poppy;
   }
+
   &[data-topic='Human'] {
     color: $western-redbud;
   }
+
   &[data-topic='Agriculture'] {
     color: $sunny-grass;
   }
+
   &[data-topic='Animals'] {
     color: $unitrans-red;
   }
+
   &[data-topic='Environment'] {
     color: $sky-blue;
   }
+
   &[data-topic='Biology'] {
     color: $golden-lupine;
   }
+
   &[data-topic='Viticulture'] {
     color: $wine-grape;
   }
@@ -197,9 +234,9 @@ ul.topic-nav {
 .funding {
   margin: 120px 0;
 }
-.sources {
 
-}
+.sources {}
+
 .geography {
   margin: 120px 0;
 }
@@ -213,8 +250,8 @@ ul.topic-nav {
   margin-top: 28px;
   margin-bottom: 24px;
   @include breakpoint(mdbreak) {
-    margin-left:-2px;
-    margin-top:-90px;
+    margin-left: -2px;
+    margin-top: -90px;
   }
 }
 
@@ -246,22 +283,26 @@ ul.topic-nav {
     margin-left: 16px;
   }
 }
+
 .col-md.proj-detail-col {
-  padding-left:32px;
+  padding-left: 32px;
   @include breakpoint(mdbreak) {
-    padding-left:0px;
+    padding-left: 0;
   }
 }
+
 .research-details {
   margin-top: 16px;
-  max-width:60rem;
+  max-width: 60rem;
 }
 
 .lead_carousel {
   margin-left: 5%;
+
   .slick-slide {
     height: inherit;
   }
+
   .carousel_item {
     margin-right: 32px;
     background-clip: content-box;
@@ -269,24 +310,25 @@ ul.topic-nav {
 }
 @media (min-width: 576px) {
   .lead_carousel {
-    margin-left:6%;
+    margin-left: 6%;
   }
 }
 @media (min-width: 768px) {
   .lead_carousel {
-    margin-left:7%;
+    margin-left: 7%;
   }
 }
 @media (min-width: 992px) {
   .lead_carousel {
-    margin-left:8%;
+    margin-left: 8%;
   }
 }
 @media (min-width: 1200px) {
   .lead_carousel {
-  margin-left:9%;
+    margin-left: 9%;
   }
 }
+
 .active-article img {
   opacity: 0.50;
 }
@@ -297,18 +339,21 @@ ul.topic-nav {
   padding-bottom: 8px;
   justify-content: space-between;
   align-items: flex-end;
+
   p {
-    max-width:620px
+    max-width: 620px;
   }
 
   form {
     text-align: right;
     display: inline-block;
+
     label {
       font-size: 1.8rem;
       color: $primary-font;
       font-family: $sans-bold;
     }
+
     a {
       color: $tertiary-font;
       font-family: $sans-bold;
@@ -318,14 +363,17 @@ ul.topic-nav {
         color: $primary-color;
       }
     }
+
     .form-group {
       margin-bottom: 0;
     }
+
     select.form-control:not([size]):not([multiple]) {
       height: calc(3.25rem + 2px);
     }
+
     .form-control {
-      font-size:1.8rem;
+      font-size: 1.8rem;
     }
   }
 }
@@ -335,38 +383,20 @@ footer {
   bottom: 0;
   width: 100%;
   display: block;
-  height: 180px;
-
-  .foot-border {
-    border-top: 1px solid $tertiary-color;
-    padding-top: 20px;
   }
-  // p a {
-  //   color:$tertiary-color;
-  // }
-  .footer-divider {
-    text-align: center;
-
-    img {
-      z-index: 99;
-      border-right: 20px solid #fff;
-      border-left: 20px solid #fff;
-      background-color: #fff;
-      position: relative;
-      bottom: -55px;
-      @include breakpoint (mdbreak) {
-        display: none;
-      }
-    }
+  .footer_bleed {
+    background: #1e3a5b;
+      background: -moz-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      background: -webkit-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      background: linear-gradient(to right,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$gradient-one',endColorstr='$gradient-two',GradientType=1);
   }
-  @include breakpoint (smbreak) {
-    .col-sm:nth-child(3),
-    .col-sm:nth-child(4) {
-      text-align: right;
-    }
+  .footer_divider {
+      background: url("/media/gunrock_banner_final.svg") center top/cover no-repeat;
+      height: 41px;
+      padding-top:10px;
   }
-}
 .row {
-  margin-right:0px;
-  margin-left:0px;
+  margin-right: 0;
+  margin-left: 0;
 }
