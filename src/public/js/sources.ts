@@ -3,23 +3,21 @@ import * as force from "d3-force";
 import * as Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 import { debounce } from "../utils/common";
-import { getSources, getCategories, getSelectedCategory, onSelectedCategoryChanged, ISource, ICategory } from "./data";
+import { getSources, getCategories, getSelectedCategory, onSelectedCategoryChanged, ISourceTotal, ICategory, getSourceTotals, ICategoryTotal } from "./data";
 
-interface ISourceDatam extends ISource {
-  sourceIndex: number;
-  categories: ICategoryDatam[];
+interface ISourceDatam extends ISourceTotal {
+  byCategory: ICategoryDatam[];
   width: number;
   height: number;
 }
 
-interface ICategoryDatam extends ICategory, SimulationNodeDatum {
-  sourceIndex: number;
+interface ICategoryDatam extends ICategoryTotal, SimulationNodeDatum {
+  // sourceIndex: number;
   categoryIndex: number;
-  total: number;
 }
 
 // prepare data
-let sources =  getSources();
+let sources = getSourceTotals();
 sources = sources.filter(s => s.total > 0);
 sources.sort((a, b) => b.total - a.total);
 sources = sources.slice(0, 15);
@@ -52,8 +50,8 @@ function getSelectedTotal(source: ISourceDatam): number {
   if (selectedCategory < 0) {
     return source.total;
   }
-
-  return source.categories[selectedCategory].total;
+  console.log(source, selectedCategory);
+  return source.byCategory[selectedCategory].total;
 }
 
 function getTotalLabelColor(): string {
@@ -92,16 +90,12 @@ function getTargetHeight(total: number): number {
 // tranform data into datams
 const data: ISourceDatam[] = sources.map((s, i) => {
   return {
-    name: s.name,
-    total: s.total,
-    sourceIndex: i,
+    ...s,
     width: Math.max(3 * getCircleRadius(s.total), 75) + 50,
     height: Math.max(3 * getCircleRadius(s.total), 150) + 40,
-    categories: s.categories.map((c) => {
+    byCategory: s.byCategory.map((c) => {
       return {
-        name: c.name,
-        total: c.total || 0,
-        sourceIndex: i,
+        ...c,
         categoryIndex: categories.findIndex((x) => x.name === c.name),
       };
     }),
@@ -124,19 +118,19 @@ const charts = svg
   .attr("width", (d) => d.width)
   .attr("height", "100%");
 
-charts.each(function(source) {
+charts.each(function(sourceTotal) {
 
   const chart = d3.select(this as Element);
 
   const center = {
-    x: (source.width / 2),
-    y: (source.height / 2),
+    x: (sourceTotal.width / 2),
+    y: (sourceTotal.height / 2),
   };
 
   // setup circles
   const circles = chart
     .selectAll(".circle")
-    .data(source.categories)
+    .data(sourceTotal.byCategory)
     .enter()
     .append("svg:circle")
     .attr("class", "circle")
@@ -156,14 +150,14 @@ charts.each(function(source) {
     .attr("dy", "1.1em")
     // .attr("alignment-baseline", "middle")
     .attr("text-anchor", "middle")
-    .text(source.name);
+    .text(sourceTotal.source.name);
 
   // word wrap label
-  label.call(wrap, source.width - 30);
+  label.call(wrap, sourceTotal.width - 30);
 
   const totals = label
     .selectAll(".total-label")
-    .data([source])
+    .data([sourceTotal])
     .enter()
     .append<SVGTSpanElement>("tspan")
     .attr("class", "total-label")
@@ -261,7 +255,7 @@ const buildSimulation = debounce(() => {
 
     // build forces
     const simulation = force
-      .forceSimulation(source.categories)
+      .forceSimulation(source.byCategory)
       .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.3).iterations(3))
       .force("x", force.forceX(center.x))
       .force("y", force.forceY((d: ICategoryDatam) => d.categoryIndex === selectedCategory ? center.y * 0.5 : center.y));
