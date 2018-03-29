@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./css/app.css">
 </head>
 
-<body data-topic="Agriculture">
+<body data-topic="">
   <header>
     <!-- <div class="head_bleed"> -->
     <div class="container">
@@ -92,7 +92,7 @@
 
           <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
           <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
-          <li class="topic-item col topic-button" data-topic="Biology"><img src="/media/yellowtopic.svg" alt="icon">
+          <li class="topic-item col topic-button" data-topic="Human"><img src="/media/yellowtopic.svg" alt="icon">
             <p class="topic-title">Human &amp; Social</p>
           </li>
         </ul>
@@ -108,25 +108,7 @@
 
         <h2>How <span id="spend-total" class="total-span">$194.9 Million</span> is spent</h2>
         <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
-
-        <!-- <div class="col-sm-4 t-right">
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Choose a Topic</label>
-              <select class="form-control topic-dropdown" id="exampleFormControlSelect1">
-                <option value="" selected>Show All</option>
-                <option value="Animals">Animals</option>
-                <option class="color-sunny-grass" value="Agriculture">Agriculture</option>
-                <option value="Biology">Biology</option>
-                <option value="Environment">Environment</option>
-                <option value="Food">Food</option>
-                <option value="Human">Humans</option>
-                <option value="Viticulture">Viticulture</option>
-              </select>
-              <button type="button" class="topic-all btn btn-link">View All</button>
-            </div>
-          </form>
-        </div> -->
+        
       </div>
       <div class="row">
         <div class="col">
@@ -138,8 +120,10 @@
               <p class="sans-bold">
                 <span class="secondary-font">Total Funding: </span> <span id="bubble-summary-chart-total">$7 Million</span><br>
                 <span class="secondary-font"># of Projects: </span> <span id="bubble-summary-chart-count">24</span></p>
-              <p class="sans-bold">
-                <span class="secondary-font">Departments</span><br> Animal Sciences<br> Entomology and Nematology
+              <p id="bubble-summary-chart-departments" class="sans-bold">
+                <span class="secondary-font">Departments</span>
+                <br> Animal Sciences
+                <br> Entomology and Nematology
               </p>
             </div>
             <div id="bubble-mouseover-chart" class="chart-card opaque">
@@ -267,8 +251,7 @@
             </div>
             <div class="col t-right">
               <p><a href="https://github.com/ucdavis/ad419-charts"><img src="/media/github.svg" alt="Github Icon"></a></p>
-
-</div>
+            </div>
           </div>
         </div>
       </div>

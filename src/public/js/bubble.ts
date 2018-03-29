@@ -6,7 +6,6 @@ import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeou
 import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject } from "./data";
 
 interface IProjectDatam extends IProject, SimulationNodeDatum {
-  categoryIndex: number;
 }
 
 const projects = getProjects();
@@ -25,14 +24,8 @@ const scale = 50;
 
 const categories = getCategories();
 
-// assign category index
-const data: IProjectDatam[] = projects.map(p => {
-  const index = categories.findIndex((c) => c.name === p.category);
-  return {
-    ...p,
-    categoryIndex: index,
-  };
-});
+// map to datam
+const data: IProjectDatam[] = projects;
 
 // sort by total, limit
 data.sort((a, b) => b.total - a.total);
@@ -135,7 +128,7 @@ circles
         .text(category.name);
 
       mouseoverChart.select("#bubble-mouseover-chart-title")
-        .text(project.project);
+        .text(project.name);
 
       mouseoverChart.select("#bubble-mouseover-chart-total")
         .text(`$${ (project.total / 1000000).toFixed(1) }M`);
@@ -242,6 +235,7 @@ onSelectedCategoryChanged(() => {
       const count = data.length;
 
       totalChart.select("#bubble-summary-chart-icon");
+
       totalChart.select("#bubble-summary-chart-topic")
         .text("");
 
@@ -255,7 +249,9 @@ onSelectedCategoryChanged(() => {
       const total = data.reduce((prev, p) => p.categoryIndex !== selectedCategory ? prev : prev + p.total, 0);
       const count = data.reduce((prev, p) => p.categoryIndex !== selectedCategory ? prev : prev + 1, 0);
 
-      totalChart.select("#bubble-summary-chart-icon");
+      totalChart.select("#bubble-summary-chart-icon")
+        .attr("src", category.icon || "");
+
       totalChart.select("#bubble-summary-chart-topic")
         .text(category.name);
 

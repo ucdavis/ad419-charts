@@ -11,7 +11,7 @@ function getTotal() {
 
     const category = categories[categoryIndex];
     const total = projects
-        .filter(p => p.category == category.name)
+        .filter(p => p.categoryKey == category.key)
         .reduce((prev, p) => prev + p.total, 0);
 
     return total;
