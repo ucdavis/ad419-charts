@@ -291,11 +291,23 @@ table.dataTable tr.even td {
 .bg-recpool {
   background-color: $recpool-blue;
 }
+.bg-skyblue {
+  background-color: $sky-blue;
+}
 .bg-winegrape {
   background-color:$wine-grape;
 }
 .border-unitrans {
   border-color:$unitrans-red;
+}
+.border-skyblue {
+  border-color:$sky-blue;
+}
+.border-sunny-grass {
+  border-color:$sunny-grass;
+}
+.border-golden-lupine {
+  border-color:$golden-lupine;
 }
 .color-unitrans {
   color:$unitrans-red !important;

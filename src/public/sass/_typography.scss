@@ -87,6 +87,14 @@ p {
     margin-top:24px;
     color:$primary-font;
   }
+  &.discreet {
+    font-size:1.4rem;
+    color:$secondary-font;
+  }
+  &.caption {
+    text-align: center;
+    margin: 5px 10px;
+  }
 
 }
 h1,
