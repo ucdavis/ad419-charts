@@ -10,7 +10,6 @@ import "./map";
 import { setSelectedCategory } from "./data";
 
 const navButtons = document.getElementsByClassName("topic-button");
-const dropdowns = document.getElementsByClassName("topic-dropdown");
 const viewAllButtons = document.getElementsByClassName("topic-all");
 
 function setupTopicSelector() {
@@ -21,13 +20,6 @@ function setupTopicSelector() {
         button.onclick = function(e) {
             handleTopicChanged(topic);
         };
-    }
-
-    for (let i = 0; i < dropdowns.length; i++) {
-        const dropdown = dropdowns[i] as HTMLSelectElement;
-        dropdown.addEventListener("change", function() {
-            handleTopicChanged(dropdown.value);
-        });
     }
 
     for (let i = 0; i < viewAllButtons.length; i++) {
@@ -43,6 +35,9 @@ window.addEventListener("load", setupTopicSelector);
 function handleTopicChanged(topic: string) {
     setSelectedCategory(topic);
 
+    // decorate body
+    document.body.setAttribute("data-topic", topic);
+
     // decorate topic button
     for (let i = 0; i < navButtons.length; i++) {
         const button = navButtons[i] as HTMLLIElement;
@@ -52,12 +47,6 @@ function handleTopicChanged(topic: string) {
         } else {
             $(button).removeClass("active");
         }
-    }
-
-    // update drodown values
-    for (let i = 0; i < dropdowns.length; i++) {
-        const dropdown = dropdowns[i] as HTMLSelectElement;
-        dropdown.value = topic;
     }
 }
 

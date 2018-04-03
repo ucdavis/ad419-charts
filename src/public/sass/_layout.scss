@@ -122,6 +122,7 @@ ul.topic-nav {
   margin-bottom: 0;
   background-color: white;
   border-bottom: 4px solid rgba(255,255,255,.0005);
+  transition: border 500ms; 
 
   body[data-topic='Environment'] & {
     border-color: $sky-blue;
@@ -131,7 +132,7 @@ ul.topic-nav {
     border-color: $sunny-grass;
   }
 
-  body[data-topic='Humans'] & {
+  body[data-topic='Human'] & {
     border-color: $golden-lupine;
   }
 
@@ -169,65 +170,35 @@ ul.topic-nav {
     &:hover {
       transition: all linear 100ms;
       opacity: 1;
-
-      &[data-topic='Food'] .topic-title {
-        color: $california-poppy;
-      }
-
-      &[data-topic='Human'] .topic-title {
-        color: $western-redbud;
-      }
-
+      
       &[data-topic='Agriculture'] .topic-title {
         color: $sunny-grass;
       }
-
-      &[data-topic='Animals'] .topic-title {
-        color: $unitrans-red;
-      }
-
+      
       &[data-topic='Environment'] .topic-title {
         color: $sky-blue;
       }
 
-      &[data-topic='Biology'] .topic-title {
+      &[data-topic='Human'] .topic-title {
         color: $golden-lupine;
-      }
-
-      &[data-topic='Viticulture'] .topic-title {
-        color: $wine-grape;
       }
     }
   }
 }
 
 .total-span {
-  &[data-topic='Food'] {
-    color: $california-poppy;
-  }
 
-  &[data-topic='Human'] {
-    color: $western-redbud;
-  }
 
   &[data-topic='Agriculture'] {
     color: $sunny-grass;
-  }
-
-  &[data-topic='Animals'] {
-    color: $unitrans-red;
   }
 
   &[data-topic='Environment'] {
     color: $sky-blue;
   }
 
-  &[data-topic='Biology'] {
+  &[data-topic='Human'] {
     color: $golden-lupine;
-  }
-
-  &[data-topic='Viticulture'] {
-    color: $wine-grape;
   }
 }
 
