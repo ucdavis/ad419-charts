@@ -393,10 +393,7 @@ table.dataTable tr.even td {
     opacity: 0;
     transition: opacity 250ms;
   }
-}
-
-.row {
-  .chart-card + .chart-card {
+  & + & {
     margin-left: 1rem;
   }
 }
@@ -421,5 +418,11 @@ table.dataTable tr.even td {
     font-family: $sans-bold;
     font-size: 14px;
     text-align: center;
+  }
+}
+
+.article {
+  & + & {
+    margin-top: 2.5rem;
   }
 }

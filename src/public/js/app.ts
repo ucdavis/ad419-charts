@@ -1,6 +1,7 @@
 import "../sass/app.scss";
 
 import * as $ from "jquery";
+import "slick-carousel";
 
 import "./totals";
 import "./bubble";
@@ -9,67 +10,89 @@ import "./map";
 
 import { setSelectedCategory } from "./data";
 
-const navButtons = document.getElementsByClassName("topic-button");
-const viewAllButtons = document.getElementsByClassName("topic-all");
+
+const $topicBar = $("#topic-bar");
+const $root = $("html, body");
+function smoothScroll(href) {
+    const margin = 50;
+    $root.animate({
+        scrollTop: $(href).offset().top - $topicBar.height() - margin
+    }, 500, function () {
+        // window.location.hash = href;
+    });
+}
 
 function setupTopicSelector() {
     // attach listeners
-    for (let i = 0; i < navButtons.length; i++) {
-        const button = navButtons[i] as HTMLElement;
-        const topic = button.getAttribute("data-topic") || "";
-        button.onclick = function(e) {
-            handleTopicChanged(topic);
-        };
-    }
+    $(".topic-button").click(function() {
+        const topic = $(this).data("topic");
+        handleTopicChanged(topic);
+        handleTopicChanged(topic);
+    });
 
-    for (let i = 0; i < viewAllButtons.length; i++) {
-        const button = viewAllButtons[i] as HTMLButtonElement;
-        button.onclick = function(e) {
-            e.preventDefault();
-            handleTopicChanged("");
-        };
-    }
+    $(".topic-all").click(function(e) {
+        e.preventDefault();
+        handleTopicChanged("");
+    });
+
+    $(".lead_carousel").on("click", ".article-link", function(e) {
+        e.preventDefault();
+        $(".lead_carousel .article-link").removeClass("active");
+        $(this).addClass("active");
+
+        const topic = $(this).data("topic");
+        handleTopicChanged(topic);
+
+        const href = $(this).attr("href");
+        smoothScroll(href);
+    });
 }
-window.addEventListener("load", setupTopicSelector);
+$().ready(setupTopicSelector);
 
 function handleTopicChanged(topic: string) {
     setSelectedCategory(topic);
 
     // decorate body
-    document.body.setAttribute("data-topic", topic);
+    $root.data("topic", topic);
 
     // decorate topic button
-    for (let i = 0; i < navButtons.length; i++) {
-        const button = navButtons[i] as HTMLLIElement;
-        const t = button.getAttribute("data-topic");
+    $(".topic-button").each(function() {
+        const t = $(this).data("topic");
         if (t === topic) {
-            $(button).addClass("active");
+            $(this).addClass("active");
         } else {
-            $(button).removeClass("active");
+            $(this).removeClass("active");
         }
+    });
+
+    // hide/show articles
+    if (!topic) {
+        $(".article").show();
+    } else {
+        $(".article").hide();
+        $(`.article[data-topic='${topic}']`).show();
     }
 }
 
 function setupScroll() {
     // get fixed position
-    const topicBar = $("#topic-bar");
-    const startTop = Math.ceil(topicBar.position().top) + 1;
+    const startTop = Math.ceil($topicBar.position().top) + 1;
 
     // add sticky
-    topicBar.addClass("sticky-top");
+    $topicBar.addClass("sticky-top");
 
     // setup scroll spy
     const handleScroll = () => {
-        const top = topicBar.position().top;
+        const top = $topicBar.position().top;
         if (top > startTop) {
-            topicBar.addClass("thin");
+            $topicBar.addClass("thin");
         } else {
-            topicBar.removeClass("thin");
+            $topicBar.removeClass("thin");
         }
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    $(window).scroll(handleScroll);
 
     // prefire
     handleScroll();
 }
-window.addEventListener("load", setupScroll);
+$().ready(setupScroll);
