@@ -49,7 +49,7 @@ module.exports = (env) => {
         }
 
         if ('slick-carousel' === request) {
-          return callback(null, 'slick');
+          return callback(null, 'jQuery');
         }
 
         return callback();
@@ -127,6 +127,7 @@ module.exports = (env) => {
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
+        jquery: 'jquery',
       }),
       new CopyWebpackPlugin(
         assets.map(a => {
