@@ -420,3 +420,9 @@ table.dataTable tr.even td {
     text-align: center;
   }
 }
+
+.article {
+  & + & {
+    margin-top: 2.5rem;
+  }
+}
