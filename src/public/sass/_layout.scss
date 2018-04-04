@@ -268,40 +268,22 @@ ul.topic-nav {
 }
 
 .lead_carousel {
-  margin-left: 5%;
-
-  .slick-slide {
-    height: inherit;
-  }
+  margin-bottom: 32px;
+  height: 200px;
 
   .carousel_item {
     margin-right: 32px;
     background-clip: content-box;
+  
   }
-}
-@media (min-width: 576px) {
-  .lead_carousel {
-    margin-left: 6%;
+  img {
+    height: 200px;
   }
-}
-@media (min-width: 768px) {
-  .lead_carousel {
-    margin-left: 7%;
-  }
-}
-@media (min-width: 992px) {
-  .lead_carousel {
-    margin-left: 8%;
-  }
-}
-@media (min-width: 1200px) {
-  .lead_carousel {
-    margin-left: 9%;
-  }
-}
 
-.active-article img {
-  opacity: 0.50;
+  .article-link:hover img,
+  .article-link.active img {
+    opacity: 0.50;
+  }
 }
 
 .section-intro {
