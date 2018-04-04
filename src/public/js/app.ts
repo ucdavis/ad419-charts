@@ -37,18 +37,6 @@ function setupTopicSelector() {
         e.preventDefault();
         handleTopicChanged("");
     });
-
-    $(".lead_carousel").on("click", ".article-link", function(e) {
-        e.preventDefault();
-        $(".lead_carousel .article-link").removeClass("active");
-        $(this).addClass("active");
-
-        const topic = $(this).data("topic");
-        handleTopicChanged(topic);
-
-        const href = $(this).attr("href") || "";
-        smoothScroll(href);
-    });
 }
 $().ready(setupTopicSelector);
 
@@ -67,14 +55,6 @@ function handleTopicChanged(topic: string) {
             $(this).removeClass("active");
         }
     });
-
-    // hide/show articles
-    if (!topic) {
-        $(".article").show();
-    } else {
-        $(".article").hide();
-        $(`.article[data-topic='${topic}']`).show();
-    }
 }
 
 function setupScroll() {
@@ -99,3 +79,27 @@ function setupScroll() {
     handleScroll();
 }
 $().ready(setupScroll);
+
+function setupArticleSelect() {
+    // hide all articles
+    $(".article").hide();
+
+    $(".lead_carousel").on("click", ".article-link", function(e) {
+        e.preventDefault();
+        $(".lead_carousel .article-link").removeClass("active");
+        $(this).addClass("active");
+
+        // hide all articles
+        $(".article").hide()
+        ;
+        // show single article
+        const href = $(this).attr("href") || "";
+        $(href).show();
+        smoothScroll(href);
+
+        // set topic
+        const topic = $(this).data("topic");
+        handleTopicChanged(topic);
+    });
+}
+$().ready(setupArticleSelect);
