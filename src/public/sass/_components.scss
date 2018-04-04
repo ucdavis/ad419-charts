@@ -393,10 +393,7 @@ table.dataTable tr.even td {
     opacity: 0;
     transition: opacity 250ms;
   }
-}
-
-.row {
-  .chart-card + .chart-card {
+  & + & {
     margin-left: 1rem;
   }
 }
