@@ -104,5 +104,3 @@ node
 node.append("title").text(function(d: any) {
   return d.name + "\n" + format(d.value);
 });
-
-console.log("wat");

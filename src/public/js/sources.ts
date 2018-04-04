@@ -50,7 +50,6 @@ function getSelectedTotal(source: ISourceDatam): number {
   if (selectedCategory < 0) {
     return source.total;
   }
-  console.log(source, selectedCategory);
   return source.byCategory[selectedCategory].total;
 }
 
