@@ -13,10 +13,13 @@ import { setSelectedCategory } from "./data";
 
 const $topicBar = $("#topic-bar");
 const $root = $("html, body");
-function smoothScroll(href) {
+function smoothScroll(href: string) {
+    const target = ($(href).offset() || { top: 0 }).top;
+    const offset = $topicBar.height() || 0;
     const margin = 50;
+
     $root.animate({
-        scrollTop: $(href).offset().top - $topicBar.height() - margin
+        scrollTop: target - offset - margin
     }, 500, function () {
         // window.location.hash = href;
     });
@@ -43,7 +46,7 @@ function setupTopicSelector() {
         const topic = $(this).data("topic");
         handleTopicChanged(topic);
 
-        const href = $(this).attr("href");
+        const href = $(this).attr("href") || "";
         smoothScroll(href);
     });
 }
