@@ -10,7 +10,6 @@ import "./map";
 
 import { setSelectedCategory } from "./data";
 
-
 const $topicBar = $("#topic-bar");
 const $root = $("html, body");
 function smoothScroll(href: string) {
@@ -24,21 +23,6 @@ function smoothScroll(href: string) {
         // window.location.hash = href;
     });
 }
-
-function setupTopicSelector() {
-    // attach listeners
-    $(".topic-button").click(function() {
-        const topic = $(this).data("topic");
-        handleTopicChanged(topic);
-        handleTopicChanged(topic);
-    });
-
-    $(".topic-all").click(function(e) {
-        e.preventDefault();
-        handleTopicChanged("");
-    });
-}
-$().ready(setupTopicSelector);
 
 function handleTopicChanged(topic: string) {
     setSelectedCategory(topic);
@@ -54,6 +38,23 @@ function handleTopicChanged(topic: string) {
         } else {
             $(this).removeClass("active");
         }
+    });
+}
+
+function setupTopicSelector() {
+    // attach listeners
+    $(".topic-button").click(function() {
+        const topic = $(this).data("topic");
+        handleTopicChanged(topic);
+        handleTopicChanged(topic);
+
+        showRandomArticle(topic);
+    });
+
+    $(".topic-all").click(function(e) {
+        e.preventDefault();
+        handleTopicChanged("");
+        showRandomArticle("");
     });
 }
 
@@ -78,20 +79,30 @@ function setupScroll() {
     // prefire
     handleScroll();
 }
-$().ready(setupScroll);
 
+const $carousel = $(".lead_carousel");
+function setupSlideshow() {
+    $carousel.slick({
+        variableWidth: true,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 3000
+    });
+}
+
+const $articleLinks = $(".lead_carousel .article-link");
+const $articles = $(".article");
 function setupArticleSelect() {
-    // hide all articles
-    $(".article").hide();
-
     $(".lead_carousel").on("click", ".article-link", function(e) {
         e.preventDefault();
-        $(".lead_carousel .article-link").removeClass("active");
+
+        // mark one slide as active
+        $articleLinks.removeClass("active");
         $(this).addClass("active");
 
         // hide all articles
-        $(".article").hide()
-        ;
+        $articles.hide();
+
         // show single article
         const href = $(this).attr("href") || "";
         $(href).show();
@@ -102,4 +113,43 @@ function setupArticleSelect() {
         handleTopicChanged(topic);
     });
 }
-$().ready(setupArticleSelect);
+
+function showRandomArticle(topic: string) {
+    // deactivate active article, show random one
+    $articleLinks.removeClass("active");
+    $articles.hide();
+
+    let article;
+    if (!topic) {
+        const articleIndex = Math.floor(Math.random() * $articles.length);
+        article = $articles[articleIndex];
+    } else {
+        const $topicArticles = $articles.filter(function() {
+            const t = $(this).data("topic");
+            return t === topic;
+        });
+        const articleIndex = Math.floor(Math.random() * $topicArticles.length);
+        article = $topicArticles[articleIndex];
+    }
+    // show article
+    $(article).show();
+
+    // find an select slide as active
+    const id = article.id;
+    for (let i = 0; i < $articleLinks.length; i++) {
+        const $articleLink = $($articleLinks[i]);
+        if ($articleLink.attr("href") === `#${id}`) {
+            $articleLink.addClass("active");
+            $carousel.slick("slickGoTo", i);
+            break;
+        }
+    }
+}
+
+$().ready(() => {
+    setupTopicSelector();
+    setupScroll();
+    setupSlideshow();
+    setupArticleSelect();
+    showRandomArticle("");
+});
