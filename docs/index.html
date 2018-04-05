@@ -7,115 +7,133 @@
   <link rel="stylesheet" href="./css/app.css">
 </head>
 
-<body>
+<body data-topic="">
   <header>
-    <div class="head_bleed">
-      <div class="container">
-        <div class="row">
+    <!-- <div class="head_bleed"> -->
+    <div class="container">
+      <!-- <div class="row">
           <div class="col">
             <img src="/media/ucdavislogo.svg" alt="UC Davis Logo">
           </div>
-        </div>
-        <div class="row">
-          <div class="col t-center spacer">
-            <img src="/media/AES-Logo.svg" alt="AES font">
-          </div>
+        </div> -->
+      <div class="row">
+        <div class="col t-center">
+          <img src="/media/total-logo.svg" alt="AES font">
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </header>
   <div class="lead_content">
     <div class="container">
       <div class="flexer align-items-center justify-content-md-center">
-        <h1>What is AES</h1>
+        <h1>Mission</h1>
         <img src="/media/wheat.svg" alt="wheat icon">
-        <p style="max-width:600px">The mission of the Agricultural Experiment Station (AES) at the University of California, Davis is to conduct research that encompasses the continuum of fundamental and applied research for the purpose of developing new knowledge and technologies
-          that address specific problems of importance to the people of California.</p>
+        <p style="max-width:600px;">This is truly an almighty mountain. You can do anything here - the only pre-requisite is that it makes you happy. Let's give him a friend too. Everybody needs a friend.</p>
+      </div>
+    </div>
+  </div>
+  <div class="department_intro t-center">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-sm-4">
+          <img src="/media/seed-intro.svg" />
+          <p class="color-sunny-grass"><b>Agricultural Sciences</b></p>
+          <ul class="no-list-style">
+            <li>Animal science</li>
+            <li>Biological and agricultural sciences</li>
+            <li>Entomology and nematology</li>
+            <li>Plant pathology</li>
+            <li>Plant sciences</li>
+            <li>Viticulture and enology</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <img src="/media/tree-intro.svg" />
+          <p class="color-skyblue"><b>Environmental Sciences</b></p>
+          <ul class="no-list-style">
+            <li>Environmental science and policy</li>
+            <li>Environmental toxicology</li>
+            <li>Land, air and water resources</li>
+            <li>Wildlife, fish and biology</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <img src="/media/brain-intro.svg" />
+          <p class="color-golden-lupine"><b>Human &amp; Social Sciences</b></p>
+          <ul class="no-list-style">
+            <li>Agricultural and resource economics</li>
+            <li>Food science and technology</li>
+            <li>Human ecology</li>
+            <li>Nutrition</li>
+            <li>Textitles and Clothing</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
   <div id="topic-bar" class="topics">
     <div class="container">
-      <ul class="topic-nav">
-        <li class="topic-item col topic-button" data-topic="Food"><img src="/media/orangetopic.svg" alt="icon">
-          <p class="topic-title">Food</p>
-        </li>
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
+      <div class="row justify-content-md-center">
+        <div class="topic-picker">
+          <p><b>Explore a topic:</b></p>
+          <button type="button" class="topic-all btn-discreet">View All</button>
+        </div>
+        <ul class="topic-nav">
+          <li class="topic-item col topic-button" data-topic="Agriculture">
+            <img src="/media/greentopic.svg" alt="icon">
+            <p class="topic-title">Agriculture</p>
+          </li>
+          <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
+          <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
+          <li class="topic-item col topic-button" data-topic="Environment"><img src="/media/bluetopic.svg" alt="icon">
+            <p class="topic-title">Environment</p>
+          </li>
 
-        <li class="topic-item col topic-button" data-topic="Human"><img src="/media/pinktopic.svg" alt="icon">
-          <p class="topic-title">Humans</p>
-        </li>
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
+          <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
+          <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
+          <li class="topic-item col topic-button" data-topic="Human"><img src="/media/yellowtopic.svg" alt="icon">
+            <p class="topic-title">Human &amp; Social</p>
+          </li>
+        </ul>
+      </div>
 
-        <li class="topic-item col topic-button" data-topic="Agriculture"><img src="/media/greentopic.svg" alt="icon">
-          <p class="topic-title">Agriculture</p>
-        </li>
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
 
-        <li class="topic-item col topic-button" data-topic="Animals"><img src="/media/redtopic.svg" alt="icon">
-          <p class="topic-title">Animals</p>
-        </li>
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
-        <li class="topic-item col topic-button" data-topic="Environment"><img src="/media/bluetopic.svg" alt="icon">
-          <p class="topic-title">Environment</p>
-        </li>
-
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
-        <li class="topic-item col topic-button" data-topic="Biology"><img src="/media/yellowtopic.svg" alt="icon">
-          <p class="topic-title">Biology</p>
-        </li>
-
-        <span class="topic-separator topic-spacer"><img src="/media/topic-separator.svg" alt=""></span>
-        <span class="topic-separator"><img src="/media/topic-separator.svg" alt=""></span>
-        <li class="topic-item col topic-button" data-topic="Viticulture"><img src="/media/purpletopic.svg" alt="icon">
-          <p class="topic-title">Viticulture</p>
-        </li>
-      </ul>
     </div>
 
   </div>
   <div class="funding">
     <div class="container">
-      <div class="row section-intro">
-        <div class="col-sm-8">
-          <h2>How <span id="spend-total" class="total-span">$194.9 Million</span> is spent</h2>
-          <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
-        </div>
-        <div class="col-sm-4 t-right">
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Choose a Topic</label>
-              <select class="form-control topic-dropdown" id="exampleFormControlSelect1">
-                <option value="" selected>Show All</option>
-                <option value="Animals">Animals</option>
-                <option class="color-sunny-grass" value="Agriculture">Agriculture</option>
-                <option value="Biology">Biology</option>
-                <option value="Environment">Environment</option>
-                <option value="Food">Food</option>
-                <option value="Human">Humans</option>
-                <option value="Viticulture">Viticulture</option>
-              </select>
-              <button type="button" class="topic-all btn btn-link">View All</button>
-            </div>
-          </form>
-        </div>
+      <div class="section-intro">
+
+        <h2>How <span id="spend-total" class="total-span">$194.9 Million</span> is spent</h2>
+        <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
+
       </div>
       <div class="row">
         <div class="col">
-          <div class="chart-card">
-            <img src="/media/animal-icon.svg" alt="cow icon">
-            <h2 class="color-unitrans">Animals</h2>
-            <p class="sans-bold">Funding Information</p>
-            <p class="sans-bold">
-              <span class="secondary-font">Total Funding: </span> $7 Million<br>
-              <span class="secondary-font"># of Projects: </span> 24</p>
-            <p class="sans-bold"><span class="secondary-font">Departments</span><br> Animal Sciences <br> Entomology and Nematology
-            </p>
+          <div class="row">
+            <div id="bubble-summary-chart" class="chart-card">
+              <img id="bubble-summary-chart-icon" src="/media/animal-icon.svg" class="icon" alt="icon">
+              <h2 id="bubble-summary-chart-topic" class="topic-header">Animals</h2>
+              <p class="sans-bold">Funding Information</p>
+              <p class="sans-bold">
+                <span class="secondary-font">Total Funding: </span> <span id="bubble-summary-chart-total">$7 Million</span><br>
+                <span class="secondary-font"># of Projects: </span> <span id="bubble-summary-chart-count">24</span></p>
+              <p id="bubble-summary-chart-departments" class="sans-bold">
+                <span class="secondary-font">Departments</span>
+                <br> Animal Sciences
+                <br> Entomology and Nematology
+              </p>
+            </div>
+            <div id="bubble-mouseover-chart" class="chart-card opaque">
+              <img id="bubble-mouseover-chart-icon" src="/media/animal-icon.svg" class="icon" alt="icon">
+              <h2 id="bubble-mouseover-chart-topic" class="topic-header">Animals</h2>
+              <p id="bubble-mouseover-chart-title" class="sans-bold">Title</p>
+              <p class="sans-bold">
+                <span class="secondary-font">Funding: </span> <span id="bubble-mouseover-chart-total">$7 Million</span><br>
+              </p>
+            </div>
           </div>
         </div>
         <div class="col">
@@ -129,30 +147,13 @@
   </div>
   <div class="sources">
     <div class="container">
-      <div class="row section-intro">
-        <div class="col-sm-8">
-          <h2>Who <span id="source-total" class="total-span">$194.9 Million</span> comes from.</h2>
-          <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
-        </div>
-        <div class="col-sm-4 t-right">
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Choose a Topic</label>
-              <select class="form-control topic-dropdown" id="exampleFormControlSelect1">
-                <option value="" selected>Show All</option>
-                <option value="Animals">Animals</option>
-                <option class="color-sunny-grass" value="Agriculture">Agriculture</option>
-                <option value="Biology">Biology</option>
-                <option value="Environment">Environment</option>
-                <option value="Food">Food</option>
-                <option value="Human">Humans</option>
-                <option value="Viticulture">Viticulture</option>
-              </select>
-              <button type="button" class="topic-all btn btn-link">View All</button>
-            </div>
-          </form>
-        </div>
+      <div class="section-intro">
+
+        <h2>Who <span id="source-total" class="total-span">$194.9 Million</span> comes from.</h2>
+        <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
       </div>
+
+
       <div class="row">
         <div id="sources" class="chart-grid"></div>
       </div>
@@ -160,85 +161,520 @@
   </div>
   <div class="geography">
     <div class="container">
-      <div class="row section-intro">
-        <div class="col-sm-8">
-          <h2>Where <span id="map-total" class="total-span">$194.9 Million</span> is spent</h2>
-          <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
-        </div>
-        <div class="col-sm-4 t-right">
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Choose a Topic</label>
-              <select class="form-control topic-dropdown" id="exampleFormControlSelect1">
-                <option value="" selected>Show All</option>
-                <option value="Animals">Animals</option>
-                <option class="color-sunny-grass" value="Agriculture">Agriculture</option>
-                <option value="Biology">Biology</option>
-                <option value="Environment">Environment</option>
-                <option value="Food">Food</option>
-                <option value="Human">Humans</option>
-                <option value="Viticulture">Viticulture</option>
-              </select>
-              <button type="button" class="topic-all btn btn-link">View All</button>
-            </div>
-          </form>
-        </div>
+      <div class="section-intro">
+
+        <h2>Where <span id="map-total" class="total-span">$194.9 Million</span> is spent</h2>
+        <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
+
       </div>
       <div class="row flex-between">
-      <div class="col">
-        <div id="map"></div>
-      </div>
-      <div class="col t-right">
-        <div class="chart-card">
-          <img src="/media/animal-icon.svg" alt="cow icon">
-          <h2 class="color-unitrans">Animals</h2>
-          <p class="sans-bold">Geographic Information</p>
-          <p>Let's make some happy little clouds in our world. It's life. It's interesting.</p>
+        <div class="col">
+          <div id="map"></div>
+        </div>
+        <div class="col t-right">
+          <div class="chart-card">
+            <img src="/media/animal-icon.svg" alt="cow icon">
+            <h2 class="color-unitrans">Animals</h2>
+            <p class="sans-bold">Geographic Information</p>
+            <p>Let's make some happy little clouds in our world. It's life. It's interesting.</p>
 
+          </div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>
 
   <div class="articles">
     <div class="container">
-      <div class="row section-intro">
-        <div class="col-sm-8">
-          <h2>What <span id="impact-total" class="total-span">$194.9 Million</span> is impacting</h2>
-          <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
+      <div class="section-intro">
+
+        <h2>What <span id="impact-total" class="total-span">$194.9 Million</span> is impacting</h2>
+        <p>Let's make some happy little clouds in our world. It's life. It's interesting. It's fun. Every single thing in the world has its own personality - and it is up to you to make friends with the little rascals. We'll play with clouds today.</p>
+      </div>
+
+      <div class="lead_carousel">
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-skyblue">
+            <a href="#article_dahkle" class="article-link" data-topic="Environment">
+              <img src="/media/articleshots/helen-dahkle.jpg" alt="" class="">
+            </a>
+          </div>
         </div>
-        <div class="col-sm-4 t-right">
-          <form>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Choose a Topic</label>
-              <select class="form-control topic-dropdown" id="exampleFormControlSelect1">
-                <option value="" selected>Show All</option>
-                <option value="Animals">Animals</option>
-                <option class="color-sunny-grass" value="Agriculture">Agriculture</option>
-                <option value="Biology">Biology</option>
-                <option value="Environment">Environment</option>
-                <option value="Food">Food</option>
-                <option value="Human">Humans</option>
-                <option value="Viticulture">Viticulture</option>
-              </select>
-              <button type="button" class="topic-all btn btn-link">View All</button>
-            </div>
-          </form>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-golden-lupine">
+            <a href="#article_belsky" class="article-link" data-topic="Human">
+              <img src="/media/articleshots/jay-belsky.jpg" alt="" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-sunny-grass">
+            <a href="#article_upadhyaya" class="article-link" data-topic="Agriculture">
+                <img src="/media/articleshots/shrinivasa-upadhyayaop.jpg" alt="" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-sunny-grass">
+            <a href="#article_knapp" class="article-link" data-topic="Agriculture">
+              <img src="/media/articleshots/steve-knapp.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-skyblue">
+            <a href="#article_eadie" class="article-link" data-topic="Environment">
+              <img src="/media/articleshots/john-eadie.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-sunny-grass">
+            <a href="#article_block" class="article-link" data-topic="Agriculture">
+              <img src="/media/articleshots/david-block.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-sunny-grass">
+            <a href="#article_medrano" class="article-link" data-topic="Agriculture">
+              <img src="/media/articleshots/juan-medrano.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-golden-lupine">
+            <a href="#article_hibel" class="article-link" data-topic="Human">
+              <img src="/media/articleshots/leah-hibel.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-sunny-grass">
+            <a href="#article_depeters" class="article-link" data-topic="Agriculture">
+              <img src="/media/articleshots/ed-depeters.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-skyblue">
+            <a href="#article_todgham" class="article-link" data-topic="Environment">
+              <img src="/media/articleshots/anne-todgham.jpg" alt="kitten" class="">
+            </a>
+          </div>
+        </div>
+        <div class="carousel-wrapper">
+          <div class="carousel_item bg-skyblue">
+            <a href="#article_rizzo" class="article-link" data-topic="Environment">
+              <img src="/media/articleshots/dave-rizzo.jpg" alt="kitten" class="">
+            </a>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md"><img class="img-fluid" src="/media/article-shot.jpg" alt=""></div>
+
+      <div id="article_dahkle" class="row article" data-topic="Environment">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/helen-dahkle.jpg" alt="UC Davis scientist, Helen Dahlke,  stands in a deliberately flooded almond orchard outside Modesto as part of a groundwater banking experiment on Tuesday, Jan. 19, 2016. ">
+        <p class="discreet caption">UC Davis scientist, Helen Dahlke,  stands in a deliberately flooded almond orchard outside Modesto as part of a groundwater banking experiment on Tuesday, Jan. 19, 2016. </p></div>
         <div class="col-md proj-detail-col">
           <div class="row">
             <div class="flexer research-title">
-              <div class="research-title-inner bg-unitrans">
-                <h2>Animals</h2>
-                <img src="/media/cow-white.svg" alt="cow icon">
+              <div class="research-title-inner bg-skyblue">
+                <h2>Environment</h2>
+                <img src="/media/tree-white.svg" alt="tree icon">
               </div>
               <div class="research-title-more">
-                <a href="/" class="btn-border border-unitrans color-unitrans">Learn More</a>
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/09/farmland-may-provide-key-to-replenishing-groundwater" class="btn-border border-skyblue color-skyblue">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Assistant Professor:</span> Helen Dahlke <br>
+                <span class="secondary-font">Dept:</span> Land, Air and Water Resources</p>
+                <h2>Importance</h2>
+                <p>Managing drought. In 2015 alone, statewide revenue losses reached $2.7 billion due to drought, and 18,600 workers lost full and part-time jobs. </p>
+              <h2>Impact</h2>
+              <p>Early results show that deliberately flooding farmland in the winter can refill groundwater aquifers without harming crops and benefit everyone in the drought-impacted state. Dalhke is working with alfalfa growers in Siskiyou County and almond growers in the Central Valley.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_belsky" class="row article" data-topic="Human">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/jay-belsky.jpg" alt="Jay Belsky, human development with the Department of Human Ecology, studies the link between genetics and how humans respond to good, bad, and benign experiences and exposures.">
+        <p class="discreet caption">Jay Belsky, human development with the Department of Human Ecology, studies the link between genetics and how humans respond to good, bad, and benign experiences and exposures.</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-golden-lupine">
+                <h2>Human &amp; Social</h2>
+                <img src="/media/brain-white.svg" alt="brain icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/05/for-better-or-worse" class="btn-border border-golden-lupine color-golden-lupine">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Jay Belsky <br>
+                <span class="secondary-font">Dept:</span> Human Ecology </p>
+                <h2>Importance</h2>
+                <p>Our genes can influence how we respond to stress, making some people more predisposed to anxiety and depression.</p>
+              <h2>Impact</h2>
+              <p>Belsky has discovered an upside to the link between genetics and environmental exposure. In many cases, the same people who are most adversely affected by negative experiences also benefit the most from supportive or even benign environments. His findings inform society’s understanding of human development and can help all humans thrive</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div id="article_slupsky" class="row article" data-topic="">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/carolyn-slupsky.jpg" alt="Carolyn Slupsky">
+        <p class="discreet caption">Caroyln Slupsky</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/12/fresh-citrus-at-risk" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Carolyn Slupsky <br>
+                <span class="secondary-font">Dept:</span> Nutrition, Food Science Technology</p>
+                <h2>Importance</h2>
+                <p>Huanglongbing (HLB) has decimated citrus groves in Florida, Texas and throughout the world. There is no cure. For the first time in 70 years California has surpassed Florida in citrus production. The disease has been spotted in California.</p>
+              <h2>Impact</h2>
+              <p>Slupsky and other UC Davis experts are working with farmers and fellow scientists to develop early detection methods, boost tree immunity and find a cure for the devastating disease. Slupsky is working with growers in southern California, Placer County and throughout the state. </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div id="article_upadhyaya" class="row article" data-topic="Agriculture">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/shrinivasa-upadhyayaop.jpg" alt="Professor Shrini Upadhyaya, faculty in biological and agricultural engineering, has developed a suite of sensors that can help growers determine when, where, and how much to irrigate. Dr. Upadyhaya's technology has been commercialized and is now available to improve irrigation in vineyards and almonds and walnut orchards. Soon, more crops will come online, helping growers save water and improve crop quality and yield. ">
+        <p class="discreet caption">Professor Shrini Upadhyaya, faculty in biological and agricultural engineering, has developed a suite of sensors that can help growers determine when, where, and how much to irrigate.</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/09/helping-growers-optimize-irrigation" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Shrinivasa Upadhyaya <br>
+                <span class="secondary-font">Dept:</span> Biological and Agricultural Engineering </p>
+                <h2>Importance</h2>
+                <p>The key to effective irrigation is giving crops the right amount of water in the right place at the right time, but that is easier said than done.</p>
+              <h2>Impact</h2>
+              <p>Upadhyaya developed new technology that helps grape, walnut and almond growers throughout the state decide when, where and how much to irrigate, which helps save water and improve crop quality and yield.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div id="article_brummer" class="row article" data-topic="">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/charlie-brummer.jpg" alt="Plant Sciences Professor Charlie Brummer faculty">
+        <p class="discreet caption">Plant Sciences Professor Charlie Brummer faculty</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/03/crop-breeding-for-the-unknown" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Charlie Brummer <br>
+                <span class="secondary-font">Dept:</span> Plant Sciences </p>
+                <h2>Importance</h2>
+                <p>Variable weather is creating extreme challenges for crop breeding in California. How do you develop crops that will thrive under certain conditions when you can no longer predict what those conditions will be?</p>
+              <h2>Impact</h2>
+              <p>Variable weather is creating extreme challenges for crop breeding in California. How do you develop crops that will thrive under certain conditions when you can no longer predict what those conditions will be?</p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div id="article_knapp" class="row article" data-topic="Agriculture">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/steve-knapp.jpg" alt="Steve Knapp, who will be the new strawberry breeder, stands in the strawberry greenhouse on Tuesday January 20, 2015 at UC Davis.">
+        <p class="discreet caption">Steve Knapp, who will be the new strawberry breeder, stands in the strawberry greenhouse on Tuesday January 20, 2015 at UC Davis.</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/08/4-5-million-grant-funds-new-disease-resistant-strawberries" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Steve Knapp <br>
+                <span class="secondary-font">Dept:</span> Plant Sciences </p>
+                <h2>Importance</h2>
+                <p>Strawberries constitute a $4.4 billion industry in the United States, and most of the berries are grown in California. Strawberries are especially vulnerable to soil-borne pathogens, which destroy plants and greatly reduce yield. </p>
+              <h2>Impact</h2>
+              <p>Knapp leads the UC Davis Public Strawberry Breeding Program and is focused on improving disease resistance and the sustainable production of strawberries throughout the nation. Over the years, the public program has developed more than 30 patented varieties, made strawberries a year-round crop in California and boosted strawberry yield from just six tons per acre in the 1950s to 30 tons per acre today.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_eadie" class="row article" data-topic="Environment">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/john-eadie.jpg" alt="Professor John Eadie talks about his research as he hold a duckling as they collect data on wood ducks and their ducklings at the Roosevelt Ranch in Zamora, Ca.">
+        <p class="discreet caption">Professor John Eadie talks about his research as he hold a duckling as they collect data on wood ducks and their ducklings at the Roosevelt Ranch in Zamora, Ca.</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-skyblue">
+                <h2>Environment</h2>
+                <img src="/media/tree-white.svg" alt="tree icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="/" class="btn-border border-skyblue color-skyblue">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> John Eadie <br>
+                <span class="secondary-font">Dept:</span> Wildlife, Fish and Conservation Biology </p>
+                <h2>Importance</h2>
+                <p>Loss of wetlands. An estimated 95 percent of original wetland habitat in California has been lost due to human activity, leading to declining numbers of waterfowl and other wildlife dependent on riparian landscapes, as well as reduced flood protection, clean water and other ecosystem services provided by wetlands.</p>
+              <h2>Impact</h2>
+              <p>Public-private partnerships between the university and farmers/landowners have led to restoration of thousands of acres of wetlands, with land managers relying on university research and expertise to create riparian forests that support migrating waterfowl and other native wildlife. Landowners allow Eadie’s wildlife students to conduct wood duck research on their property, which gives students field experience with wildlife and helps quantify the success of restoration efforts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_block" class="row article" data-topic="Agriculture">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/david-block.jpg" alt="Professor Roger Boulton, left, and David Block, right, faculty with the department of viticulture and enology, are helping vintners  produce world-class wine with less water. Photo by Kassie Borreson/Edible Sacramento">
+        <p class="discreet caption">Professor Roger Boulton, left, and David Block, right, faculty with the department of viticulture and enology, are helping vintners  produce world-class wine with less water. Photo by Kassie Borreson/Edible Sacramento  </p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/08/uc-davis-helps-winemakers-sustainably-produce-premium-wine" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor and Chair:</span> David Block <br>
+                <span class="secondary-font">Dept:</span> Viticulture and Enology </p>
+                <h2>Importance</h2>
+                <p>A typical winery uses four to six gallons of water after the grapes are harvested to produce one gallon of wine, with most of that water used to wash equipment.</p>
+              <h2>Impact</h2>
+              <p>Block’s team is developing self-cleaning fermenters capable of recycling 90 percent of that water. The goal: affordable technology that uses one gallon of water to produce one gallon of world-class wine.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div id="article_cantu" class="row article" data-topic="">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/dario-cantu.jpg" alt="Associate professor Dario Cantu stands in the UC Davis vineyard on of the Robert Mondavi Institute on Thursday October 13, 2016.  He does work on grape genetics.">
+        <p class="discreet caption">Associate professor Dario Cantu stands in the UC Davis vineyard on of the Robert Mondavi Institute on Thursday October 13, 2016. </p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/02/fighting-powdery-grape-mildew" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Assistant Professor:</span> Dario Cantu <br>
+                <span class="secondary-font">Dept:</span> Viticulture and Enology </p>
+                <h2>Importance</h2>
+                <p>California growers use more chemicals to control powdery mildew than to manage any other vineyard problem. Left untreated, powdery mildew destroys grape quality and yield.</p>
+              <h2>Impact</h2>
+              <p>UC Davis researchers have uncovered important genetic clues about the pathogen that causes grape powdery mildew, which can help reduce fungicide use and benefit both the environment and the economy.</p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div id="article_bradford" class="row article" data-topic="">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/kent-bradford.jpg" alt="Kent Bradford, director of the UC Davis Seed Biotech Center.">
+        <p class="discreet caption">Kent Bradford, director of the UC Davis Seed Biotech Center </p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2016/03/crucial-lettuce-gene-discovery" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Kent Bradford <br>
+                <span class="secondary-font">Dept:</span> Plant Sciences </p>
+                <h2>Importance</h2>
+                <p>Nutritious, plentiful food begins with a seed. Seeds are the delivery system for agricultural technology. </p>
+              <h2>Impact</h2>
+              <p>Bradford helped launch the UC Davis Seed Biotechnology Center, which links the seed industry to the university. Bradford is a popular teacher and mentor and has advanced seed biology for important crops such as tomatoes, melons, peas, beans, rice, broccoli, peppers, carrots and lettuce. </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div id="article_medrano" class="row article" data-topic="Agriculture">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/juan-medrano.jpg" alt="UC Davis researcher Juan Medrano at Good Land Organics in Goleta, Calif. on December 15, 2016.">
+        <p class="discreet caption">UC Davis researcher Juan Medrano at Good Land Organics in Goleta, Calif. on December 15, 2016.</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/01/breeding-hill-climbing-cows" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Juan Medrano <br>
+                <span class="secondary-font">Dept:</span> Animal Science </p>
+                <h2>Importance</h2>
+                <p>Cattle like to graze in valleys and hang out by creeks, which leads to overgrazing in riparian areas and lets perfectly good forage on hillsides go to waste</p>
+              <h2>Impact</h2>
+              <p>Medrano is helping develop an easy, inexpensive genetic test so ranchers can improve cattle distribution by breeding hill-climbing cows. The test could enhance management of California's 38 million acres of rangeland.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_hibel" class="row article" data-topic="Human">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/leah-hibel.jpg" alt="???">
+        <p class="discreet caption">Leah Hibel</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-golden-lupine">
+                <h2>Human &amp; Social</h2>
+                <img src="/media/brain-white.svg" alt="brain icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/10/risk-and-resilience" class="btn-border border-golden-lupine color-golden-lupine">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Associate Professor:</span> Leah Hibel <br>
+                <span class="secondary-font">Dept:</span> Human Ecology </p>
+                <h2>Importance</h2>
+                <p>More than half of the people in California are Latino, and 82 percent of the state’s Latino population is of Mexican origin. Yet scientists know very little about the social and emotional development of Mexican-origin children.</p>
+              <h2>Impact</h2>
+              <p>Assessing 250 families in the Sacramento area, Hibel is charting emotions, behaviors, physical health and school readiness to measure how discrimination and fear of deportation affect parents and their children. Her science will influence policy and improve intervention strategies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div id="article_eenennaam" class="row article" data-topic="">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/alison-van-eenennaam.jpg" alt="Alison Van Eenennaam CE specialist animal science">
+        <p class="discreet caption">Alison Van Eenennaam CE specialist animal science</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2014/09/study-no-health-problems-for-ge-fed-livestock" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Cooperative Extension specialist:</span> Alison Van Eenennaam <br>
+                <span class="secondary-font">Dept:</span> Animal Science </p>
+                <h2>Importance</h2>
+                <p>To feed a growing population, we need to find ways to boost sustainable livestock production while enhancing animal health and welfare.</p>
+              <h2>Impact</h2>
+              <p>Van Eeennaam works closely with the beef cattle industry to develop educational programs on topics ranging from animal cloning to DNA and genome-based genetic selection methods. She is a world leader in gene-editing research as a way to make beneficial genetic changes to improve health, welfare and sustainable production of food animals.</p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div id="article_depeters" class="row article" data-topic="Agriculture">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/ed-depeters.jpg" alt="Dr. Ed DePeter's Melamine study at the Dairy on campus">
+        <p class="discreet caption">Dr. Ed DePeter's Melamine study at the Dairy on campus</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-sunny-grass">
+                <h2>Agriculture</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="https://www.ucdavis.edu/news/animal-scientist-ed-depeters-wins-40000-teaching-prize/" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
                 <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
                 <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
@@ -248,54 +684,103 @@
             <div class="research-details">
               <p class="sans-bold">
                 <span class="secondary-font">Professor:</span> Ed DePeters <br>
-              <span class="secondary-font">Geography:</span> Central Valley</p>
+                <span class="secondary-font">Dept:</span> Animal Science </p>
+                <h2>Importance</h2>
+                <p>Milk quality starts on the farm. Dairy management involves nutrition, environmental sustainability, animal welfare, genetics and herd health.</p>
               <h2>Impact</h2>
-              <p>Milk quality starts on the farm. Dairy management involves nutrition, environmental sustainability, animal welfare, genetics and herd health.</p>
-              <p>
-                DePeters works directly with farmers to improve dairy-cow nutrition, evaluate byproduct feedstuffs and enhance the nutritional profile of milk, specifically milk proteins and fatty acids</p>
+              <p>DePeters works directly with farmers to improve dairy-cow nutrition, evaluate byproduct feedstuffs and enhance the nutritional profile of milk, specifically milk proteins and fatty acids.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_todgham" class="row article" data-topic="Environment">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/anne-todgham.jpg" alt="Anne Todgham">
+        <p class="discreet caption">Anne Todgham</p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-skyblue">
+                <h2>Environment</h2>
+                <img src="/media/seed-white.svg" alt="seed icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/10/the-last-stop" class="btn-border border-skyblue color-skyblue">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Assistant Professor:</span> Anne Todgham <br>
+                <span class="secondary-font">Dept:</span> Animal Science </p>
+                <h2>Importance</h2>
+                <p>Ocean warming and acidification are happening all along California’s coastlines, affecting many species people rely on for food, like oysters and Dungeness crab.</p>
+              <h2>Impact</h2>
+              <p>Todgham studies how stress, including climate change, affects sea creatures in a wide variety of locations. By identifying vulnerable populations, her team can influence policies that protect species from direct threats like overfishing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="article_rizzo" class="row article" data-topic="Environment">
+        <div class="col-md"><img class="img-fluid" src="/media/articleshots/dave-rizzo.jpg" alt="Dave Rizzo stands in the health Oak Grove on March 20, 2017.  Dave Rizzo is a plant disease expert who helped identify Sudden Oak Death, and also does work with mushrooms.">
+        <p class="discreet caption">Dave Rizzo stands in the health Oak Grove on March 20, 2017.  Dave Rizzo is a plant disease expert who helped identify Sudden Oak Death, and also does work with mushrooms. </p></div>
+        <div class="col-md proj-detail-col">
+          <div class="row">
+            <div class="flexer research-title">
+              <div class="research-title-inner bg-skyblue">
+                <h2>Environment</h2>
+                <img src="/media/tree-white.svg" alt="tree icon">
+              </div>
+              <div class="research-title-more">
+                <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/04/congratulations-dave-rizzo" class="btn-border border-skyblue color-skyblue">Learn More</a>
+                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
+                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
+              </div>
+            </div>
+          </div>
+          <div class="flexer">
+            <div class="research-details">
+              <p class="sans-bold">
+                <span class="secondary-font">Professor:</span> Dave Rizzo <br>
+                <span class="secondary-font">Dept:</span> Plant Pathology</p>
+                <h2>Importance</h2>
+                <p>Forest devastation. In California, millions of trees have died due to sudden oak death affecting ecosystems across the state.</p>
+              <h2>Impact</h2>
+              <p>Rizzo and a UC Berkeley colleague identified the culprit behind sudden oak death—a fungus-like microorganism that caused infected trees to ooze sap, lose foliage and die. Rizzo’s lab is involved in numerous efforts to restore infested forests and protect forests that are still at risk. Rizzo is a dedicated teacher and mentor and has developed student programs that provide students with early exposure to courses and career opportunities.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  </div>
-  <div class="lead_carousel">
-    <div class="carousel-wrapper">
-      <div class="carousel_item bg-sunny-grass"><img src="/media/carousel1.jpg" alt="kitten"></div>
+ 
+  <footer>
+    <div class="footer_bleed">
+      <div class="footer_divider">
+        <div class="container">
+          <div class="row flex-between">
+            <div class="col">
+              <p>Copyright &copy; <span id="copywrite-year"></span>  The Regents of the University of California, Davis campus. All rights reserved.</p>
+            </div>
+            <div class="col t-right">
+              <p><a href="https://github.com/ucdavis/ad419-charts"><img src="/media/github.svg" alt="Github Icon"></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="carousel-wrapper">
-      <div class="carousel_item active-article bg-unitrans"><img src="/media/carousel2.jpg" alt="kitten"></div>
-    </div>
-    <div class="carousel-wrapper">
-      <div class="carousel_item bg-recpool"><img src="/media/carousel3.jpg" alt="kitten"></div>
-    </div>
-    <div class="carousel-wrapper">
-      <div class="carousel_item bg-golden-lupine"><img src="/media/carousel4.jpg" alt="kitten"></div>
-    </div>
-    <div class="carousel-wrapper">
-      <div class="carousel_item bg-winegrape"><img src="/media/carousel5.jpg" alt="kitten"></div>
-    </div>
-  </div>
-  <script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.js"></script>
   <script src="./js/app.js"></script>
-
   <script>
-    // setup carousel
-    $(function() {
-      $(".lead_carousel").slick({
-          adaptiveHeight: true,
-          variableWidth: true,
-          arrows: false,
-          autoplay: true,
-          autoplaySpeed: 3000
-        });
-    });
-  </script>
+    var today = new Date()
+    var year = today.getFullYear()
+    $('#copywrite-year').text(year);
+</script>
 </body>
 
 </html>
