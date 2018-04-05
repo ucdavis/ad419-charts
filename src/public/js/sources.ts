@@ -115,7 +115,7 @@ const charts = svg
   .append("svg")
   .attr("class", "chart")
   .attr("width", (d) => d.width)
-  .attr("height", "100%");
+  .attr("height", (d) => d.height);
 
 charts.each(function(sourceTotal) {
 
@@ -252,6 +252,10 @@ const buildSimulation = debounce(() => {
       y: (height / 2),
     };
 
+    // update svg height
+    const chart = d3.select(element);
+    chart.attr("height", height);
+
     // build forces
     const simulation = force
       .forceSimulation(source.byCategory)
@@ -260,7 +264,6 @@ const buildSimulation = debounce(() => {
       .force("y", force.forceY((d: ICategoryDatam) => d.categoryIndex === selectedCategory ? center.y * 0.5 : center.y));
 
     // listen to ticks
-    const chart = d3.select(element);
     const circles = chart.selectAll<Element, ICategoryDatam>(".circle");
     simulation.on("tick", () => {
       circles
