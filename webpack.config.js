@@ -65,12 +65,10 @@ module.exports = (env) => {
         {
           test: /\.tsx?$/,
           loader: 'awesome-typescript-loader',
-        },
-        {
+        }, {
           test: /\.json$/,
           loader: 'json-loader',
-        },
-        {
+        }, {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             use: [{
@@ -79,12 +77,12 @@ module.exports = (env) => {
                 importLoaders: 1,
                 minimize: true,
                 sourceMap: true,
-              }
+              },
             }, {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true,
-              }
+              },
             }, {
               loader: 'sass-loader',
               options: {
@@ -92,9 +90,8 @@ module.exports = (env) => {
               },
             }],
           }),
-        },
-        {
-          test: /\.(png|jpg|svg)$/,
+        }, {
+          test: /\.(png|jpg)$/,
           use: [{
             loader: 'url-loader',
             options: {
@@ -109,8 +106,10 @@ module.exports = (env) => {
               },
             },
           }],
-        },
-        {
+        }, {
+          test: /\.svg$/,
+          loader: 'svg-inline-loader',
+        }, {
           test: /\.(woff|woff2)$/,
           use: [{
             loader: 'file-loader',
