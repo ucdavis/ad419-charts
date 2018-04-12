@@ -413,11 +413,18 @@ table.dataTable tr.even td {
   align-content: flex-start;
 
   margin: 0 auto;
+}
 
-  .chart-label {
-    font-family: $sans-bold;
-    font-size: 14px;
-    text-align: center;
+.chart-label {
+  font-family: $sans-bold;
+  font-size: 14px;
+  text-align: center;
+
+  opacity: 1;
+  transition: opacity 250ms;
+
+  &.opaque {
+    opacity: 0;
   }
 }
 
