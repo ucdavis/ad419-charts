@@ -11,7 +11,7 @@ export default {
     marsh: require('./marsh.svg'),
     milk: require('./milk.svg'),
     orangeslice: require('./orangeslice.svg'),
-    seed: ('./seed.svg'),
+    seed: require('./seed.svg'),
     strawberry: require('./strawberry.svg'),
     tree: require('./tree.svg'),
     wineglass: require('./wineglass.svg'),
