@@ -378,6 +378,10 @@ table.dataTable tr.even td {
 //     display:inline-block;
 //     margin:0 24px;
 // }
+.chart {
+  position: relative;
+}
+
 .chart-card {
   border: 1px solid $borders;
   padding:26px 24px 16px 24px;
@@ -425,6 +429,83 @@ table.dataTable tr.even td {
 
   &.opaque {
     opacity: 0;
+  }
+}
+
+.chart-tooltip {
+  position: absolute;
+  display: none;
+  transform: translate(-50%, -100%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 2rem;
+  border: 1px solid $borders;
+  background-color: rgba(255,255,255,0.95);
+
+  &.hidden {
+    display: none;
+  }
+
+  .department {
+    color: $secondary-font;
+    font-family: $sans-bold;
+    font-size: 1.6rem;
+
+    border-bottom: 1px solid $borders;
+  }
+
+  .project {
+    color: $primary-font;
+    font-family: $sans-bold;
+    font-size: 1.6rem;
+  }
+
+  .total {
+    font-size: 1.6rem;
+  }
+
+  &[data-topic="AG"] .total {
+    color: $sunny-grass;
+  }
+
+  &[data-topic="ENV"] .total {
+    color: $sky-blue;
+  }
+
+  &[data-topic="HUMAN"] .total {
+    color: $golden-lupine;
+  }
+
+  &:before {
+    content: '';
+    display: block;  
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid $borders;
+    transform: translate(-50%, 0);
+}
+
+  &:after {
+    content: '';
+    display: block;  
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(255,255,255,0.95);
+    transform: translate(-50%, 0);
   }
 }
 

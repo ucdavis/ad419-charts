@@ -83,12 +83,11 @@ function getStrengthMultiplier(d: IProjectDatam) {
 }
 
 // build chart
-const svg: d3.Selection<Element, {}, Element, {}> = d3
+const svg = d3
   .select(chartSelector)
-  .append("svg")
+  .append<SVGElement>("svg")
   .attr("width", width)
-  .attr("height", height)
-  .append("g");
+  .attr("height", height);
 
 // initial setup
 const circles = svg
@@ -97,7 +96,7 @@ const circles = svg
   .selectAll("circle")
   .data(data)
   .enter()
-  .append("svg:circle")
+  .append<SVGCircleElement>("svg:circle")
   .attr("fill", (d) => getCircleColor(d.categoryIndex))
   .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
   .attr("stroke-width", "1")
@@ -105,43 +104,66 @@ const circles = svg
   .attr("cy", (d) => getTargetY(d.categoryIndex))
   .attr("r", (d) => getCircleRadius(d.total));
 
-// mouse over thick border and project view
-const mouseoverChart = d3.select("#bubble-mouseover-chart");
+// mouse over tooltip
+const tooltip = d3
+  .select(chartSelector)
+  .append<HTMLElement>("div")
+  .attr("class", "chart-tooltip hidden")
+  .attr("dy", 1);
+
+// build tooltip
+tooltip.append("div").attr("class", "department");
+tooltip.append("div").attr("class", "project");
+tooltip.append("div").attr("class", "total");
 
 circles
-    .on("mouseover", function() {
-      const project = d3.select<Element, IProjectDatam>(this as Element).datum();
+    .on("mouseover", function(project: IProjectDatam) {
+      const circle = d3.select(this);
       const category = categories[project.categoryIndex];
 
-      d3.select<Element, IProjectDatam>(this as Element)
+      const circleX = this.cx.baseVal.value;
+      const circleY = this.cy.baseVal.value;
+      const circleR = this.r.baseVal.value;
+
+      // highlight circle
+      d3.select<Element, IProjectDatam>(this)
         .transition()
         .duration(100)
         .attr("stroke", "#1d1d1d")
         .attr("stroke-width", "2");
 
-      // show the chart
-      mouseoverChart
-        .classed("opaque", false);
+      // setup tooltip text
+      tooltip.attr("data-topic", category.key);
 
-      mouseoverChart.select("#bubble-mouseover-chart-icon");
-      mouseoverChart.select("#bubble-mouseover-chart-topic")
-        .text(category.name);
-
-      mouseoverChart.select("#bubble-mouseover-chart-title")
+      tooltip.select(".department")
         .text(project.name);
 
-      mouseoverChart.select("#bubble-mouseover-chart-total")
+      tooltip.select(".project")
+        .text(project.name);
+
+      tooltip.select(".total")
         .text(`$${ (project.total / 1000000).toFixed(1) }M`);
+
+      // move mouseover tooltip
+      tooltip
+        .classed("hidden", false)
+        .style("left", circleX)
+        .style("top", circleY - circleR);
+
     })
-    .on("mouseout", function() {
-      d3.select<Element, IProjectDatam>(this as Element)
+    .on("mouseout", function(project: IProjectDatam) {
+      const circle = d3.select(this);
+
+      // normalize circle
+      circle
         .transition()
         .duration(100)
-        .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
+        .attr("stroke", getCircleStroke(project.categoryIndex))
         .attr("stroke-width", "1");
 
-      mouseoverChart
-        .classed("opaque", true);
+      // hide tooltip
+      tooltip
+        .classed("hidden", true);
     });
 
 let simulation: force.Simulation<IProjectDatam, any>;

@@ -3,19 +3,28 @@ import * as geo from "d3-geo";
 import * as topojson from "topojson";
 import { Polygon, Point } from "geojson";
 import { Selection } from "d3-selection";
+import { DragContainerElement } from "d3";
+
+import { getCategories, getSelectedCategory, onSelectedCategoryChanged } from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
 const counties_data = require("./map-counties-ca-topo.json") as topojson.Topology;
 
-const selector = "#map";
-const width = 500;
-const height = 600;
+const categories = getCategories();
+
+const chartSelector = "#map";
+const width = 800;
+const height = 800;
+
+const iconSize = 38;
+const iconCircleSize = 70;
+const zoomFactor = 1.1;
 
 // create projection translation
 const projection = geo.geoMercator()
-    .center([-121, 38])
-    .scale(2500)
+    .center([-122, 38.5])
+    .scale(3500)
     .translate([175, 250]);
 
 // setup icons
@@ -72,8 +81,8 @@ const iconsData: any[] = [
         categoryKey: "AG",
     }, {
         svg: iconImages.kids,
-        lat: 32.65,
-        lng: -120.13,
+        lat: 33.27,
+        lng: -119.44,
         title: "child development",
         pi: "Lean Hibel",
         categoryKey: "HUMAN",
@@ -86,15 +95,15 @@ const iconsData: any[] = [
         categoryKey: "AG",
     }, {
         svg: iconImages.marsh,
-        lat: 38.11,
-        lng: -123.57,
+        lat: 38.29,
+        lng: -123.97,
         title: "wetland ecology and conservation",
         pi: "John Eadie",
         categoryKey: "ENV",
     }, {
         svg: iconImages.milk,
-        lat: 34.09,
-        lng: -122.01,
+        lat: 34.80,
+        lng: -121.56,
         title: "animal science",
         pi: "Ed DePeters",
         categoryKey: "AG",
@@ -121,8 +130,8 @@ const iconsData: any[] = [
         categoryKey: "AG",
     }, {
         svg: iconImages.tree,
-        lat: 41.57,
-        lng: -123.57,
+        lat: 41.02,
+        lng: -123.43,
         title: "plant pathology",
         pi: "Dave Rizzo",
         categoryKey: "ENV",
@@ -148,19 +157,19 @@ iconsData.forEach(icon => {
 const path = geo.geoPath()
     .projection(projection);
 
-const svg = d3.select(selector)
+const svg = d3.select(chartSelector)
     .insert("svg:svg", "h2")
     .attr("width", width)
     .attr("height", height);
 
 const states = svg.append("svg:g")
     .attr("id", "states")
-    .attr("fill", "#ccc")
+    .attr("fill", "#B2C8DA")
     .attr("stroke", "#fff");
 
 const counties = svg.append("svg:g")
     .attr("id", "counties")
-    .attr("fill", "#ccc")
+    .attr("fill", "#B2C8DA")
     .attr("stroke", "#fff");
 
 const icons = svg.append("svg:g")
@@ -170,32 +179,29 @@ const icons = svg.append("svg:g")
     .enter()
     .append("svg:g");
 
+// icon circle shadow
+const iconCircles = icons
+    .append("svg:g")
+    .html(iconImages.circle)
+    .select("svg")
+    .attr("class", "circle")
+    .attr("x", d => d.left - (iconCircleSize / 2))
+    .attr("y", d => d.top - (iconCircleSize / 2))
+    .attr("width", iconCircleSize)
+    .attr("height", iconCircleSize)
+    .attr("fill", "#fff");
+
+// icon symbols
 const iconSvgs = icons
     .append("svg:g")
     .html(d => d.svg)
     .select("svg")
     .attr("class", "icon")
-    .attr("x", d => d.left - 25)
-    .attr("y", d => d.top - 25)
-    .attr("width", 50)
-    .attr("height", 50)
+    .attr("x", d => d.left - (iconSize / 2))
+    .attr("y", d => d.top - (iconSize / 2))
+    .attr("width", iconSize)
+    .attr("height", iconSize)
     .attr("fill", d => d.categoryColor);
-
-// icon titles
-icons.append("svg:text")
-    .attr("class", "chart-label opaque")
-    .attr("x", d => d.left)
-    .attr("y", d => d.top + 50)
-    .attr("text-anchor", "middle")
-    .text(d => d.title);
-
-// investigator titles
-icons.append("svg:text")
-    .attr("class", "chart-label minor opaque")
-    .attr("x", d => d.left)
-    .attr("y", d => d.top + 65)
-    .attr("text-anchor", "middle")
-    .text(d => d.pi);
 
 states.selectAll("path")
     .data([state_data] as any)
@@ -220,54 +226,117 @@ counties.selectAll("path")
     .duration(3000)
     .attr("stroke-dashoffset", 0);
 
+// mouse over tooltip
+const tooltip = d3
+  .select(chartSelector)
+  .append<HTMLElement>("div")
+  .attr("class", "chart-tooltip hidden")
+  .attr("dy", 1);
+
+// build tooltip
+tooltip.append("div").attr("class", "department");
+tooltip.append("div").attr("class", "project");
+tooltip.append("div").attr("class", "total");
+
 // mouse overs
-icons
-    .append("svg:rect")
-    .attr("x", d => d.left - 25)
-    .attr("y", d => d.top - 25)
-    .attr("width", 50)
-    .attr("height", 50)
-    .attr("fill", "none")
-    .style("pointer-events", "all")
+icons.selectAll("svg")
     .on("mouseover", function (d: any, i) {
 
         const element = d3.select(this as Element).node();
         console.log(element);
         if (!element) return;
-        const g = element.parentElement;
+        const parent = element.parentElement;
+        if (!parent) return;
+        const g =  parent.parentElement;
+        if (!g) return;
 
         d3.select(g)
-            .select("svg")
+            .select(".circle")
             .transition()
-            .duration(200)
-            .attr("x", (d: any) => d.left - 40)
-            .attr("y", (d: any) => d.top - 40)
-            .attr("width", 80)
-            .attr("height", 80);
+            .duration(100)
+            .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor / 2))
+            .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor / 2))
+            .attr("width", iconCircleSize * zoomFactor)
+            .attr("height", iconCircleSize * zoomFactor);
 
-        // show text
         d3.select(g)
-            .selectAll("text")
-            .classed("opaque", false);
+            .select(".icon")
+            .transition()
+            .duration(100)
+            .attr("x", (d: any) => d.left - (iconSize * zoomFactor / 2))
+            .attr("y", (d: any) => d.top - (iconSize * zoomFactor / 2))
+            .attr("width", iconSize * zoomFactor)
+            .attr("height", iconSize * zoomFactor);
+
+        // setup tooltip text
+        // tooltip.attr("data-topic", category.key);
+
+        // tooltip.select(".department")
+        //     .text(project.name);
+
+        // tooltip.select(".project")
+        //     .text(project.name);
+
+        // tooltip.select(".total")
+        //     .text(`$${ (project.total / 1000000).toFixed(1) }M`);
+
+        // move mouseover tooltip
+        tooltip
+            .classed("hidden", false)
+            .style("left", d.left)
+            .style("top", d.top - (iconCircleSize / 2));
     })
     .on("mouseout", function() {
 
         const element = d3.select(this as Element).node();
         if (!element) return;
-        const g = element.parentElement;
+        const parent = element.parentElement;
+        if (!parent) return;
+        const g =  parent.parentElement;
+        if (!g) return;
 
         d3.select(g)
-            .select("svg")
+            .select(".circle")
             .transition()
-            .duration(1000)
-            .attr("x", (d: any) => d.left - 25)
-            .attr("y", (d: any) => d.top - 25)
-            .attr("width", 50)
-            .attr("height", 50);
+            .duration(100)
+            .attr("x", (d: any) => d.left - (iconCircleSize / 2))
+            .attr("y", (d: any) => d.top - (iconCircleSize / 2))
+            .attr("width", iconCircleSize)
+            .attr("height", iconCircleSize);
 
-        // hide text
         d3.select(g)
-            .selectAll("text")
-            .classed("opaque", true);
+            .select(".icon")
+            .transition()
+            .duration(100)
+            .attr("x", (d: any) => d.left - (iconSize / 2))
+            .attr("y", (d: any) => d.top - (iconSize / 2))
+            .attr("width", iconSize)
+            .attr("height", iconSize);
 
+        // hide tooltip
+        tooltip
+            .classed("hidden", true);
     });
+
+// category change
+onSelectedCategoryChanged(() => {
+    const selectedCategory = getSelectedCategory();
+});
+
+// drag
+// icons.call(
+//     d3.drag()
+//         .container(svg.node() as DragContainerElement)
+//         .subject(function() {
+//             return this;
+//         })
+//         .on("drag", () => {
+//             console.log("draging");
+//             // console.log(d3.event);
+//             d3.select(d3.event.subject)
+//               .select(".circle")
+//                 .attr("x", d3.event.x - 25)
+//                 .attr("y", d3.event.y - 25);
+
+//             console.log(projection.invert([d3.event.x, d3.event.y]));
+//         }));

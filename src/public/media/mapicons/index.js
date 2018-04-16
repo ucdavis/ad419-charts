@@ -1,6 +1,7 @@
 export default {
     bigwater: require('./bigwater.svg'),
     brain: require('./brain.svg'),
+    circle: require('./circle.svg'),
     cow: require('./cow.svg'),
     crab: require('./crab.svg'),
     dna: require('./dna.svg'),
