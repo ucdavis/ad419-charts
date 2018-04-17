@@ -136,19 +136,19 @@ circles
       tooltip.attr("data-topic", category.key);
 
       tooltip.select(".department")
-        .text(project.name);
+        .text(project.department.name);
 
       tooltip.select(".project")
-        .text(project.name);
+        .text(project.title);
 
       tooltip.select(".total")
-        .text(`$${ (project.total / 1000000).toFixed(1) }M`);
+        .text(`$${ (project.total / 1000000).toFixed(1) } million`);
 
       // move mouseover tooltip
       tooltip
         .classed("hidden", false)
         .style("left", circleX)
-        .style("top", circleY - circleR);
+        .style("top", circleY - circleR - 10);
 
     })
     .on("mouseout", function(project: IProjectDatam) {

@@ -26,19 +26,30 @@ const sources: ISource[] = Object.keys(sourceJson).map((k) => {
 });
 
 // parse projects
-const projectJson: any[] = require("./projectTotals.json");
-const projects: IProject[] = projectJson.map(p => {
+const projectJson: any = require("./projects.json");
+const projectTotalsJson: any[] = require("./projectTotals.json");
+const projects: IProject[] = [];
+for (const p of projectTotalsJson) {
+    const project = projectJson[p.project];
+
     const categoryKey = departmentJson[p.dept].category;
     const categoryIndex = categories.findIndex(c => c.key === categoryKey);
-    return {
+    if (categoryIndex < 0) continue;
+
+    const department = departments.find(d => d.key === p.dept);
+    if (!department) continue;
+
+    projects.push({
         key: p.project,
         name: p.project,
+        title: project.Title,
+        director: project.ProjectDirector,
         categoryKey: categoryKey,
         categoryIndex: categoryIndex,
-        departmentKey: p.dept,
+        department: department,
         total: p.total,
-    };
-}).filter(p => p.categoryIndex > -1);
+    });
+}
 
 const sourceTotalsByDepartmentJson: any = require("./sourceTotalsByDepartment.json");
 const sourceTotals: ISourceTotal[] = [];
@@ -128,9 +139,11 @@ export interface IDepartmentTotal extends IDepartment {
 export interface IProject {
     key: string;
     name: string;
+    title: string;
+    director: string;
     categoryKey: string;
     categoryIndex: number;
-    departmentKey: string;
+    department: IDepartment;
     total: number;
 }
 

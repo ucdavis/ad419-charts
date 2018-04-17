@@ -453,8 +453,11 @@ table.dataTable tr.even td {
   .department {
     color: $secondary-font;
     font-family: $sans-bold;
-    font-size: 1.6rem;
-
+    font-size: 1.4rem;
+    text-align: center;
+    
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
     border-bottom: 1px solid $borders;
   }
 
@@ -462,21 +465,35 @@ table.dataTable tr.even td {
     color: $primary-font;
     font-family: $sans-bold;
     font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .director {
+    color: $primary-font;
+    font-family: $sans-bold;
+    font-size: 1.4rem;
+    text-align: center;
+    font-style: italic;
   }
 
   .total {
+    font-family: $sans-bold;
     font-size: 1.6rem;
+    text-align: center;
   }
 
-  &[data-topic="AG"] .total {
+  &[data-topic="AG"] .total,
+  &[data-topic="AG"] .director {
     color: $sunny-grass;
   }
 
-  &[data-topic="ENV"] .total {
+  &[data-topic="ENV"] .total,
+  &[data-topic="ENV"] .director {
     color: $sky-blue;
   }
 
-  &[data-topic="HUMAN"] .total {
+  &[data-topic="HUMAN"] .total,
+  &[data-topic="HUMAN"] .director {
     color: $golden-lupine;
   }
 

@@ -34,113 +34,129 @@ const iconsData: any[] = [
         svg: iconImages.bigwater,
         lat: 35.31,
         lng: -118.94,
-        title: "ground water banking",
-        pi: "Helene Dahike",
+        title: "Ground Water Banking",
+        department: "Department of Land, Air and Water Resources",
+        director: "Helene Dahike",
         categoryKey: "ENV",
     }, {
         svg: iconImages.brain,
         lat: 40.56,
         lng: -116.64,
-        title: "human development",
-        pi: "Jay Belsky",
+        title: "Human Development",
+        department: "Department of Human Ecology",
+        director: "Jay Belsky",
         categoryKey: "HUMAN",
     }, {
         svg: iconImages.cow,
         lat: 38.70,
         lng: -116.22,
-        title: "animal genetics",
-        pi: "Alison Van Eenennaam",
+        title: "Animal Genetics",
+        department: "Department of Animal Science",
+        director: "Alison Van Eenennaam",
         categoryKey: "AG",
     }, {
         svg: iconImages.crab,
         lat: 36.15,
         lng: -122.86,
-        title: "animal science",
-        pi: "Anne Todgham",
+        title: "Animal Science",
+        department: "Department of Animal Science",
+        director: "Anne Todgham",
         categoryKey: "ENV",
     }, {
         svg: iconImages.dna,
         lat: 36.70,
         lng: -118.01,
-        title: "animal genetics",
-        pi: "Juan Medrano",
+        title: "Animal Genetics",
+        department: "Department of Animal Science",
+        director: "Juan Medrano",
         categoryKey: "AG",
     }, {
         svg: iconImages.droplets,
         lat: 40.8361,
         lng: -121.30,
-        title: "precision irrigation",
-        pi: "Shrinivasa Upadhyaya",
+        title: "Pecision Irrigation",
+        department: "Department of Biological and Agricultural Engineering",
+        director: "Shrinivasa Upadhyaya",
         categoryKey: "AG",
     }, {
         svg: iconImages.grapes,
         lat: 39.38,
         lng: -122.44,
-        title: "powdery mildew",
-        pi: "Dario Cantu",
+        title: "Powdery Mildew",
+        department: "Department of Viticulture and Enology",
+        director: "Dario Cantu",
         categoryKey: "AG",
     }, {
         svg: iconImages.kids,
         lat: 33.27,
         lng: -119.44,
-        title: "child development",
-        pi: "Lean Hibel",
+        title: "Child Development",
+        department: "Department of Human Ecology",
+        director: "Leah Hibel",
         categoryKey: "HUMAN",
     }, {
         svg: iconImages.leaf,
         lat: 34.02,
         lng: -115.49,
-        title: "crop breeding",
-        pi: "Charlie Brummer",
+        title: "Crop Breeding",
+        department: "Department of Plant Sciences",
+        director: "Charlie Brummer",
         categoryKey: "AG",
     }, {
         svg: iconImages.marsh,
         lat: 38.29,
         lng: -123.97,
-        title: "wetland ecology and conservation",
-        pi: "John Eadie",
+        title: "Wetland Ecology and Conservation",
+        department: "Department of Wildlife, Fish and Conservation Biology",
+        director: "John Eadie",
         categoryKey: "ENV",
     }, {
         svg: iconImages.milk,
         lat: 34.80,
         lng: -121.56,
-        title: "animal science",
-        pi: "Ed DePeters",
+        title: "Animal Science",
+        department: "Department of Animal Science",
+        director: "Ed DePeters",
         categoryKey: "AG",
     }, {
         svg: iconImages.orangeslice,
         lat: 34.87,
         lng: -117.00,
-        title: "citrus greening disease",
-        pi: "Carolyn Slupsky",
+        title: "Citrus Greening Disease",
+        department: "Department of Nutrition",
+        director: "Carolyn Slupsky",
         categoryKey: "AG",
     }, {
         svg: iconImages.seed,
         lat: 39.67,
         lng: -118.71,
-        title: "seed biotechnology",
-        pi: "Kent Bradford",
+        title: "Seed Biotechnology",
+        department: "Department of Plant Sciences",
+        director: "Kent Bradford",
         categoryKey: "AG",
     }, {
         svg: iconImages.strawberry,
         lat: 36.83,
         lng: -120.52,
-        title: "strawberry breeding",
-        pi: "Steve Knapp",
+        title: "Strawberry Breeding",
+        department: "Department of Plant Sciences",
+        director: "Steve Knapp",
         categoryKey: "AG",
     }, {
         svg: iconImages.tree,
         lat: 41.02,
         lng: -123.43,
-        title: "plant pathology",
-        pi: "Dave Rizzo",
+        title: "Plant Pathology",
+        department: "Department of Plant Pathology",
+        director: "Dave Rizzo",
         categoryKey: "ENV",
     }, {
         svg: iconImages.wineglass,
         lat: 38.66,
         lng: -120.5943,
-        title: "sustainable wine production",
-        pi: "David Block",
+        title: "Sustainable Wine Production",
+        department: "Department of Viticulture and Enology",
+        director: "David Block",
         categoryKey: "AG",
     },
 ];
@@ -236,14 +252,13 @@ const tooltip = d3
 // build tooltip
 tooltip.append("div").attr("class", "department");
 tooltip.append("div").attr("class", "project");
-tooltip.append("div").attr("class", "total");
+tooltip.append("div").attr("class", "director");
 
 // mouse overs
 icons.selectAll("svg")
     .on("mouseover", function (d: any, i) {
 
         const element = d3.select(this as Element).node();
-        console.log(element);
         if (!element) return;
         const parent = element.parentElement;
         if (!parent) return;
@@ -269,16 +284,16 @@ icons.selectAll("svg")
             .attr("height", iconSize * zoomFactor);
 
         // setup tooltip text
-        // tooltip.attr("data-topic", category.key);
+        tooltip.attr("data-topic", d.categoryKey);
 
-        // tooltip.select(".department")
-        //     .text(project.name);
+        tooltip.select(".department")
+            .text(d.department);
 
-        // tooltip.select(".project")
-        //     .text(project.name);
+        tooltip.select(".project")
+            .text(d.title);
 
-        // tooltip.select(".total")
-        //     .text(`$${ (project.total / 1000000).toFixed(1) }M`);
+        tooltip.select(".director")
+            .text(d.director);
 
         // move mouseover tooltip
         tooltip
@@ -331,8 +346,6 @@ onSelectedCategoryChanged(() => {
 //             return this;
 //         })
 //         .on("drag", () => {
-//             console.log("draging");
-//             // console.log(d3.event);
 //             d3.select(d3.event.subject)
 //               .select(".circle")
 //                 .attr("x", d3.event.x - 25)
