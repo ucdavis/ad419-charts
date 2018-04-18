@@ -120,9 +120,9 @@ ul.topic-nav {
   padding-bottom: 20px;
   margin-top: 0;
   margin-bottom: 0;
-  background-color: white;
+  background-color: rgba(255,255,255,.95);
   border-bottom: 4px solid rgba(255,255,255,.0005);
-  transition: border 500ms; 
+  transition: border 500ms;
 
   body[data-topic='Environment'] & {
     border-color: $sky-blue;
@@ -170,11 +170,11 @@ ul.topic-nav {
     &:hover {
       transition: all linear 100ms;
       opacity: 1;
-      
+
       &[data-topic='Agriculture'] .topic-title {
         color: $sunny-grass;
       }
-      
+
       &[data-topic='Environment'] .topic-title {
         color: $sky-blue;
       }
@@ -215,7 +215,13 @@ ul.topic-nav {
 .articles {
   margin: 80px 0 120px;
 }
-
+.cardheader {
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom:2px solid $borders;
+  padding-bottom:8px;
+  margin-bottom:16px;
+}
 .research-title {
   margin-left: -76px;
   margin-top: 28px;
@@ -270,19 +276,35 @@ ul.topic-nav {
 .lead_carousel {
   margin-bottom: 32px;
   height: 200px;
-
+  .article_thumb_title {
+    position: absolute;
+    top:-1px;
+    z-index: 99;
+    h4 {
+      color:#fff;
+      font-size:1.6rem;
+      font-family: $sans-bold;
+      text-shadow: 1px 1px 1px #262626;
+    }
+  }
   .carousel_item {
     margin-right: 32px;
     background-clip: content-box;
-  
-  }
-  img {
-    height: 200px;
-  }
 
-  .article-link:hover img,
-  .article-link.active img {
-    opacity: 0.50;
+  }
+  .carousel-image {
+    height: 200px;
+    position: relative;
+  }
+  .article-link:hover {
+    & .carousel-image, .article_thumb_title {
+      opacity:0.5
+    }
+  }
+  .article-link.active {
+    & .carousel-image, .article_thumb_title {
+      opacity:0.50;
+    }
   }
 }
 

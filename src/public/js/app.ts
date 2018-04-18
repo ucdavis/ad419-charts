@@ -85,7 +85,7 @@ function setupSlideshow() {
     $carousel.slick({
         variableWidth: true,
         arrows: false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000
     });
 }

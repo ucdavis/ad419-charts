@@ -36,7 +36,7 @@ const iconsData: any[] = [
         lng: -118.94,
         title: "Ground Water Banking",
         department: "Department of Land, Air and Water Resources",
-        director: "Helene Dahike",
+        director: "Helene Dahlke",
         categoryKey: "ENV",
     }, {
         svg: iconImages.brain,
