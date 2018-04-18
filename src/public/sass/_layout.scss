@@ -278,8 +278,9 @@ ul.topic-nav {
   height: 200px;
   .article_thumb_title {
     position: absolute;
-    top:-1px;
+    bottom:10px;
     z-index: 99;
+    padding-left:15px;
     h4 {
       color:#fff;
       font-size:1.6rem;
@@ -298,12 +299,14 @@ ul.topic-nav {
   }
   .article-link:hover {
     & .carousel-image, .article_thumb_title {
-      opacity:0.5
+      opacity:0.5;
+      text-shadow: none;
     }
   }
   .article-link.active {
     & .carousel-image, .article_thumb_title {
       opacity:0.50;
+      text-shadow: none;
     }
   }
 }
