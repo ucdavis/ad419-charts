@@ -11,7 +11,7 @@ import "./map";
 import { setSelectedCategory } from "./data";
 
 const $topicBar = $("#topic-bar");
-const $root = $("html, body");
+const $root = $("html body");
 function smoothScroll(href: string) {
     const target = ($(href).offset() || { top: 0 }).top;
     const offset = $topicBar.height() || 0;
@@ -28,7 +28,7 @@ function handleTopicChanged(topic: string) {
     setSelectedCategory(topic);
 
     // decorate body
-    $root.data("topic", topic);
+    $root.attr("data-topic", topic);
 
     // decorate topic button
     $(".topic-button").each(function() {
