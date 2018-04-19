@@ -16,7 +16,6 @@ const sumTotal = projects.reduce((prev, d) => prev + d.total, 0);
 // category change
 const legends = d3.selectAll("#bubble-summary-legend, #map-summary-legend");
 onSelectedCategoryChanged(categoryIndex => {
-    console.log(categoryIndex);
   if (categoryIndex < 0) {
     // hide legends
     legends.classed("hidden", true);

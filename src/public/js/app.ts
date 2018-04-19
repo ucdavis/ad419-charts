@@ -9,7 +9,7 @@ import "./map";
 import "./sources";
 import "./totals";
 
-import { setSelectedCategory, onSelectedCategoryChanged, getSelectedCategory, getCategories } from "./data";
+import { setSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
 
 const $topicBar = $("#topic-bar");
 const $root = $("html body");
