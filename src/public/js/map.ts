@@ -342,6 +342,11 @@ icons.selectAll("svg")
 // category change
 const totalChart = d3.select("#map-summary-chart");
 onSelectedCategoryChanged((categoryIndex) => {
+    if (categoryIndex < 0) {
+        icons.classed("inactive", false);
+        return;
+    }
+    icons.classed("inactive", d => d.categoryIndex !== categoryIndex);
 });
 
 // drag

@@ -570,3 +570,11 @@ table.dataTable tr.even td {
     margin-top: 2.5rem;
   }
 }
+
+#map {
+  #icons {
+    .inactive {
+      opacity: 0.6;
+    }
+  }
+}
