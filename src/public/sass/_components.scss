@@ -465,6 +465,12 @@ table.dataTable tr.even td {
   }
 }
 
+.legend {
+  &.hidden {
+    display: none;
+  }
+}
+
 .chart-tooltip {
   position: absolute;
   display: none;
