@@ -3,12 +3,13 @@ import "../sass/app.scss";
 import * as $ from "jquery";
 import "slick-carousel";
 
-import "./totals";
 import "./bubble";
-import "./sources";
+import "./legend";
 import "./map";
+import "./sources";
+import "./totals";
 
-import { setSelectedCategory } from "./data";
+import { setSelectedCategory, onSelectedCategoryChanged, getSelectedCategory, getCategories } from "./data";
 
 const $topicBar = $("#topic-bar");
 const $root = $("html body");
@@ -24,8 +25,13 @@ function smoothScroll(href: string) {
     });
 }
 
-function handleTopicChanged(topic: string) {
-    setSelectedCategory(topic);
+const categories = getCategories();
+function handleTopicChanged(categoryIndex: number) {
+    let topic = "";
+    const category = categories[categoryIndex];
+    if (category) {
+        topic = category.key;
+    }
 
     // decorate body
     $root.attr("data-topic", topic);
@@ -39,22 +45,22 @@ function handleTopicChanged(topic: string) {
             $(this).removeClass("active");
         }
     });
+
+    // set selected article
+    showRandomArticle(topic);
 }
+onSelectedCategoryChanged(handleTopicChanged);
 
 function setupTopicSelector() {
     // attach listeners
     $(".topic-button").click(function() {
         const topic = $(this).data("topic");
-        handleTopicChanged(topic);
-        handleTopicChanged(topic);
-
-        showRandomArticle(topic);
+        setSelectedCategory(topic);
     });
 
     $(".topic-all").click(function(e) {
         e.preventDefault();
-        handleTopicChanged("");
-        showRandomArticle("");
+        setSelectedCategory("");
     });
 }
 
@@ -110,7 +116,7 @@ function setupArticleSelect() {
 
         // set topic
         const topic = $(this).data("topic");
-        handleTopicChanged(topic);
+        setSelectedCategory(topic);
     });
 }
 
