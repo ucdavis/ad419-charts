@@ -124,18 +124,6 @@ ul.topic-nav {
   border-bottom: 4px solid rgba(255,255,255,.0005);
   transition: border 500ms;
 
-  body[data-topic='Environment'] & {
-    border-color: $sky-blue;
-  }
-
-  body[data-topic='Agriculture'] & {
-    border-color: $sunny-grass;
-  }
-
-  body[data-topic='Human'] & {
-    border-color: $golden-lupine;
-  }
-
   .topic-item {
     opacity: 0.25;
   }
@@ -171,34 +159,18 @@ ul.topic-nav {
       transition: all linear 100ms;
       opacity: 1;
 
-      &[data-topic='Agriculture'] .topic-title {
+      &[data-topic='AG'] .topic-title {
         color: $sunny-grass;
       }
 
-      &[data-topic='Environment'] .topic-title {
+      &[data-topic='ENV'] .topic-title {
         color: $sky-blue;
       }
 
-      &[data-topic='Human'] .topic-title {
+      &[data-topic='HUMAN'] .topic-title {
         color: $golden-lupine;
       }
     }
-  }
-}
-
-.total-span {
-
-
-  &[data-topic='Agriculture'] {
-    color: $sunny-grass;
-  }
-
-  &[data-topic='Environment'] {
-    color: $sky-blue;
-  }
-
-  &[data-topic='Human'] {
-    color: $golden-lupine;
   }
 }
 

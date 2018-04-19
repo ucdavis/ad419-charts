@@ -3,7 +3,7 @@ import * as force from "d3-force";
 import * as Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 
-import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject } from "./data";
+import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject, getDepartments, setSelectedCategory } from "./data";
 
 interface IProjectDatam extends IProject, SimulationNodeDatum {
 }
@@ -23,6 +23,8 @@ const center = {
 const scale = 50;
 
 const categories = getCategories();
+
+const departments = getDepartments();
 
 // map to datam
 const data: IProjectDatam[] = projects;
@@ -166,6 +168,10 @@ circles
         .classed("hidden", true);
     });
 
+circles.on("click", function(project: IProjectDatam) {
+  setSelectedCategory(project.categoryKey);
+});
+
 let simulation: force.Simulation<IProjectDatam, any>;
 function buildSimulation() {
   const selectedCategory = getSelectedCategory();
@@ -282,5 +288,17 @@ onSelectedCategoryChanged(() => {
 
       totalChart.select("#bubble-summary-chart-count")
         .text(count);
+
+      totalChart.select("#bubble-summary-chart-departments")
+        .selectAll("p")
+        .remove();
+
+      const d = departments.filter(d => d.categoryIndex === selectedCategory);
+      totalChart.select("#bubble-summary-chart-departments")
+        .selectAll("p")
+        .data(d)
+        .enter()
+        .append("p")
+        .text(d => d.name);
     }
 });

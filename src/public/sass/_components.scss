@@ -414,6 +414,34 @@ table.dataTable tr.even td {
   color:$secondary-font;
 }
 
+.topic-color-text {
+  body[data-topic="AG"] & {
+    color: $sunny-grass;
+  }
+
+  body[data-topic="ENV"] & {
+    color: $sky-blue;
+  }
+
+  body[data-topic="HUMAN"] & {
+    color: $golden-lupine;
+  }
+}
+
+.topic-border-color {
+  body[data-topic="AG"] & {
+    border-color: $sunny-grass;
+  }
+
+  body[data-topic="ENV"] & {
+    border-color: $sky-blue;
+  }
+
+  body[data-topic="HUMAN"] & {
+    border-color: $golden-lupine;
+  }
+}
+
 #sources {
   display: flex;
   flex-wrap: wrap;
