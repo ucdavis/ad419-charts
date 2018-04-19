@@ -157,5 +157,6 @@ $().ready(() => {
     setupScroll();
     setupSlideshow();
     setupArticleSelect();
-    showRandomArticle("");
+
+    setSelectedCategory("");
 });
