@@ -5,7 +5,7 @@ import { Polygon, Point } from "geojson";
 import { Selection } from "d3-selection";
 import { DragContainerElement } from "d3";
 
-import { getCategories, getSelectedCategory, onSelectedCategoryChanged } from "./data";
+import { getCategories, getSelectedCategory, onSelectedCategoryChanged, setSelectedCategory } from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
@@ -333,9 +333,15 @@ icons.selectAll("svg")
             .classed("hidden", true);
     });
 
+// click
+icons.selectAll("svg")
+    .on("click", function (d: any, i) {
+        setSelectedCategory(d.categoryKey);
+    });
+
 // category change
-onSelectedCategoryChanged(() => {
-    const selectedCategory = getSelectedCategory();
+const totalChart = d3.select("#map-summary-chart");
+onSelectedCategoryChanged((categoryIndex) => {
 });
 
 // drag
