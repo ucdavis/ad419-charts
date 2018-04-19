@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>circle</title>
+    <defs>
+        <filter id="f1">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="0.5" />
+            <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <filter x="-6.2%" y="-4.9%" width="112.3%" height="112.3%" filterUnits="objectBoundingBox" id="f2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.179315476   0 0 0 0 0.179315476   0 0 0 0 0.179315476  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="circle">
+        <circle cx="25" cy="25" r="20" filter="url(#f2)" />
+    </g>
+</svg>
