@@ -187,7 +187,7 @@ export function getSelectedCategory(): number {
 }
 
 export function setSelectedCategory(category: string): number {
-    const index = categories.findIndex(c => c.name === category);
+    const index = categories.findIndex(c => c.key === category);
     selectedCategory = index;
 
     events.forEach(e => {
