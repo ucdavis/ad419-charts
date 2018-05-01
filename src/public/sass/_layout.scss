@@ -116,8 +116,8 @@ ul.topic-nav {
 .topics {
   text-align: center;
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
-  padding-top: 40px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-top: 0;
   margin-bottom: 0;
   background-color: rgba(255,255,255,.95);
@@ -135,15 +135,9 @@ ul.topic-nav {
     margin-left: 52px;
   }
 
-  &.thin {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 60px;
-    // move extra height to bottom margin to reduce page jitter
-    .topic-title {
-      margin-top: 8px;
-      margin-bottom: 0;
-    }
+  .topic-title {
+    margin-top: 8px;
+    margin-bottom: 0;
   }
 
   .topics-container {

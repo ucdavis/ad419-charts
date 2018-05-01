@@ -64,28 +64,6 @@ function setupTopicSelector() {
     });
 }
 
-function setupScroll() {
-    // get fixed position
-    const startTop = Math.ceil($topicBar.position().top) + 1;
-
-    // add sticky
-    $topicBar.addClass("sticky-top");
-
-    // setup scroll spy
-    const handleScroll = () => {
-        const top = $topicBar.position().top;
-        if (top > startTop) {
-            $topicBar.addClass("thin");
-        } else {
-            $topicBar.removeClass("thin");
-        }
-    };
-    $(window).scroll(handleScroll);
-
-    // prefire
-    handleScroll();
-}
-
 const $carousel = $(".lead_carousel");
 function setupSlideshow() {
     $carousel.slick({
@@ -154,7 +132,6 @@ function showRandomArticle(topic: string) {
 
 $().ready(() => {
     setupTopicSelector();
-    setupScroll();
     setupSlideshow();
     setupArticleSelect();
 
