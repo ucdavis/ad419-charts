@@ -18,7 +18,7 @@ const legends = d3.selectAll("#bubble-summary-legend, #map-summary-legend");
 onSelectedCategoryChanged(categoryIndex => {
   if (categoryIndex < 0) {
     // hide legends
-    legends.classed("hidden", true);
+    legends.classed("d-none", true);
     return;
   }
 
@@ -33,7 +33,7 @@ onSelectedCategoryChanged(categoryIndex => {
   );
 
   // show legend
-  legends.classed("hidden", false);
+  legends.classed("d-none", false);
 
   // update legend details
   legends.select(".icon").attr("src", category.icon || "");
