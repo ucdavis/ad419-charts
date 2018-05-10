@@ -20,7 +20,7 @@ const center = {
   x: (width / 2),
   y: (height / 2),
 };
-const scale = 50;
+export const scale = 50;
 
 const categories = getCategories();
 
@@ -53,7 +53,7 @@ function getCircleStroke(index: number): string {
     .hex();
 }
 
-function getCircleRadius(total: number) {
+export function getCircleRadius(total: number) {
   return Math.sqrt(total) / scale;
 }
 

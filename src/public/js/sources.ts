@@ -25,7 +25,7 @@ const sumTotal = sources.reduce((prev, d) => prev + d.total, 0);
 const maxTotal = sources.reduce((prev, d) => Math.max(prev, d.total), 0);
 
 const chartSelector = "#sources";
-const scale = 80;
+export const scale = 80;
 
 const categories = getCategories();
 

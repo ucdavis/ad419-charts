@@ -7,6 +7,9 @@ import {
   getDepartments
 } from "./data";
 
+import { scale as bubbleScale, getCircleRadius as getBubbleCircleRadius } from "./bubble";
+import { scale as sourceScale } from "./sources";
+
 const categories = getCategories();
 const departments = getDepartments();
 const projects = getProjects();
@@ -59,3 +62,49 @@ onSelectedCategoryChanged(categoryIndex => {
     .append("p")
     .text(d => d.name);
 });
+
+// setup circle scale legends
+const bubbleScaleLegend = d3.select<SVGElement, {}>("#bubble-legend-scale");
+
+const radius50 = getBubbleCircleRadius(5000000);
+bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-50")
+  .attr("r", radius50)
+  .attr("cy", 100 - radius50)
+  .attr("cx", 100);
+
+bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-50-label")
+  .attr("x", 150 + radius50)
+  .attr("y", 100 - (radius50 * 2));
+
+bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-50-path")
+  .attr("d", `M 100 ${100 - (radius50 * 2)} L ${150 + radius50} ${100 - (radius50 * 2)}`);
+
+const radius15 = getBubbleCircleRadius(1500000);
+bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-15")
+  .attr("r", radius15)
+  .attr("cy", 100 - radius15)
+  .attr("cx", 100);
+
+bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-15-label")
+  .attr("x", 150 + radius50)
+  .attr("y", 100 - (radius15 * 2));
+
+bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-15-path")
+  .attr("d", `M 100 ${100 - (radius15 * 2)} L ${150 + radius50} ${100 - (radius15 * 2)}`);
+
+const radius02 = getBubbleCircleRadius(200000);
+bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-02")
+  .attr("r", radius02)
+  .attr("cy", 100 - radius02)
+  .attr("cx", 100);
+
+bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-02-label")
+  .attr("x", 150 + radius50)
+  .attr("y", 100 - (radius50 * 2));
+
+bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-02-label")
+  .attr("x", 150 + radius50)
+  .attr("y", 100 - (radius02 * 2));
+
+bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-02-path")
+  .attr("d", `M 100 ${100 - (radius02 * 2)} L ${150 + radius50} ${100 - (radius02 * 2)}`);
