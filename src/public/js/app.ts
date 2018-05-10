@@ -70,7 +70,8 @@ function setupSlideshow() {
         variableWidth: true,
         arrows: false,
         autoplay: false,
-        autoplaySpeed: 3000
+        autoplaySpeed: 3000,
+        swipeToSlide: true,
     });
 }
 
