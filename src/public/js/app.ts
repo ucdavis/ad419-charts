@@ -75,23 +75,14 @@ function setupSlideshow() {
     });
 }
 
-const $articleLinks = $(".lead_carousel .article-link");
 const $articles = $(".article");
 function setupArticleSelect() {
     $(".lead_carousel").on("click", ".article-link", function(e) {
         e.preventDefault();
 
-        // mark one slide as active
-        $articleLinks.removeClass("active");
-        $(this).addClass("active");
-
-        // hide all articles
-        $articles.hide();
-
         // show single article
         const href = $(this).attr("href") || "";
-        $(href).show();
-        smoothScroll(href);
+        setArticle(href);
 
         // set topic
         const topic = $(this).data("topic");
@@ -100,10 +91,6 @@ function setupArticleSelect() {
 }
 
 function showRandomArticle(topic: string) {
-    // deactivate active article, show random one
-    $articleLinks.removeClass("active");
-    $articles.hide();
-
     let article;
     if (!topic) {
         const articleIndex = Math.floor(Math.random() * $articles.length);
@@ -116,19 +103,27 @@ function showRandomArticle(topic: string) {
         const articleIndex = Math.floor(Math.random() * $topicArticles.length);
         article = $topicArticles[articleIndex];
     }
-    // show article
-    $(article).show();
 
     // find an select slide as active
     const id = article.id;
-    for (let i = 0; i < $articleLinks.length; i++) {
-        const $articleLink = $($articleLinks[i]);
-        if ($articleLink.attr("href") === `#${id}`) {
-            $articleLink.addClass("active");
-            $carousel.slick("slickGoTo", i);
-            break;
-        }
-    }
+    setArticle(`#${id}`);
+}
+
+function setArticle(href) {
+    // find all article links (new ones are created as the carousel moves)
+    const $articleLinks = $(".lead_carousel .article-link");
+
+    // remove all active
+    $articleLinks.removeClass("active");
+
+    // set matching slides as active
+    $articleLinks.find(`[href='${href}']`).addClass("active");
+
+    // hide all articles
+    $articles.hide();
+
+    // show single article
+    $(href).show();
 }
 
 $().ready(() => {
