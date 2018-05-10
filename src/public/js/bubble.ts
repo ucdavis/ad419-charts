@@ -168,10 +168,6 @@ circles
         .classed("hidden", true);
     });
 
-circles.on("click", function(project: IProjectDatam) {
-  setSelectedCategory(project.categoryKey);
-});
-
 let simulation: force.Simulation<IProjectDatam, any>;
 function buildSimulation() {
   const selectedCategory = getSelectedCategory();
