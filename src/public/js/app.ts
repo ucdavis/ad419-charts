@@ -125,7 +125,7 @@ function setArticle(href) {
     $articleLinks.removeClass("active");
 
     // set matching slides as active
-    $articleLinks.find(`[href='${href}']`).addClass("active");
+    $carousel.find(`[href='${href}']`).addClass("active");
 
     // hide all articles
     $articles.hide();
