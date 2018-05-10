@@ -109,7 +109,15 @@ function showRandomArticle(topic: string) {
     setArticle(`#${id}`);
 }
 
+// setup an article lock object
+// prevents a feedback loop from article change -> change topic -> select random article
+let _articleLock = undefined;
 function setArticle(href) {
+    if (!!_articleLock) return;
+
+    // lock article change for 200 ms
+    _articleLock = setTimeout(() => { _articleLock = undefined; }, 200);
+
     // find all article links (new ones are created as the carousel moves)
     const $articleLinks = $(".lead_carousel .article-link");
 
