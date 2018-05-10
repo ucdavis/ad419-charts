@@ -12,7 +12,6 @@ interface ISourceDatam extends ISourceTotal {
 }
 
 interface ICategoryDatam extends ICategoryTotal, SimulationNodeDatum {
-  // sourceIndex: number;
   categoryIndex: number;
 }
 
@@ -76,7 +75,7 @@ function getCircleRadius(total: number): number {
 
 const targetHeights = [100, 150, 200, 300];
 function getTargetHeight(total: number): number {
-  const result = 3.5 * getCircleRadius(total);
+  const result = 3 * getCircleRadius(total);
 
   for (let i = 0; i < targetHeights.length; i++) {
     const target = targetHeights[i];
@@ -91,7 +90,7 @@ const data: ISourceDatam[] = sources.map((s, i) => {
   return {
     ...s,
     width: Math.max(3 * getCircleRadius(s.total), 75) + 50,
-    height: Math.max(3 * getCircleRadius(s.total), 150) + 40,
+    height: Math.max(2.5 * getCircleRadius(s.total), 50) + 40,
     byCategory: s.byCategory.map((c) => {
       return {
         ...c,
@@ -109,13 +108,8 @@ const charts = svg
   .selectAll(".chart")
   .data(data)
   .enter()
-  .append("div")
-  .attr("class", "chart-container")
-  .attr("style", (d) => `min-height:${d.height}`)
-  .append("svg")
-  .attr("class", "chart")
-  .attr("width", (d) => d.width)
-  .attr("height", (d) => d.height);
+  .append<HTMLDivElement>("div")
+  .attr("class", "chart-container");
 
 charts.each(function(sourceTotal) {
 
@@ -126,8 +120,30 @@ charts.each(function(sourceTotal) {
     y: (sourceTotal.height / 2),
   };
 
+  // add labels
+  const label = chart
+    .append<HTMLDivElement>("div")
+    .attr("class", "chart-label")
+    .text(sourceTotal.source.name);
+
+  // add totals
+  const totals = label
+    .selectAll(".total-label")
+    .data([sourceTotal])
+    .enter()
+    .append<HTMLDivElement>("div")
+    .attr("class", "total-label")
+    .text(`$${ (getSelectedTotal(sourceTotal) / 1000000).toFixed(1) }M`);
+
+  // create svg element
+  const svg = chart.append("svg")
+    .attr("class", "chart")
+    .attr("width", sourceTotal.width)
+    .attr("height", "100%")
+    .attr("style", `min-height:${sourceTotal.height}`);
+
   // setup circles
-  const circles = chart
+  const circles = svg
     .selectAll(".circle")
     .data(sourceTotal.byCategory)
     .enter()
@@ -139,36 +155,6 @@ charts.each(function(sourceTotal) {
     .attr("r", (d) => getCircleRadius(d.total))
     .attr("cx", center.x)
     .attr("cy", center.y);
-
-  // add labels
-  const label = chart
-    .append<SVGTextElement>("text")
-    .attr("class", "chart-label")
-    .attr("x", center.x)
-    .attr("y", 10)
-    .attr("dy", "1.1em")
-    // .attr("alignment-baseline", "middle")
-    .attr("text-anchor", "middle")
-    .text(sourceTotal.source.name);
-
-  // word wrap label
-  label.call(wrap, sourceTotal.width - 30);
-
-  const totals = label
-    .selectAll(".total-label")
-    .data([sourceTotal])
-    .enter()
-    .append<SVGTSpanElement>("tspan")
-    .attr("class", "total-label")
-    .attr("x", center.x)
-    .attr("y", 10)
-    .attr("dy", function() {
-      const count = label.selectAll("tspan").size();
-      const dy = parseFloat(label.attr("dy"));
-      return count * dy + "em";
-    })
-    .text((d) => `$${ (getSelectedTotal(d) / 1000000).toFixed(1) }M`);
-
 
   // mouse over thick border
   circles
@@ -188,43 +174,6 @@ charts.each(function(sourceTotal) {
     });
 });
 
-function wrap(text: d3.Selection<SVGTextElement, any, any, any>, width: number) {
-    const words: string[] = text.text().split(/\s+/).reverse();
-    let word: string;
-    let line: string[] = [];
-    let lineNumber = 0;
-    const lineHeight = 1.1; // ems
-    const x = text.attr("x");
-    const y = text.attr("y");
-    const dy = parseFloat(text.attr("dy"));
-
-    let tspan = text
-      .text("")                           // clear existing text
-      .append<SVGTSpanElement>("tspan")   // add new tspan items
-      .attr("x", x)
-      .attr("y", y)
-      .attr("dy", dy + "em");
-
-    while (word = words.pop() || "") {
-      line.push(word);
-      tspan.text(line.join(" "));
-
-      const node = tspan.node();
-      if (node !== null && node.getComputedTextLength() > width && line.length > 1) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text
-          .append<SVGTSpanElement>("tspan")
-          .attr("x", x)
-          .attr("y", y)
-          .attr("dy", ++lineNumber * lineHeight + dy + "em")
-          .text(word);
-      }
-    }
-}
-
-
 let simulations: d3.Simulation<ICategoryDatam, any>[] = [];
 const buildSimulation = debounce(() => {
   // stop and clear simulations
@@ -233,28 +182,20 @@ const buildSimulation = debounce(() => {
 
   // iterate over charts
   charts.each(function(source) {
-    const element = this as Element;
-    if (element === null) {
-      return;
-    }
+
+    const chart = d3.select<HTMLDivElement, ISourceDatam>(this);
+    const label = chart.select<HTMLDivElement>(".chart-label");
+    const svg = chart.select<SVGElement>("svg");
 
     // fetch category so we can "lift" active bubbles
     const selectedCategory = getSelectedCategory();
 
     // calculate height from container div
-    const parent = element.parentElement;
-    let height = source.height;
-    if (parent !== null) {
-      height = parent.clientHeight;
-    }
+    const height = this.clientHeight;
     const center = {
       x: (source.width / 2),
-      y: (height / 2),
+      y: ((height - label.node().clientHeight) / 2),
     };
-
-    // update svg height
-    const chart = d3.select(element);
-    chart.attr("height", height);
 
     // build forces
     const simulation = force

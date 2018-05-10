@@ -445,11 +445,20 @@ table.dataTable tr.even td {
 #sources {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: stretch;
   align-content: flex-start;
 
   margin: 0 auto;
+
+  .chart-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 1rem;
+  }
 }
 
 .chart-label {
