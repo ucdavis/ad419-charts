@@ -111,8 +111,8 @@ function showRandomArticle(topic: string) {
 
 // setup an article lock object
 // prevents a feedback loop from article change -> change topic -> select random article
-let _articleLock = undefined;
-function setArticle(href) {
+let _articleLock: any;
+function setArticle(href: string) {
     if (!!_articleLock) return;
 
     // lock article change for 200 ms

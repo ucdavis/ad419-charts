@@ -111,6 +111,8 @@ const charts = svg
   .append<HTMLDivElement>("div")
   .attr("class", "chart-container");
 
+
+
 charts.each(function(sourceTotal) {
 
   const chart = d3.select(this as Element);
@@ -147,7 +149,7 @@ charts.each(function(sourceTotal) {
     .selectAll(".circle")
     .data(sourceTotal.byCategory)
     .enter()
-    .append("svg:circle")
+    .append<SVGCircleElement>("svg:circle")
     .attr("class", "circle")
     .attr("fill", (d) => getCircleColor(d.categoryIndex))
     .attr("stroke", (d) => getCircleStroke(d.categoryIndex))
@@ -156,14 +158,43 @@ charts.each(function(sourceTotal) {
     .attr("cx", center.x)
     .attr("cy", center.y);
 
+  // mouse over tooltip
+  const tooltip = chart
+    .append<HTMLElement>("div")
+    .attr("class", "chart-tooltip hidden")
+    .attr("dy", 1);
+
+  // build tooltip
+  tooltip.append("div").attr("class", "title");
+  tooltip.append("div").attr("class", "total");
+  tooltip.append("div").attr("class", "percent");
+
   // mouse over thick border
   circles
-    .on("mouseover", function() {
-      d3.select(this as SVGCircleElement)
+    .on("mouseover", function(category) {
+      d3.select(this)
         .transition()
         .duration(100)
         .attr("stroke", "#1d1d1d")
         .attr("stroke-width", "2");
+
+      // setup tooltip text
+      tooltip.attr("data-topic", category.key);
+
+      tooltip.select(".title")
+        .text(category.name);
+
+      tooltip.select(".percent")
+        .text(100 * category.categoryIndex / sourceTotal.total + "%");
+
+      tooltip.select(".total")
+        .text(`$${ (category.total / 1000000).toFixed(1) } million`);
+
+      // move mouseover tooltip
+      tooltip
+        .classed("hidden", false)
+        .style("left", category.x || 0)
+        .style("top", (category.y || 0) - 10);
     })
     .on("mouseout", function() {
       d3.select(this as SVGCircleElement)
@@ -171,6 +202,10 @@ charts.each(function(sourceTotal) {
         .duration(100)
         .attr("stroke", (d: any) => getCircleStroke(d.categoryIndex))
         .attr("stroke-width", "1");
+
+      // hide tooltip
+      tooltip
+        .classed("hidden", true);
     });
 });
 
@@ -190,11 +225,17 @@ const buildSimulation = debounce(() => {
     // fetch category so we can "lift" active bubbles
     const selectedCategory = getSelectedCategory();
 
+    const labelElement = label.node();
+    let labelHeight = 0;
+    if (!!labelElement) {
+      labelHeight = labelElement.clientHeight;
+    }
+
     // calculate height from container div
     const height = this.clientHeight;
     const center = {
       x: (source.width / 2),
-      y: ((height - label.node().clientHeight) / 2),
+      y: ((height - labelHeight) / 2),
     };
 
     // build forces

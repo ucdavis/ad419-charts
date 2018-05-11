@@ -21,6 +21,21 @@ const iconSize = 38;
 const iconCircleSize = 70;
 const zoomFactor = 1.1;
 
+interface IIconData {
+    svg: string;
+    lat: number;
+    lng: number;
+    title: string;
+    department: string;
+    director: string;
+    categoryKey: string;
+
+    left?: number;
+    top?: number;
+    categoryIndex?: number;
+    categoryColor?: string;
+}
+
 // create projection translation
 const projection = geo.geoMercator()
     .center([-122, 38.5])
@@ -29,7 +44,7 @@ const projection = geo.geoMercator()
 
 // setup icons
 const iconImages = require("../media/mapicons").default;
-const iconsData: any[] = [
+const iconsData: IIconData[] = [
     {
         svg: iconImages.bigwater,
         lat: 35.31,
@@ -193,31 +208,31 @@ const icons = svg.append("svg:g")
     .selectAll("g")
     .data(iconsData)
     .enter()
-    .append("svg:g");
+    .append<SVGGElement>("svg:g");
 
 // icon circle shadow
 const iconCircles = icons
-    .append("svg:g")
+    .append<SVGGElement>("svg:g")
     .html(iconImages.circle)
-    .select("svg")
+    .select<SVGElement>("svg")
     .attr("class", "circle")
-    .attr("x", d => d.left - (iconCircleSize / 2))
-    .attr("y", d => d.top - (iconCircleSize / 2))
+    .attr("x", d => (d.left || 0) - (iconCircleSize / 2))
+    .attr("y", d => (d.top || 0) - (iconCircleSize / 2))
     .attr("width", iconCircleSize)
     .attr("height", iconCircleSize)
     .attr("fill", "#fff");
 
 // icon symbols
 const iconSvgs = icons
-    .append("svg:g")
+    .append<SVGGElement>("svg:g")
     .html(d => d.svg)
-    .select("svg")
+    .select<SVGElement>("svg")
     .attr("class", "icon")
-    .attr("x", d => d.left - (iconSize / 2))
-    .attr("y", d => d.top - (iconSize / 2))
+    .attr("x", d => (d.left || 0) - (iconSize / 2))
+    .attr("y", d => (d.top || 0) - (iconSize / 2))
     .attr("width", iconSize)
     .attr("height", iconSize)
-    .attr("fill", d => d.categoryColor);
+    .attr("fill", d => d.categoryColor || "none");
 
 states.selectAll("path")
     .data([state_data] as any)
@@ -255,10 +270,10 @@ tooltip.append("div").attr("class", "project");
 tooltip.append("div").attr("class", "director");
 
 // mouse overs
-icons.selectAll("svg")
-    .on("mouseover", function (d: any, i) {
+icons.selectAll<SVGElement, IIconData>("svg")
+    .on("mouseover", function (data, i) {
 
-        const element = d3.select(this as Element).node();
+        const element = d3.select(this).node();
         if (!element) return;
         const parent = element.parentElement;
         if (!parent) return;
@@ -284,22 +299,22 @@ icons.selectAll("svg")
             .attr("height", iconSize * zoomFactor);
 
         // setup tooltip text
-        tooltip.attr("data-topic", d.categoryKey);
+        tooltip.attr("data-topic", data.categoryKey);
 
         tooltip.select(".department")
-            .text(d.department);
+            .text(data.department);
 
         tooltip.select(".project")
-            .text(d.title);
+            .text(data.title);
 
         tooltip.select(".director")
-            .text(d.director);
+            .text(data.director);
 
         // move mouseover tooltip
         tooltip
             .classed("hidden", false)
-            .style("left", d.left)
-            .style("top", d.top - (iconCircleSize / 2));
+            .style("left", data.left || 0)
+            .style("top", (data.top || 0) - (iconCircleSize / 2));
     })
     .on("mouseout", function() {
 
