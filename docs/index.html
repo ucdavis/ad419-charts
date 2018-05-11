@@ -107,11 +107,11 @@
     <div class="container">
       <div class="section-intro">
         <h2>How <span id="spend-total" class="total-span topic-color-text">$194.9 Million</span> is spent</h2>
-        <p>From the smallest to biggest project, all research at the College of Agricultural and Environmental Science is important. Below you'll find circles that represent individual research projects. Their size relates to it's funding and it's color relates to it's topic.</p>
+        <p>From the smallest to biggest project, all research at the College of Agricultural and Environmental Science is important. Below you'll find circles that represent individual research projects. Their size relates to it's funding and it's color relates to it's topic.</p> 
       </div>
 
       <div class="row justify-content-between">
-        <div id="bubble-summary-legend" class="col-md-6">
+        <div id="bubble-summary-legend" class="">
           <div class="chart-card legend">
             <div class="row cardheader topic-border-color">
               <h2 class="topic-header topic-color-text title">Agriculture</h2>
@@ -119,12 +119,50 @@
             </div>
             <h3>Funding Information</h3>
             <p>Total Funding: <span class="sans-bold topic-color-text total">$7 Million</span>
-              <p># of Projects: <span class="sans-bold topic-color-text count">24</span></p>
+            <p># of Projects: <span class="sans-bold topic-color-text count">24</span></p>
+            <div class="departments">
               <h3>Departments</h3>
-              <div class="departments"></div>
+            </div>
+          </div>
+          <div class="">
+            <p>Each circle represent a research project in a given topic</p>
+            <svg id="bubble-legend-color" width="400" height="200">
+              <g>
+                <circle id="bubble-legend-color-human" r="15" cx="50" cy="50" fill="#ffcd00" stroke="rgb(128, 103, 0)" stroke-width="1"></circle>
+                <text x="75" y="55" text-anchor="start">Human and Social</text>
+              </g>
+              <g>
+                <circle id="bubble-legend-color-ag" r="15" cx="50" cy="100" fill="#78be20" stroke="rgb(128, 103, 0)" stroke-width="1"></circle>
+                <text x="75" y="105" text-anchor="start">Agriculture</text>
+              </g>
+              <g>
+                <circle id="bubble-legend-color-env" r="15" cx="50" cy="150" fill="#00B5E2" stroke="rgb(128, 103, 0)" stroke-width="1"></circle>
+                <text x="75" y="155" text-anchor="start">Environment</text>
+              </g>
+            </svg>
+          </div>
+          <div class="">
+            <p>Size of each circle correlates to the funding that a project received</p>
+            <svg id="bubble-legend-scale" width="400" height="200">
+              <g>
+                <circle id="bubble-legend-scale-50" fill="none" stroke="rgb(128, 103, 0)" stroke-width="1" stroke-dasharray="2,2" ></circle>
+                <path id="bubble-legend-scale-50-path" stroke="rgb(128, 103, 0)" stroke-width="1"></path>
+                <text id="bubble-legend-scale-50-label" class="scale-label" text-anchor="start">$5 Million</text>
+              </g>
+              <g>
+                <circle id="bubble-legend-scale-15" r="0" cx="0" cy="0" fill="none" stroke="rgb(128, 103, 0)" stroke-width="1" stroke-dasharray="2,2" ></circle>
+                <path id="bubble-legend-scale-15-path" stroke="rgb(128, 103, 0)" stroke-width="1"></path>
+                <text id="bubble-legend-scale-15-label" class="scale-label" text-anchor="start">$1.5 Million</text>
+              </g>
+              <g>
+                <circle id="bubble-legend-scale-02" r="0" cx="0" cy="0" fill="none" stroke="rgb(128, 103, 0)" stroke-width="1" stroke-dasharray="2,2" ></circle>
+                <path id="bubble-legend-scale-02-path" stroke="rgb(128, 103, 0)" stroke-width="1"></path>
+                <text id="bubble-legend-scale-02-label" class="scale-label" text-anchor="start">$0.1 Million</text>
+              </g>
+            </svg>
           </div>
         </div>
-        <div class="col-md-6 mx-auto">
+        <div class="mx-auto">
           <div id="bubble" class="chart"></div>
         </div>
       </div>
@@ -150,13 +188,12 @@
       <div class="section-intro">
 
         <h2>Where <span id="map-total" class="total-span topic-color-text">$194.9 Million</span> is spent</h2>
-        <p>College of Agricultural and Environmental Science researchers positively impact California in numerous ways and support research in the areas of: Sustainable agriculture, environmental conservation, nutritious food, clean water, and human health This map represents a small fraction of the 300+ faculty who provide critical scientific solutions to some of our state and nation’s biggest challenges.
-</p>
+        <p>College of Agricultural and Environmental Science researchers positively impact California in numerous ways and support research in the areas of: Sustainable agriculture, environmental conservation, nutritious food, clean water, and human health This map represents a small fraction of the 300+ faculty who provide critical scientific solutions to some of our state and nation’s biggest challenges.</p>
 
       </div>
       <div class="row flex-between">
 
-        <div class="col-4">
+        <div class="">
           <div id="map-summary-legend" class="chart-card legend" >
             <div class="row cardheader topic-border-color">
               <h2 class="topic-header topic-color-text title">Agriculture</h2>
@@ -164,12 +201,13 @@
             </div>
             <h3>Funding Information</h3>
             <p>Total Funding: <span class="sans-bold topic-color-text total">$7 Million</span>
-              <p># of Projects: <span class="sans-bold topic-color-text count">24</span></p>
+            <p># of Projects: <span class="sans-bold topic-color-text count">24</span></p>
+            <div class="departments">
               <h3>Departments</h3>
-              <div class="departments"></div>
+            </div>
           </div>
         </div>
-        <div class="col">
+        <div class="">
           <div id="map" class="chart"></div>
         </div>
       </div>
@@ -181,7 +219,7 @@
     <div class="container">
       <div class="section-intro">
         <h2>What <span id="impact-total" class="total-span">$194.9 Million</span> is impacting</h2>
-        <p>CAES research is impacting california and the globe on all fronts. Check out these highlighted articles get more indepth on what we are doing in the fields of Agriculture, Environment and Human & Social.</p>
+        <p>CAES research is impacting california and the globe on all fronts. Check out these highlighted articles get more indepth on what we are doing in the fields of Agriculture, Environment and Human &amp; Social.</p>
       </div>
       <div class="lead_carousel">
         <div class="carousel-wrapper">
@@ -347,8 +385,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/09/farmland-may-provide-key-to-replenishing-groundwater" class="btn-border border-skyblue color-skyblue">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -380,8 +416,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/05/for-better-or-worse" class="btn-border border-golden-lupine color-golden-lupine">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -400,7 +434,7 @@
           </div>
         </div>
       </div>
-      <div id="article_slupsky" class="row article" data-topic="">
+      <div id="article_slupsky" class="row article" data-topic="AG">
         <div class="col-md"><img class="img-fluid" src="/media/articleshots/carolyn-slupsky.jpg" alt="Carolyn Slupsky">
           <p class="discreet caption">Caroyln Slupsky</p>
         </div>
@@ -413,8 +447,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/12/fresh-citrus-at-risk" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -446,8 +478,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/09/helping-growers-optimize-irrigation" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -477,8 +507,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/03/crop-breeding-for-the-unknown" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -508,8 +536,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/08/4-5-million-grant-funds-new-disease-resistant-strawberries" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -541,8 +567,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="/" class="btn-border border-skyblue color-skyblue">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -575,8 +599,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/08/uc-davis-helps-winemakers-sustainably-produce-premium-wine" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -606,8 +628,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2015/02/fighting-powdery-grape-mildew" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -637,8 +657,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2016/03/crucial-lettuce-gene-discovery" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -669,8 +687,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/01/breeding-hill-climbing-cows" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -701,8 +717,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/10/risk-and-resilience" class="btn-border border-golden-lupine color-golden-lupine">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -734,8 +748,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2014/09/study-no-health-problems-for-ge-fed-livestock" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -766,8 +778,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="https://www.ucdavis.edu/news/animal-scientist-ed-depeters-wins-40000-teaching-prize/" class="btn-border border-sunny-grass color-sunny-grass">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -797,8 +807,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/10/the-last-stop" class="btn-border border-skyblue color-skyblue">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -829,8 +837,6 @@
               </div>
               <div class="research-title-more">
                 <a target="_blank" href="http://www.caes.ucdavis.edu/news/articles/2017/04/congratulations-dave-rizzo" class="btn-border border-skyblue color-skyblue">Learn More</a>
-                <a href="/"><img src="/media/facebook.svg" alt="facebook icon"></a>
-                <a href="/"><img src="/media/twitter.svg" alt="twitter icon"></a>
               </div>
             </div>
           </div>
@@ -857,10 +863,10 @@
       <div class="footer_divider">
         <div class="container">
           <div class="row flex-between">
-            <div class="col">
+            <div class="">
               <p>Copyright &copy; <span id="copywrite-year"></span> The Regents of the University of California, Davis campus. All rights reserved.</p>
             </div>
-            <div class="col t-right">
+            <div class="t-right">
               <p><a href="https://github.com/ucdavis/ad419-charts"><img src="/media/github.svg" alt="Github Icon"></a></p>
             </div>
           </div>
