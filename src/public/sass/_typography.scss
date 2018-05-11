@@ -58,12 +58,26 @@ ul, ol {
       color:$primary-font;
     }
   }
+  .legend-topic & {
+    list-style-type: none;
+    margin-left:0px;
+    padding-left:0px;
+    li {
+      img {
+        margin-right:4px;
+      }
+      color:$primary-font;
+      font-family: $sans-reg;
+      margin:8px 0px;
+    }
+  }
   &.funding-list {
     font-family: $sans-bold;
   }
   font-family: $sans-reg;
   li {
     font-size:1.6rem;
+
   }
 }
 

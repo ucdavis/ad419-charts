@@ -48,7 +48,7 @@ body {
 header {
   // background-color: $primary-color;
   background: url("/media/head-bg.png") center top/cover no-repeat;
-  padding: 6% 0;
+  padding: 2.5% 0;
 }
 
 .head_bleed {
@@ -91,9 +91,11 @@ ul.topic-nav {
   justify-content: space-between;
   align-items: top;
 }
-
+.helptext {
+  margin-bottom:84px;
+}
 .department_intro {
-  padding: 8% 0;
+  padding: 75px 0 175px 0px;
 
   p {
     font-size: 1.8rem;
@@ -276,7 +278,20 @@ ul.topic-nav {
     }
   }
 }
-
+.legend-topic {
+  margin-bottom:32px;
+}
+.legend-size {
+  svg {
+    margin-top:16px;
+    margin-left:-54px;
+    text {
+      font-size: 1.6rem;
+      color:$primary-font;
+      font-family: $sans-reg;
+    }
+  }
+}
 .section-intro {
   border-bottom: 1px solid $borders;
   margin-bottom: 32px;
@@ -285,9 +300,8 @@ ul.topic-nav {
   align-items: flex-end;
 
   p {
-    max-width: 620px;
+    max-width: 660px;
   }
-
   form {
     text-align: right;
     display: inline-block;

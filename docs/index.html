@@ -107,10 +107,11 @@
     <div class="container">
       <div class="section-intro">
         <h2>How <span id="spend-total" class="total-span topic-color-text">$194.9 Million</span> is spent</h2>
-        <p>From the smallest to biggest project, all research at the College of Agricultural and Environmental Science is important. Below you'll find circles that represent individual research projects. Their size relates to it's funding and it's color relates to it's topic.</p> 
+        <p>From the smallest to biggest project, all research at the College of Agricultural and Environmental Science is important. Below you'll find circles that represent individual research projects. Their size relates to it's funding and it's color relates to it's topic.</p>
       </div>
 
       <div class="row justify-content-between">
+        <div>
         <div id="bubble-summary-legend" class="">
           <div class="chart-card legend">
             <div class="row cardheader topic-border-color">
@@ -124,7 +125,7 @@
               <h3>Departments</h3>
             </div>
           </div>
-          <div class="">
+          <div class="legend-type">
             <p>Each circle represent a research project in a given topic</p>
             <svg id="bubble-legend-color" width="400" height="200">
               <g>
@@ -132,16 +133,16 @@
                 <text x="75" y="55" text-anchor="start">Human and Social</text>
               </g>
               <g>
-                <circle id="bubble-legend-color-ag" r="15" cx="50" cy="100" fill="#78be20" stroke="rgb(128, 103, 0)" stroke-width="1"></circle>
+                <circle id="bubble-legend-color-ag" r="15" cx="50" cy="100" fill="#78be20" stroke="rgb(60, 95, 16)" stroke-width="1"></circle>
                 <text x="75" y="105" text-anchor="start">Agriculture</text>
               </g>
               <g>
-                <circle id="bubble-legend-color-env" r="15" cx="50" cy="150" fill="#00B5E2" stroke="rgb(128, 103, 0)" stroke-width="1"></circle>
+                <circle id="bubble-legend-color-env" r="15" cx="50" cy="150" fill="#00B5E2" stroke="rgb(0, 90, 113)" stroke-width="1"></circle>
                 <text x="75" y="155" text-anchor="start">Environment</text>
               </g>
             </svg>
           </div>
-          <div class="">
+          <div class="legend-size">
             <p>Size of each circle correlates to the funding that a project received</p>
             <svg id="bubble-legend-scale" width="400" height="200">
               <g>
@@ -161,7 +162,8 @@
               </g>
             </svg>
           </div>
-        </div>
+
+        </div></div>
         <div class="mx-auto">
           <div id="bubble" class="chart"></div>
         </div>

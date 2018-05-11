@@ -383,7 +383,9 @@ table.dataTable tr.even td {
 }
 
 .chart-card {
-  border: 1px solid $borders;
+  box-shadow: $box-shadow;
+  margin-bottom:36px;
+  border:1px solid $borders;
   padding:18px 24px 16px 24px;
   font-family: $sans-bold;
   display: inline-block;
@@ -453,7 +455,7 @@ table.dataTable tr.even td {
 
   .chart-container {
     position: relative;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
