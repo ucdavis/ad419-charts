@@ -141,7 +141,6 @@ charts.each(function(sourceTotal) {
   const svg = chart.append("svg")
     .attr("class", "chart")
     .attr("width", sourceTotal.width)
-    .attr("height", "100%")
     .attr("style", `min-height:${sourceTotal.height}`);
 
   // setup circles

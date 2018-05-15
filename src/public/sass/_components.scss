@@ -464,6 +464,10 @@ table.dataTable tr.even td {
     align-items: center;
 
     padding: 0 1rem;
+
+    .chart {
+      flex: 1;
+    }
   }
 }
 
