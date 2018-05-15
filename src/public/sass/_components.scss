@@ -503,7 +503,7 @@ table.dataTable tr.even td {
     display: none;
   }
 
-  .department {
+  .department, .title {
     color: $secondary-font;
     font-family: $sans-bold;
     font-size: 1.4rem;
@@ -532,6 +532,13 @@ table.dataTable tr.even td {
   .total {
     font-family: $sans-bold;
     font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .percent {
+    color: $primary-font;
+    font-family: $sans-bold;
+    font-size: 1.4rem;
     text-align: center;
   }
 
