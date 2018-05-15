@@ -185,7 +185,7 @@ charts.each(function(sourceTotal) {
         .text(category.name);
 
       tooltip.select(".percent")
-        .text(100 * category.categoryIndex / sourceTotal.total + "%");
+        .text((100 * category.total / sourceTotal.total).toFixed(2) + " %");
 
       tooltip.select(".total")
         .text(`$${ (category.total / 1000000).toFixed(1) } million`);
