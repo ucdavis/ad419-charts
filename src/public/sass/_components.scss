@@ -1,5 +1,5 @@
 img.img-fluid {
-  width: 100%;
+  max-width: 100%;
 }
 .action-btn {
   display:block;
@@ -19,6 +19,9 @@ img.img-fluid {
 p a.action-btn {
     text-decoration: none !important;
 
+}
+.flex-wrap {
+  flex-wrap:wrap;
 }
 .btn-borderonly {
   border:1px solid rgba(0, 40, 85, 0.8);
@@ -466,12 +469,11 @@ table.dataTable tr.even td {
 
 .chart-label {
   font-family: $sans-bold;
-  font-size: 14px;
+  font-size: 1.8rem;;
   text-align: center;
-
   opacity: 1;
   transition: opacity 250ms;
-
+  color:$primary-font;
   &.opaque {
     opacity: 0;
   }
