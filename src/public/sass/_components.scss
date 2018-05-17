@@ -1,5 +1,7 @@
 img.img-fluid {
   max-width: 100%;
+}
+.img-onehundo {
   width:100%;
 }
 .action-btn {
@@ -34,6 +36,22 @@ p a.action-btn {
     background-color:$accent;
   }
 
+}
+.topic-btn {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  width:221px;
+  height:62px;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  color:$primary-font;
+  font-size: 2rem;
+  font-family: $sans-bold;
+  border:none;
+  &:hover {
+    transform: translateY(-1px);
+  }
 }
 .btn {
   white-space: nowrap;
@@ -203,7 +221,9 @@ ol.breadcrumb {
 .m-r {
   margin-right: 16px;
 }
-
+.m-l {
+  margin-left: 16px;
+}
 .m-b {
   margin-bottom: 16px;
 }
