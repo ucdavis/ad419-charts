@@ -41,8 +41,8 @@ p a.action-btn {
   display: flex;
   justify-content:space-around;
   align-items: center;
-  width:221px;
-  height:62px;
+  width:209px;
+  height:52px;
   background-color: #fff;
   box-shadow: $box-shadow;
   color:$primary-font;
@@ -51,6 +51,22 @@ p a.action-btn {
   border:none;
   &:hover {
     transform: translateY(-1px);
+  }
+  &.active {
+    body[data-topic="AG"] & {
+      color: $sunny-grass;
+      border:1px solid $sunny-grass;
+    }
+
+    body[data-topic="ENV"] & {
+      color: $sky-blue;
+      border:1px solid $sky-blue;
+    }
+
+    body[data-topic="HUMAN"] & {
+      color: $golden-lupine;
+      border:1px solid $golden-lupine;
+    }
   }
 }
 .btn {
