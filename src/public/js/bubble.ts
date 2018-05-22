@@ -111,7 +111,7 @@ const tooltip = d3
   .select(chartSelector)
   .append<HTMLElement>("div")
   .attr("class", "chart-tooltip hidden")
-  .attr("dy", 1);
+  .style("min-width", "35rem");
 
 // build tooltip
 tooltip.append("div").attr("class", "department");

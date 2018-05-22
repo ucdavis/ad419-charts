@@ -161,7 +161,7 @@ charts.each(function(sourceTotal) {
   const tooltip = chart
     .append<HTMLElement>("div")
     .attr("class", "chart-tooltip hidden")
-    .attr("dy", 1);
+    .style("min-width", "15rem");
 
   // build tooltip
   tooltip.append("div").attr("class", "title");
