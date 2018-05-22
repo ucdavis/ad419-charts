@@ -9,7 +9,7 @@ import "./map";
 import "./sources";
 import "./totals";
 
-import { setSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
+import { setSelectedCategory, getSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
 
 const $topicBar = $("#topic-bar");
 const $root = $("html body");
@@ -37,7 +37,7 @@ function handleTopicChanged(categoryIndex: number) {
     $root.attr("data-topic", topic);
 
     // decorate topic button
-    $(".topic-button").each(function() {
+    $(".topic-btn").each(function() {
         const t = $(this).data("topic");
         if (t === topic) {
             $(this).addClass("active");
@@ -53,9 +53,21 @@ onSelectedCategoryChanged(handleTopicChanged);
 
 function setupTopicSelector() {
     // attach listeners
-    $(".topic-button").click(function() {
+    $(".topic-btn").click(function() {
+        const categoryIndex = getSelectedCategory();
+        let selectedTopic = "";
+        const category = categories[categoryIndex];
+        if (category) {
+            selectedTopic = category.key;
+        }
+
         const topic = $(this).data("topic");
-        setSelectedCategory(topic);
+        if (topic === selectedTopic) {
+            setSelectedCategory("");
+        } else {
+            setSelectedCategory(topic);
+        }
+
     });
 
     $(".topic-all").click(function(e) {
