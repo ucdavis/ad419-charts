@@ -115,7 +115,7 @@ const charts = svg
 
 charts.each(function(sourceTotal) {
 
-  const chart = d3.select(this as Element);
+  const chart = d3.select(this);
 
   const center = {
     x: (sourceTotal.width / 2),
@@ -138,10 +138,10 @@ charts.each(function(sourceTotal) {
     .text(`$${ (getSelectedTotal(sourceTotal) / 1000000).toFixed(1) }M`);
 
   // create svg element
-  const svg = chart.append("svg")
+  const svg = chart.append<SVGElement>("svg")
     .attr("class", "chart")
     .attr("width", sourceTotal.width)
-    .attr("style", `min-height:${sourceTotal.height}`);
+    .attr("style", `min-height:${sourceTotal.height}; min-width:${sourceTotal.width}`);
 
   // setup circles
   const circles = svg
@@ -189,11 +189,29 @@ charts.each(function(sourceTotal) {
       tooltip.select(".total")
         .text(`$${ (category.total / 1000000).toFixed(1) } million`);
 
+      // calculate tooltip position
+      const chartElement = chart.node();
+      let chartPosition = { left: 0, top: 0 };
+      if (!!chartElement) {
+        chartPosition = chartElement.getBoundingClientRect();
+      }
+
+      const svgElement = svg.node();
+      let svgPosition = { left: 0, top: 0 };
+      if (!!svgElement) {
+        svgPosition = svgElement.getBoundingClientRect();
+      }
+
+      const circlePosition = {
+        x: (category.x || 0) + svgPosition.left - chartPosition.left,
+        y: (category.y || 0) + svgPosition.top - chartPosition.top,
+      };
+
       // move mouseover tooltip
       tooltip
         .classed("hidden", false)
-        .style("left", category.x || 0)
-        .style("top", (category.y || 0) - 10);
+        .style("left", circlePosition.x)
+        .style("top", circlePosition.y - 10 - getCircleRadius(category.total));
     })
     .on("mouseout", function() {
       d3.select(this as SVGCircleElement)
