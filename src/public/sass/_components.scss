@@ -49,6 +49,14 @@ p a.action-btn {
   font-size: 2rem;
   font-family: $sans-bold;
   border:none;
+  @include breakpoint(mdmax){
+    width:167px;
+    height:48px;
+    font-size:1.6rem;
+  }
+  @include breakpoint(smmax) {
+    width:157px;
+  }
   &:hover {
     transform: translateY(-1px);
   }
@@ -603,7 +611,9 @@ table.dataTable tr.even td {
     transform: translate(-50%, 0);
   }
 }
-
+.justify-center {
+  justify-content: center;
+}
 .article {
   & + & {
     margin-top: 2.5rem;
@@ -615,5 +625,11 @@ table.dataTable tr.even td {
     .inactive {
       opacity: 0.4;
     }
+  }
+}
+.flex-md {
+  @include breakpoint(mdmax) {
+    display:flex;
+    justify-content: space-between;
   }
 }

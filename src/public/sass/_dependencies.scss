@@ -89,6 +89,26 @@ $box-shadow: 0 0 0 1px rgba(49,49,93,.03), 0 2px 5px 0 rgba(49,49,93,.1), 0 1px 
             @content ;
         }
     }
+    @if $point==smmax {
+        @media (max-width: 576px) {
+            @content ;
+        }
+    }
+    @if $point==mdmax {
+        @media (max-width: 768px) {
+            @content ;
+        }
+    }
+    @if $point==lgmax {
+        @media (max-width: 992px) {
+            @content ;
+        }
+    }
+    @if $point==xlmax {
+        @media (max-width: 1200px) {
+            @content ;
+        }
+    }
 }
 @mixin fader {
   -o-transition:.25s;

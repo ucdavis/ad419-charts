@@ -20,14 +20,14 @@ body {
 
 .container {
   padding: 0;
-  width: 98%;
+  width: 95%;
   max-width:1440px;
   @include breakpoint (sm) {
-    width: 96%;
+    width: 93%;
     max-width:1440px;
   }
   @include breakpoint (md) {
-    width: 92%;
+    width: 91%;
     max-width:1440px;
   }
   @include breakpoint(lg) {
@@ -35,7 +35,7 @@ body {
     max-width:1440px;
   }
   @include breakpoint(xl) {
-    width: 80%;
+    width: 85%;
     max-width:1440px;
   }
 }
@@ -66,11 +66,15 @@ header {
     font-size: 3.6rem;
     color: $primary-font;
     padding-right: 44px;
+    @include breakpoint(smmax) {
+      padding-right:16px;
+    }
   }
   img {
     padding-right: 44px;
-    @include breakpoint(mdbreak) {
-      display:none;
+    @include breakpoint(smmax) {
+      width:4%;
+      padding-right:0px;
     }
   }
 
@@ -167,12 +171,53 @@ ul.topic-nav {
     }
   }
 }
-.card-portion {
-  width:22%;
+.chart-card {
+  box-shadow: $box-shadow;
+  margin-bottom:36px;
+  padding:18px 24px 16px 24px;
+  font-family: $sans-bold;
+  display: inline-block;
+  max-width:316px;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 250ms;
+  h3 {
+    margin-bottom:10px;
+    margin-top:20px;
+  }
+  p {
+    line-height:1;
+  }
+  &.opaque {
+    opacity: 0;
+    transition: opacity 250ms;
+  }
+  & + & {
+    margin-left: 1rem;
+  }
 }
-.graph-portion {
+
+.left-portion {
+  width:22%;
+  @include breakpoint(mdmax) {
+    width:100%;
+    .legend-topic {
+      width:33%;
+    }
+    .legend-size {
+      width:30%;
+    }
+    .chart-card {
+      width:30%;
+    }
+  }
+}
+.right-portion {
   width:78%;
   text-align: center;
+  @include breakpoint(mdmax) {
+    width:100%;
+  }
 }
 .funding {
   margin: 120px 0;
