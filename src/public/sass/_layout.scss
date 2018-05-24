@@ -17,31 +17,26 @@ body {
   margin: 0 0 170px;
 }
 
+
 .container {
-  width: 90%;
-}
-@media (min-width: 576px) {
-  .container {
-    max-width: inherit;
-    width: 88%;
+  padding: 0;
+  width: 98%;
+  max-width:1440px;
+  @include breakpoint (sm) {
+    width: 96%;
+    max-width:1440px;
   }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: inherit;
-    width: 86%;
+  @include breakpoint (md) {
+    width: 92%;
+    max-width:1440px;
   }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: inherit;
-    width: 84%;
+  @include breakpoint(lg) {
+    width: 90%;
+    max-width:1440px;
   }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1600px;
-    width: 82%;
+  @include breakpoint(xl) {
+    width: 80%;
+    max-width:1440px;
   }
 }
 
@@ -115,16 +110,18 @@ ul.topic-nav {
     margin-top: 10px;
   }
 }
-
+.sticky-top {
+  top:-1;
+}
 .topics {
   text-align: center;
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
-  padding-top: 6px;
-  padding-bottom: 5px;
+  padding-top: 8px;
+  padding-bottom: 6px;
   margin-top: 0;
   margin-bottom: 0;
-  background-color: rgba(255,255,255,.95);
-  border-bottom: 4px solid rgba(255,255,255,.0005);
+  background-color: rgba(255,255,255,.98);
+  border-bottom: 4px solid rgba(255,255,255,.999);
   transition: border 500ms;
 
   .topic-item {
@@ -170,7 +167,13 @@ ul.topic-nav {
     }
   }
 }
-
+.card-portion {
+  width:22%;
+}
+.graph-portion {
+  width:78%;
+  text-align: center;
+}
 .funding {
   margin: 120px 0;
 }
@@ -187,7 +190,7 @@ ul.topic-nav {
 .cardheader {
   justify-content: space-between;
   align-items: flex-end;
-  border-bottom:2px solid $borders;
+  border-bottom:1px solid $borders;
   padding-bottom:8px;
   margin-bottom:16px;
 }
