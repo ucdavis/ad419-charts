@@ -12,7 +12,7 @@
         "category": "CSREES Admin Federal Research Funds"
     },
     "f204": {
-        "name": "Contracts, Grants, Research Coop Agreements",
+        "name": "Contracts, Grants, Research Co-op Agreements",
         "category": "CSREES Admin Federal Research Funds"
     },
     "f205": {
@@ -20,7 +20,7 @@
         "category": "CSREES Admin Federal Research Funds"
     },
     "f219": {
-        "name": "USDA Contracts, Grans, Coop Agreements",
+        "name": "USDA Contracts, Grans, Co-op Agreements",
         "category": "Other Federal Research Funds"
     },
     "f209": {
@@ -32,7 +32,7 @@
         "category": "Other Federal Research Funds"
     },
     "f308": {
-        "name": "Agency for International Development",
+        "name": "U.S. Agency for International Development",
         "category": "Other Federal Research Funds"
     },
     "f311": {
@@ -84,4 +84,3 @@
         "category": "Non-Federal Research Funds"
     }
   }
-  

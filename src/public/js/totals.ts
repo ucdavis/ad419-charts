@@ -35,7 +35,7 @@ function setTotals() {
 
     for (let i = 0; i < totalSpans.length; i++) {
         const span = totalSpans[i] as HTMLSpanElement;
-        span.innerText = `$${millions.toFixed(1)} Million`;
+        span.innerText = `$${millions.toFixed(1)} million`;
         span.setAttribute("data-topic", topic);
     }
 }
