@@ -6,7 +6,6 @@
   "PPA": { "name": "Plant Pathology", "category": "AG" },
   "ASC": { "name": "Animal Science", "category": "AG" },
   "HCE": { "name": "Human Ecology", "category": "HUMAN" },
-  "TXC": { "name": "Textiles and Clothing", "category": "HUMAN" },
   "ESP": { "name": "Environmental Science and Policy", "category": "ENV" },
   "ENM": { "name": "Entomology and Nematology", "category": "AG" },
   "ETX": { "name": "Environmental Toxicology", "category": "ENV" },
