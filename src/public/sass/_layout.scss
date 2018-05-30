@@ -60,7 +60,7 @@ header {
 
 .lead_content {
   background-color: $bg-color;
-  padding: 3% 0;
+  padding: 6rem 0rem;
   h1 {
     font-family: $sans-bold;
     font-size: 3.6rem;
@@ -71,7 +71,7 @@ header {
     }
   }
   img {
-    padding-right: 44px;
+    margin-right: 44px;
     @include breakpoint(smmax) {
       width:4%;
       padding-right:0px;
@@ -80,8 +80,9 @@ header {
 
   p {
     font-family: $sans-bold;
-    font-size: 2rem;
+    font-size: 1.8rem;
     max-width: 650px;
+    margin-bottom:0px;
   }
 }
 
@@ -92,10 +93,10 @@ ul.topic-nav {
   align-items: top;
 }
 .helptext {
-  margin-bottom:84px;
+  margin-bottom:12rem;
 }
 .department_intro {
-  padding: 75px 0 175px 0px;
+padding:12rem 0rem;
 
   p {
     font-size: 1.8rem;
@@ -220,17 +221,19 @@ ul.topic-nav {
   }
 }
 .funding {
-  margin: 120px 0;
+  padding: $section-padding;
 }
 
-.sources {}
+.sources {
+  padding: $section-padding;
+}
 
 .geography {
-  margin: 120px 0;
+  padding: $section-padding;
 }
 
 .articles {
-  margin: 80px 0 120px;
+  padding: $section-padding;
 }
 .cardheader {
   justify-content: space-between;
