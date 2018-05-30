@@ -3,7 +3,7 @@ import * as force from "d3-force";
 import * as Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 
-import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject, getDepartments, setSelectedCategory } from "./data";
+import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject, setSelectedCategory } from "./data";
 
 interface IProjectDatam extends IProject, SimulationNodeDatum {
 }
@@ -23,8 +23,6 @@ const center = {
 export const scale = 50;
 
 const categories = getCategories();
-
-const departments = getDepartments();
 
 // map to datam
 const data: IProjectDatam[] = projects;
