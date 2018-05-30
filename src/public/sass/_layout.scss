@@ -121,7 +121,7 @@ padding:12rem 0rem;
 .topics {
   text-align: center;
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
-  padding-top: 8px;
+  padding-top: 10px;
   padding-bottom: 6px;
   margin-top: 0;
   margin-bottom: 0;
@@ -348,8 +348,12 @@ padding:12rem 0rem;
   border-bottom: 1px solid $borders;
   margin-bottom: 32px;
   padding-bottom: 8px;
-  justify-content: space-between;
-  align-items: flex-end;
+  h1 {
+    margin-bottom:8px;
+  }
+  h2 {
+    margin-bottom:4px;
+  }
 
   p {
     max-width: 660px;

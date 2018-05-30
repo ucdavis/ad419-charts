@@ -49,6 +49,12 @@ p a.action-btn {
   font-size: 2rem;
   font-family: $sans-bold;
   border:none;
+  &:focus {
+    outline:none !important;
+  }
+  &:hover {
+    cursor: pointer;
+  }
   @include breakpoint(mdmax){
     width:167px;
     height:48px;
