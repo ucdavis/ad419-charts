@@ -32,12 +32,11 @@ const projects: IProject[] = [];
 for (const p of projectTotalsJson) {
     const project = projectJson[p.project];
 
-    const categoryKey = departmentJson[p.dept].category;
-    const categoryIndex = categories.findIndex(c => c.key === categoryKey);
-    if (categoryIndex < 0) continue;
-
     const department = departments.find(d => d.key === p.dept);
     if (!department) continue;
+
+    const categoryKey = department.categoryKey;
+    const categoryIndex = department.categoryIndex;
 
     projects.push({
         key: p.project,
