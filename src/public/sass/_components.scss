@@ -78,7 +78,7 @@ p a.action-btn {
       background-color:transparentize($sunny-grass, .85);
       transform: translateY(-1px);
     }
-    body[data-topic="ALL"] & {
+    & {
       background-color:rgba(0,0,0,.015);
       transform: translateY(-1px);
     }
