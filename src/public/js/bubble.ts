@@ -83,8 +83,9 @@ function getStrengthMultiplier(d: IProjectDatam) {
 }
 
 // build chart
-const svg = d3
-  .select(chartSelector)
+const chart = d3.select<HTMLDivElement, {}>(chartSelector);
+
+const svg = chart
   .append<SVGElement>("svg")
   .attr("width", width)
   .attr("height", height);
@@ -105,8 +106,7 @@ const circles = svg
   .attr("r", (d) => getCircleRadius(d.total));
 
 // mouse over tooltip
-const tooltip = d3
-  .select(chartSelector)
+const tooltip = chart
   .append<HTMLElement>("div")
   .attr("class", "chart-tooltip hidden")
   .style("min-width", "35rem");
@@ -144,11 +144,29 @@ circles
       tooltip.select(".total")
         .text(`$${ (project.total / 1000000).toFixed(1) } million`);
 
+      // calculate tooltip position
+      const chartElement = chart.node();
+      let chartPosition = { left: 0, top: 0 };
+      if (!!chartElement) {
+        chartPosition = chartElement.getBoundingClientRect();
+      }
+
+      const svgElement = svg.node();
+      let svgPosition = { left: 0, top: 0 };
+      if (!!svgElement) {
+          svgPosition = svgElement.getBoundingClientRect();
+      }
+
+      const circlePosition = {
+          x: circleX + svgPosition.left - chartPosition.left,
+          y: circleY + svgPosition.top - chartPosition.top,
+      };
+
       // move mouseover tooltip
       tooltip
         .classed("hidden", false)
-        .style("left", circleX)
-        .style("top", circleY - circleR - 10);
+        .style("left", circlePosition.x)
+        .style("top", circlePosition.y - circleR - 10);
 
     })
     .on("mouseout", function(project: IProjectDatam) {

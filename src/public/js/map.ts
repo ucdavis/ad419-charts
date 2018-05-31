@@ -188,8 +188,10 @@ iconsData.forEach(icon => {
 const path = geo.geoPath()
     .projection(projection);
 
-const svg = d3.select(chartSelector)
-    .insert("svg:svg", "h2")
+const chart = d3.select<HTMLDivElement, {}>(chartSelector);
+
+const svg = chart
+    .append<SVGElement>("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -258,8 +260,7 @@ counties.selectAll("path")
     .attr("stroke-dashoffset", 0);
 
 // mouse over tooltip
-const tooltip = d3
-  .select(chartSelector)
+const tooltip = chart
   .append<HTMLElement>("div")
   .attr("class", "chart-tooltip hidden")
   .attr("dy", 1);
@@ -273,6 +274,7 @@ tooltip.append("div").attr("class", "director");
 icons.selectAll<SVGElement, IIconData>("svg")
     .on("mouseover", function (data, i) {
 
+        // get circle group
         const element = d3.select(this).node();
         if (!element) return;
         const parent = element.parentElement;
@@ -310,11 +312,29 @@ icons.selectAll<SVGElement, IIconData>("svg")
         tooltip.select(".director")
             .text(data.director);
 
+        // calculate tooltip position
+        const chartElement = chart.node();
+        let chartPosition = { left: 0, top: 0 };
+        if (!!chartElement) {
+          chartPosition = chartElement.getBoundingClientRect();
+        }
+
+        const svgElement = svg.node();
+        let svgPosition = { left: 0, top: 0 };
+        if (!!svgElement) {
+            svgPosition = svgElement.getBoundingClientRect();
+        }
+
+        const circlePosition = {
+            x: (data.left || 0) + svgPosition.left - chartPosition.left,
+            y: (data.top || 0) + svgPosition.top - chartPosition.top,
+        };
+
         // move mouseover tooltip
         tooltip
             .classed("hidden", false)
-            .style("left", data.left || 0)
-            .style("top", (data.top || 0) - (iconCircleSize / 2));
+            .style("left", circlePosition.x)
+            .style("top", circlePosition.y - (iconCircleSize / 2));
     })
     .on("mouseout", function() {
 
