@@ -41,12 +41,12 @@ p a.action-btn {
   display: flex;
   justify-content:space-around;
   align-items: center;
-  width:209px;
+  width:202px;
   height:52px;
   background-color: #fff;
   box-shadow: $box-shadow;
   color:$primary-font;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-family: $sans-bold;
   border:none;
   &:focus {
@@ -55,11 +55,17 @@ p a.action-btn {
   &:hover {
     cursor: pointer;
   }
-  @include breakpoint(mdmax){
+  @include breakpoint(lgmax) {
     width:167px;
     height:48px;
     font-size:1.6rem;
   }
+  @include breakpoint(mdmax){
+    width:142px;
+    height:48px;
+    font-size:1.4rem;
+  }
+
   @include breakpoint(smmax) {
     width:157px;
   }
@@ -70,6 +76,10 @@ p a.action-btn {
     body[data-topic="AG"] & {
       color: $sunny-grass;
       background-color:transparentize($sunny-grass, .85);
+      transform: translateY(-1px);
+    }
+    body[data-topic="ALL"] & {
+      background-color:rgba(0,0,0,.015);
       transform: translateY(-1px);
     }
 
