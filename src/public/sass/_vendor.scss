@@ -17,3 +17,8 @@
 .col, .col-md, .col-sm {
   padding:0px;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}

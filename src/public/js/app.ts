@@ -80,7 +80,8 @@ const $carousel = $(".lead_carousel");
 function setupSlideshow() {
     $carousel.slick({
         variableWidth: true,
-        arrows: false,
+        arrows: true,
+        dots: true,
         autoplay: false,
         autoplaySpeed: 3000,
         swipeToSlide: true,
