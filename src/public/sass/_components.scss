@@ -158,7 +158,12 @@ background-color: rgba(255,255,255,.66);
 
   .media-body {}
 }
-
+.slick-dotted.slick-slider {
+  margin-bottom:5.2rem;
+}
+.slick-dots {
+  bottom:-35px;
+}
 ol.breadcrumb {
   display: inline-block;
   list-style: none;
@@ -635,7 +640,24 @@ table.dataTable tr.even td {
     margin-top: 2.5rem;
   }
 }
-
+.citation {
+  color:$secondary-font;
+  a {
+    color:$secondary-font;
+    text-decoration: underline;
+    font-weight:inherit;
+    &:hover {
+      color:$primary-color;
+      text-decoration: underline;
+    }
+  }
+}
+.tertiary-font {
+  color:$tertiary-font;
+}
+.sans-reg {
+  font-family: $sans-reg;
+}
 #map {
   #icons {
     .inactive {
