@@ -191,7 +191,7 @@ function buildSimulation() {
   // build forces
   simulation = force
     .forceSimulation<any, any>(data)
-    .force("collision", force.forceCollide((d: IProjectDatam) => getCircleRadius(d.total) * 0.95).strength(0.5).iterations(3))
+    .force("collision", force.forceCollide((d: IProjectDatam) => getCircleRadius(d.total) * 0.95).strength(0.5))
     .force("center", force.forceCenter(center.x, center.y));
 
   if (selectedCategory >= 0) {
