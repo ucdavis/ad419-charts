@@ -88,45 +88,45 @@ onSelectedCategoryChanged(categoryIndex => {
 // setup circle scale legends
 const bubbleScaleLegend = d3.select<SVGElement, {}>("#bubble-legend-scale");
 
+const bottom = 100;
+const lineHeight = 10;
+const textLeftPadding = 6;
+
 const radius50 = getBubbleCircleRadius(5000000);
 bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-50")
   .attr("r", radius50)
-  .attr("cy", 100 - radius50)
-  .attr("cx", 100);
+  .attr("cx", 100)
+  .attr("cy", bottom - radius50);
 
 bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-50-label")
-  .attr("x", 150 + radius50)
-  .attr("y", 100 - (radius50 * 2));
+  .attr("x", 150 + textLeftPadding + radius50)
+  .attr("y", bottom - (radius50 * 2) + (lineHeight / 2));
 
 bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-50-path")
-  .attr("d", `M 100 ${100 - (radius50 * 2)} L ${150 + radius50} ${100 - (radius50 * 2)}`);
+  .attr("d", `M 100 ${bottom - (radius50 * 2)} L ${150 + radius50} ${bottom - (radius50 * 2)}`);
 
 const radius15 = getBubbleCircleRadius(1500000);
 bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-15")
   .attr("r", radius15)
-  .attr("cy", 100 - radius15)
-  .attr("cx", 100);
+  .attr("cx", 100)
+  .attr("cy", bottom - radius15);
 
 bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-15-label")
-  .attr("x", 150 + radius50)
-  .attr("y", 100 - (radius15 * 2));
+  .attr("x", 150 + textLeftPadding + radius50)
+  .attr("y", bottom - (radius15 * 2) + (lineHeight / 2));
 
 bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-15-path")
-  .attr("d", `M 100 ${100 - (radius15 * 2)} L ${150 + radius50} ${100 - (radius15 * 2)}`);
+  .attr("d", `M 100 ${bottom - (radius15 * 2)} L ${150 + radius50} ${bottom - (radius15 * 2)}`);
 
 const radius02 = getBubbleCircleRadius(200000);
 bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-02")
   .attr("r", radius02)
-  .attr("cy", 100 - radius02)
-  .attr("cx", 100);
+  .attr("cx", 100)
+  .attr("cy", bottom - radius02);
 
 bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-02-label")
-  .attr("x", 150 + radius50)
-  .attr("y", 100 - (radius50 * 2));
-
-bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-02-label")
-  .attr("x", 150 + radius50)
-  .attr("y", 100 - (radius02 * 2));
+  .attr("x", 150 + textLeftPadding + radius50)
+  .attr("y", bottom - (radius02 * 2) + (lineHeight / 2));
 
 bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-02-path")
-  .attr("d", `M 100 ${100 - (radius02 * 2)} L ${150 + radius50} ${100 - (radius02 * 2)}`);
+  .attr("d", `M 100 ${bottom - (radius02 * 2)} L ${150 + radius50} ${bottom - (radius02 * 2)}`);
