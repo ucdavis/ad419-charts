@@ -58,7 +58,9 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
     const source = sources.find(s => s.key === sourceKey);
 
     if (source === undefined) {
-        console.info("Could not find source: ", sourceKey);
+        if (process.env.NODE_ENV === "development") {
+            console.info("Could not find source: ", sourceKey);
+        }
         continue;
     }
 
@@ -74,7 +76,9 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
     for (const departmentKey of Object.keys(totals)) {
         const department = departments.find(d => d.key === departmentKey);
         if (department === undefined) {
-            console.info("Could not find department: ", departmentKey);
+            if (process.env.NODE_ENV === "development") {
+                console.info("Could not find department: ", departmentKey);
+            }
             continue;
         }
 
@@ -94,7 +98,9 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
         // find and update category entry
         const category = result.byCategory.find(c => c.key === department.categoryKey);
         if (category === undefined) {
-            console.info("Could not find category: ", department.categoryKey);
+            if (process.env.NODE_ENV === "development") {
+                console.info("Could not find category: ", department.categoryKey);
+            }
             continue;
         }
         category.total += total;
