@@ -272,18 +272,9 @@ tooltip.append("div").attr("class", "director");
 
 // mouse overs
 icons.selectAll<SVGElement, IIconData>("svg")
-    .on("mouseover", function (data, i) {
+    .on("mouseover", function (data, i, groups) {
 
-        // get circle group
-        const element = d3.select(this).node();
-        if (!element) return;
-        const parent = element.parentElement;
-        if (!parent) return;
-        const g =  parent.parentElement;
-        if (!g) return;
-
-        d3.select(g)
-            .select(".circle")
+        d3.select(groups[0])
             .transition()
             .duration(100)
             .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor / 2))
@@ -291,8 +282,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .attr("width", iconCircleSize * zoomFactor)
             .attr("height", iconCircleSize * zoomFactor);
 
-        d3.select(g)
-            .select(".icon")
+        d3.select(groups[1])
             .transition()
             .duration(100)
             .attr("x", (d: any) => d.left - (iconSize * zoomFactor / 2))
@@ -336,17 +326,9 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .style("left", `${circlePosition.x}px`)
             .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
     })
-    .on("mouseout", function() {
+    .on("mouseout", function(data, i, groups) {
 
-        const element = d3.select(this as Element).node();
-        if (!element) return;
-        const parent = element.parentElement;
-        if (!parent) return;
-        const g =  parent.parentElement;
-        if (!g) return;
-
-        d3.select(g)
-            .select(".circle")
+        d3.select(groups[0])
             .transition()
             .duration(100)
             .attr("x", (d: any) => d.left - (iconCircleSize / 2))
@@ -354,8 +336,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .attr("width", iconCircleSize)
             .attr("height", iconCircleSize);
 
-        d3.select(g)
-            .select(".icon")
+        d3.select(groups[1])
             .transition()
             .duration(100)
             .attr("x", (d: any) => d.left - (iconSize / 2))
