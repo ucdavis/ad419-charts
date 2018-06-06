@@ -1,3 +1,8 @@
+import "es6-shim";
+import "innersvg-polyfill";
+import stickybits from "stickybits";
+stickybits(".sticky-top");
+
 import "../sass/app.scss";
 
 import * as $ from "jquery";
