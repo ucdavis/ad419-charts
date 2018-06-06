@@ -333,8 +333,8 @@ icons.selectAll<SVGElement, IIconData>("svg")
         // move mouseover tooltip
         tooltip
             .classed("hidden", false)
-            .style("left", circlePosition.x)
-            .style("top", circlePosition.y - (iconCircleSize / 2));
+            .style("left", `${circlePosition.x}px`)
+            .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
     })
     .on("mouseout", function() {
 

@@ -165,9 +165,8 @@ circles
       // move mouseover tooltip
       tooltip
         .classed("hidden", false)
-        .style("left", circlePosition.x)
-        .style("top", circlePosition.y - circleR - 10);
-
+        .style("left", `${circlePosition.x}px`)
+        .style("top", `${circlePosition.y - circleR - 10}px`);
     })
     .on("mouseout", function(project: IProjectDatam) {
       const circle = d3.select(this);

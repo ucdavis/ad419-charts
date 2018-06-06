@@ -210,8 +210,8 @@ charts.each(function(sourceTotal) {
       // move mouseover tooltip
       tooltip
         .classed("hidden", false)
-        .style("left", circlePosition.x)
-        .style("top", circlePosition.y - 10 - getCircleRadius(category.total));
+        .style("left", `${circlePosition.x}px`)
+        .style("top", `${circlePosition.y - 10 - getCircleRadius(category.total)}px`);
     })
     .on("mouseout", function() {
       d3.select(this as SVGCircleElement)
