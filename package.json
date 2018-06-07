@@ -28,7 +28,6 @@
     "@types/d3-sankey": "^0.7.2",
     "@types/errorhandler": "^0.0.32",
     "@types/express": "^4.11.0",
-    "@types/jquery": "^3.3.0",
     "@types/node": "^9.3.0",
     "@types/slick-carousel": "^1.6.32",
     "@types/topojson": "^3.2.0",
