@@ -227,7 +227,7 @@ function buildSimulation() {
       forceY.strength(0);
 
       simulation.force("r", force.forceRadial(0, center.x, center.y).strength(0.1));
-    }, 3000);
+    }, 5000);
   }
 }
 buildSimulation();
