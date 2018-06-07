@@ -68,7 +68,7 @@
   ],
   "exclude": [
     "src/public/js",
-    "node/modules",
+    "node_modules",
     "**/*.spec.ts"
   ]
 }
