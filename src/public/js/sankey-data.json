@@ -1,61 +1,168 @@
 {
-  "nodes": [
-    { "name": "State 220" },
-    { "name": "State Funds" },
-    { "name": "f231" },
-    { "name": "f332" },
-    { "name": "f233" },
-    { "name": "Total Research f234" },
-    { "name": "ARE" },
-    { "name": "ASC" },
-    { "name": "BAE" },
-    { "name": "ENM" },
-    { "name": "ESP" },
-    { "name": "ETX" },
-    { "name": "EVE" },
-    { "name": "FST" },
-    { "name": "HCE" },
-    { "name": "IND" },
-    { "name": "LAW" },
-    { "name": "MCB" },
-    { "name": "MIC" },
-    { "name": "NPB" },
-    { "name": "NTR" },
-    { "name": "PLB" },
-    { "name": "PLS" },
-    { "name": "PPA" },
-    { "name": "TXC" },
-    { "name": "VIT" },
-    { "name": "WFB" },
-    { "name": "XXX" }
-  ],
-  "links": [
-    { "source": 0, "target": 1, "value": 69901762.30000001 },
-    { "source": 1, "target": 5, "value": 69901762.30000001 },
-    { "source": 2, "target": 5, "value": 17944554.0 },
-    { "source": 3, "target": 5, "value": 58658380.75999996 },
-    { "source": 4, "target": 5, "value": 55517113.88000007 },
-    { "source": 5, "target": 6, "value": 11664007.6 },
-    { "source": 5, "target": 7, "value": 15641917.040000001 },
-    { "source": 5, "target": 8, "value": 8617267.170000002 },
-    { "source": 5, "target": 9, "value": 13806609.59 },
-    { "source": 5, "target": 10, "value": 6090873.400000001 },
-    { "source": 5, "target": 11, "value": 6316057.01 },
-    { "source": 5, "target": 12, "value": 3684858.140000001 },
-    { "source": 5, "target": 13, "value": 9802576.13 },
-    { "source": 5, "target": 14, "value": 4101275.3699999996 },
-    { "source": 5, "target": 15, "value": 34564.27 },
-    { "source": 5, "target": 16, "value": 13658551.520000001 },
-    { "source": 5, "target": 17, "value": 2971980.8 },
-    { "source": 5, "target": 18, "value": 652216.5 },
-    { "source": 5, "target": 19, "value": 2081854.67 },
-    { "source": 5, "target": 20, "value": 10636727.05 },
-    { "source": 5, "target": 21, "value": 3677055.24 },
-    { "source": 5, "target": 22, "value": 45914035.64 },
-    { "source": 5, "target": 23, "value": 19253289.26 },
-    { "source": 5, "target": 24, "value": 710997.53 },
-    { "source": 5, "target": 25, "value": 8373425.91 },
-    { "source": 5, "target": 26, "value": 7231941.55 },
-    { "source": 5, "target": 27, "value": 7099729.55 }
-  ]
+    "nodes": [{
+        "name": "State 220"
+    }, {
+        "name": "State Funds"
+    }, {
+        "name": "f231"
+    }, {
+        "name": "f332"
+    }, {
+        "name": "f233"
+    }, {
+        "name": "Total Research f234"
+    }, {
+        "name": "ARE"
+    }, {
+        "name": "ASC"
+    }, {
+        "name": "BAE"
+    }, {
+        "name": "ENM"
+    }, {
+        "name": "ESP"
+    }, {
+        "name": "ETX"
+    }, {
+        "name": "EVE"
+    }, {
+        "name": "FST"
+    }, {
+        "name": "HCE"
+    }, {
+        "name": "IND"
+    }, {
+        "name": "LAW"
+    }, {
+        "name": "MCB"
+    }, {
+        "name": "MIC"
+    }, {
+        "name": "NPB"
+    }, {
+        "name": "NTR"
+    }, {
+        "name": "PLB"
+    }, {
+        "name": "PLS"
+    }, {
+        "name": "PPA"
+    }, {
+        "name": "TXC"
+    }, {
+        "name": "VIT"
+    }, {
+        "name": "WFB"
+    }, {
+        "name": "XXX"
+    }],
+    "links": [{
+        "source": 0,
+        "target": 1,
+        "value": 70076935.47
+    }, {
+        "source": 1,
+        "target": 5,
+        "value": 70076935.47
+    }, {
+        "source": 2,
+        "target": 5,
+        "value": 19494301.0
+    }, {
+        "source": 3,
+        "target": 5,
+        "value": 55933567.94
+    }, {
+        "source": 4,
+        "target": 5,
+        "value": 64180393.140000015
+    }, {
+        "source": 5,
+        "target": 6,
+        "value": 10849831.1
+    }, {
+        "source": 5,
+        "target": 7,
+        "value": 18329204.470000006
+    }, {
+        "source": 5,
+        "target": 8,
+        "value": 8332185.910000001
+    }, {
+        "source": 5,
+        "target": 9,
+        "value": 14730346.579999996
+    }, {
+        "source": 5,
+        "target": 10,
+        "value": 6625469.42
+    }, {
+        "source": 5,
+        "target": 11,
+        "value": 6832747.510000001
+    }, {
+        "source": 5,
+        "target": 12,
+        "value": 2637062.2900000005
+    }, {
+        "source": 5,
+        "target": 13,
+        "value": 10102192.430000002
+    }, {
+        "source": 5,
+        "target": 14,
+        "value": 5239319.92
+    }, {
+        "source": 5,
+        "target": 15,
+        "value": 44836.45
+    }, {
+        "source": 5,
+        "target": 16,
+        "value": 15499497.4
+    }, {
+        "source": 5,
+        "target": 17,
+        "value": 2831675.1199999996
+    }, {
+        "source": 5,
+        "target": 18,
+        "value": 577818.99
+    }, {
+        "source": 5,
+        "target": 19,
+        "value": 1590236.5299999998
+    }, {
+        "source": 5,
+        "target": 20,
+        "value": 11917114.13
+    }, {
+        "source": 5,
+        "target": 21,
+        "value": 2466495.33
+    }, {
+        "source": 5,
+        "target": 22,
+        "value": 48352180.17999999
+    }, {
+        "source": 5,
+        "target": 23,
+        "value": 18626241.83
+    }, {
+        "source": 5,
+        "target": 24,
+        "value": 985012.4500000001
+    }, {
+        "source": 5,
+        "target": 25,
+        "value": 8265985.51
+    }, {
+        "source": 5,
+        "target": 26,
+        "value": 8624835.29
+    }, {
+        "source": 5,
+        "target": 27,
+        "value": 6224908.709999999
+    }]
 }
