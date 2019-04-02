@@ -59,110 +59,110 @@
     "links": [{
         "source": 0,
         "target": 1,
-        "value": 70076935.47
+        "value": 58019677.0
     }, {
         "source": 1,
         "target": 5,
-        "value": 70076935.47
+        "value": 58019677.0
     }, {
         "source": 2,
         "target": 5,
-        "value": 19494301.0
+        "value": 19493924.0
     }, {
         "source": 3,
         "target": 5,
-        "value": 55933567.94
+        "value": 53314876.0
     }, {
         "source": 4,
         "target": 5,
-        "value": 64180393.140000015
+        "value": 52883227.0
     }, {
         "source": 5,
         "target": 6,
-        "value": 10849831.1
+        "value": 8925485.0
     }, {
         "source": 5,
         "target": 7,
-        "value": 18329204.470000006
+        "value": 15063094.0
     }, {
         "source": 5,
         "target": 8,
-        "value": 8332185.910000001
+        "value": 7379892.0
     }, {
         "source": 5,
         "target": 9,
-        "value": 14730346.579999996
+        "value": 13181083.0
     }, {
         "source": 5,
         "target": 10,
-        "value": 6625469.42
+        "value": 5993631.0
     }, {
         "source": 5,
         "target": 11,
-        "value": 6832747.510000001
+        "value": 6441846.0
     }, {
         "source": 5,
         "target": 12,
-        "value": 2637062.2900000005
+        "value": 2458118.0
     }, {
         "source": 5,
         "target": 13,
-        "value": 10102192.430000002
+        "value": 8708326.0
     }, {
         "source": 5,
         "target": 14,
-        "value": 5239319.92
+        "value": 4666617.0
     }, {
         "source": 5,
         "target": 15,
-        "value": 44836.45
+        "value": 40719.0
     }, {
         "source": 5,
         "target": 16,
-        "value": 15499497.4
+        "value": 13543503.0
     }, {
         "source": 5,
         "target": 17,
-        "value": 2831675.1199999996
+        "value": 2711682.0
     }, {
         "source": 5,
         "target": 18,
-        "value": 577818.99
+        "value": 535245.0
     }, {
         "source": 5,
         "target": 19,
-        "value": 1590236.5299999998
+        "value": 1520539.0
     }, {
         "source": 5,
         "target": 20,
-        "value": 11917114.13
+        "value": 10660977.0
     }, {
         "source": 5,
         "target": 21,
-        "value": 2466495.33
+        "value": 2320595.0
     }, {
         "source": 5,
         "target": 22,
-        "value": 48352180.17999999
+        "value": 42441978.0
     }, {
         "source": 5,
         "target": 23,
-        "value": 18626241.83
+        "value": 16435435.0
     }, {
         "source": 5,
         "target": 24,
-        "value": 985012.4500000001
+        "value": 831586.0
     }, {
         "source": 5,
         "target": 25,
-        "value": 8265985.51
+        "value": 6971639.0
     }, {
         "source": 5,
         "target": 26,
-        "value": 8624835.29
+        "value": 7170622.0
     }, {
         "source": 5,
         "target": 27,
-        "value": 6224908.709999999
+        "value": 5709092.0
     }]
 }
