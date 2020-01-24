@@ -1,0 +1,20 @@
+[
+  {
+    "key": "AG",
+    "name": "Agriculture",
+    "color": "#78be20",
+    "icon": "/media/seed-intro.svg"
+  },
+  {
+    "key": "ENV",
+    "name": "Environment",
+    "color": "#00B5E2",
+    "icon": "/media/tree-intro.svg"
+  },
+  {
+    "key": "HUMAN",
+    "name": "Human and Social",
+    "color": "#ffcd00",
+    "icon": "/media/brain-intro.svg"
+  }
+]

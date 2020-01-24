@@ -1,0 +1,86 @@
+{
+    "f201": {
+        "name": "Hatch Funds",
+        "category": "CSREES Admin Federal Research Funds"
+    },
+    "f202": {
+        "name": "Multi-State Research Funds",
+        "category": "CSREES Admin Federal Research Funds"
+    },
+    "f203": {
+        "name": "McIntire-Stennis Funds",
+        "category": "CSREES Admin Federal Research Funds"
+    },
+    "f204": {
+        "name": "Contracts, Grants, Research Co-op Agreements",
+        "category": "CSREES Admin Federal Research Funds"
+    },
+    "f205": {
+        "name": "Other Funds (Animal Health Sec 1433, Evans-Allen)",
+        "category": "CSREES Admin Federal Research Funds"
+    },
+    "f219": {
+        "name": "USDA Contracts, Grans, Co-op Agreements",
+        "category": "Other Federal Research Funds"
+    },
+    "f209": {
+        "name": "National Science Foundation",
+        "category": "Other Federal Research Funds"
+    },
+    "f310": {
+        "name": "Department of Energy",
+        "category": "Other Federal Research Funds"
+    },
+    "f308": {
+        "name": "U.S. Agency for International Development",
+        "category": "Other Federal Research Funds"
+    },
+    "f311": {
+        "name": "Department of Defense",
+        "category": "Other Federal Research Funds"
+    },
+    "f316": {
+        "name": "National Institutes of Health",
+        "category": "Other Federal Research Funds"
+    },
+    "f312": {
+        "name": "Public Health Service",
+        "category": "Other Federal Research Funds"
+    },
+    "f313": {
+        "name": "Health and Human Services",
+        "category": "Other Federal Research Funds"
+    },
+    "f314": {
+        "name": "National Aeronautics and Space Admin",
+        "category": "Other Federal Research Funds"
+    },
+    "f315": {
+        "name": "Tennessee Valley Authority",
+        "category": "Other Federal Research Funds"
+    },
+    "f318": {
+        "name": "Other Federal Funds (including 'pass-through')",
+        "category": "Other Federal Research Funds"
+    },
+    "f220": {
+        "name": "State Appropriations",
+        "category": "Non-Federal Research Funds"
+    },
+    "f22F": {
+        "name": "Field Stations",
+        "category": "Non-Federal Research Funds"
+    },
+    "f221": {
+        "name": "Self-Generated Funds",
+        "category": "Non-Federal Research Funds"
+    },
+    "f222": {
+        "name": "Industry Grants and Agreements",
+        "category": "Non-Federal Research Funds"
+    },
+    "f223": {
+        "name": "Other Non-Federal Funds",
+        "category": "Non-Federal Research Funds"
+    }
+  }

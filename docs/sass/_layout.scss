@@ -1,0 +1,418 @@
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  height: inherit;
+}
+
+body {
+  padding: 0;
+  margin: 0 0 145px;
+}
+
+
+.container {
+  padding: 0;
+  width: 95%;
+  max-width:1440px;
+  @include breakpoint (sm) {
+    width: 93%;
+    max-width:1440px;
+  }
+  @include breakpoint (md) {
+    width: 91%;
+    max-width:1440px;
+  }
+  @include breakpoint(lg) {
+    width: 90%;
+    max-width:1440px;
+  }
+  @include breakpoint(xl) {
+    width: 85%;
+    max-width:1440px;
+  }
+}
+
+header {
+  // background-color: $primary-color;
+  background: url("/media/head-bg.png") center top/cover no-repeat;
+  padding: 2.5% 0;
+}
+
+.head_bleed {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1d3a5c+0,3e90a1+40,57a6a2+52,8eb172+61,a7b55b+78,b0b44f+83,daba54+100&0.8+0,0.8+100 */
+  background: -moz-linear-gradient(left, rgba(29,58,92,0.8) 0%, rgba(62,144,161,0.8) 40%, rgba(87,166,162,0.8) 52%, rgba(142,177,114,0.8) 61%, rgba(167,181,91,0.8) 78%, rgba(176,180,79,0.8) 83%, rgba(218,186,84,0.8) 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(29,58,92,0.8) 0%,rgba(62,144,161,0.8) 40%,rgba(87,166,162,0.8) 52%,rgba(142,177,114,0.8) 61%,rgba(167,181,91,0.8) 78%,rgba(176,180,79,0.8) 83%,rgba(218,186,84,0.8) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(29,58,92,0.8) 0%,rgba(62,144,161,0.8) 40%,rgba(87,166,162,0.8) 52%,rgba(142,177,114,0.8) 61%,rgba(167,181,91,0.8) 78%,rgba(176,180,79,0.8) 83%,rgba(218,186,84,0.8) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#cc1d3a5c', endColorstr='#ccdaba54',GradientType=1 );
+  /* IE6-9 */
+}
+
+.lead_content {
+  background-color: $bg-color;
+  padding: 6rem 0rem;
+  h1 {
+    font-family: $sans-bold;
+    font-size: 3.6rem;
+    color: $primary-font;
+    padding-right: 44px;
+    @include breakpoint(smmax) {
+      padding-right:16px;
+    }
+  }
+  img {
+    margin-right: 44px;
+    @include breakpoint(smmax) {
+      width:4%;
+      padding-right:0px;
+    }
+  }
+
+  p {
+    font-family: $sans-bold;
+    font-size: 1.8rem;
+    max-width: 650px;
+    margin-bottom:0px;
+  }
+}
+
+ul.topic-nav {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
+.helptext {
+  margin-bottom:12rem;
+}
+.department_intro {
+padding:12rem 0rem;
+
+  p {
+    font-size: 1.8rem;
+    font-family: $sans-bold;
+    margin-top: 8px;
+  }
+}
+
+.topic-picker {
+  text-align: right;
+
+  p {
+    font-size: 2.4rem;
+    font-family: $sans-bold;
+    border-bottom: 2px solid $borders;
+    margin-top: 10px;
+  }
+}
+.sticky-top {
+  top:-1;
+}
+.topics {
+  text-align: center;
+  box-shadow: 0 2px 1px rgba(0,40,85,0.15);
+  padding-top: 10px;
+  padding-bottom: 6px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: rgba(255,255,255,.98);
+  border-bottom: 4px solid rgba(255,255,255,.999);
+  transition: border 500ms;
+  width: 100%;
+  z-index: 1000;
+
+  .topic-item {
+    opacity: 0.25;
+  }
+
+  .topic-nav {
+    margin: 0;
+    padding: 0;
+    width: 488px;
+    margin-left: 52px;
+  }
+
+  .topic-title {
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  .topics-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .topic-button {
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+      transition: all linear 100ms;
+      opacity: 1;
+
+      &[data-topic='AG'] .topic-title {
+        color: $sunny-grass;
+      }
+
+      &[data-topic='ENV'] .topic-title {
+        color: $sky-blue;
+      }
+
+      &[data-topic='HUMAN'] .topic-title {
+        color: $golden-lupine;
+      }
+    }
+  }
+}
+.chart-card {
+  box-shadow: $box-shadow;
+  margin-bottom:36px;
+  padding:18px 24px 16px 24px;
+  font-family: $sans-bold;
+  display: inline-block;
+  max-width:316px;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 250ms;
+  h3 {
+    margin-bottom:10px;
+    margin-top:20px;
+  }
+  p {
+    line-height:1;
+  }
+  &.opaque {
+    opacity: 0;
+    transition: opacity 250ms;
+  }
+  & + & {
+    margin-left: 1rem;
+  }
+}
+
+.left-portion {
+  width:22%;
+  @include breakpoint(mdmax) {
+    width:100%;
+    .legend-topic {
+      width:33%;
+    }
+    .legend-size {
+      width:30%;
+    }
+    .chart-card {
+      width:30%;
+    }
+  }
+}
+.right-portion {
+  width:78%;
+  text-align: center;
+  @include breakpoint(mdmax) {
+    width:100%;
+  }
+}
+.funding {
+  padding: $section-padding;
+}
+
+.sources {
+  padding: $section-padding;
+}
+
+.geography {
+  padding: $section-padding;
+}
+
+.articles {
+  padding: $section-padding;
+}
+.cardheader {
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom:1px solid $borders;
+  padding-bottom:8px;
+  margin-bottom:16px;
+}
+.research-title {
+  margin-left: -76px;
+  margin-top: 28px;
+  margin-bottom: 24px;
+  @include breakpoint(mdbreak) {
+    margin-left: -2px;
+    margin-top: -90px;
+  }
+}
+
+.research-title-inner {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px 15px 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    color: #fff;
+    font-size: 2.8rem;
+    margin-top: 0;
+    padding-right: 12px;
+  }
+}
+
+.research-title-more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    margin: 0 8px;
+  }
+
+  a {
+    margin-left: 16px;
+  }
+}
+
+.col-md.proj-detail-col {
+  padding-left: 32px;
+  @include breakpoint(mdbreak) {
+    padding-left: 0;
+  }
+}
+
+.research-details {
+  margin-top: 16px;
+  max-width: 60rem;
+}
+
+.lead_carousel {
+  margin-bottom: 64px;
+  height: 200px;
+  .article_thumb_title {
+    position: absolute;
+    bottom:10px;
+    z-index: 99;
+    padding-left:15px;
+    h4 {
+      color:#fff;
+      font-size:1.6rem;
+      font-family: $sans-bold;
+      text-shadow: 1px 1px 1px #262626;
+    }
+  }
+  .carousel_item {
+    margin-right: 32px;
+    background-clip: content-box;
+
+  }
+  .carousel-image {
+    height: 200px;
+    position: relative;
+  }
+  .article-link:hover {
+    & .carousel-image, .article_thumb_title {
+      opacity:0.5;
+      text-shadow: none;
+    }
+  }
+  .article-link.active {
+    & .carousel-image, .article_thumb_title {
+      opacity:0.50;
+      text-shadow: none;
+    }
+  }
+}
+.legend-topic {
+  margin-bottom:32px;
+}
+.legend-size {
+  svg {
+    margin-top:16px;
+    margin-left:-54px;
+    text {
+      font-size: 1.6rem;
+      color:$primary-font;
+      font-family: $sans-reg;
+    }
+  }
+}
+.section-intro {
+  border-bottom: 1px solid $borders;
+  margin-bottom: 32px;
+  padding-bottom: 8px;
+  h1 {
+    margin-bottom:8px;
+  }
+  h2 {
+    margin-bottom:4px;
+  }
+
+  p {
+    max-width: 660px;
+  }
+  form {
+    text-align: right;
+    display: inline-block;
+
+    label {
+      font-size: 1.8rem;
+      color: $primary-font;
+      font-family: $sans-bold;
+    }
+
+    a {
+      color: $tertiary-font;
+      font-family: $sans-bold;
+      font-size: 1.8rem;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 0;
+    }
+
+    select.form-control:not([size]):not([multiple]) {
+      height: calc(3.25rem + 2px);
+    }
+
+    .form-control {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  }
+  .footer_bleed {
+    background: #1e3a5b;
+      background: -moz-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      background: -webkit-linear-gradient(left,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      background: linear-gradient(to right,#1e3a5b 0%,#1e3a5b 44%,#dbbc5b 57%,#dbbc5b 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$gradient-one',endColorstr='$gradient-two',GradientType=1);
+  }
+  .footer_divider {
+      background: url("/media/gunrock_banner_final.svg") center top/cover no-repeat;
+      height: 41px;
+      padding-top:10px;
+  }
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
