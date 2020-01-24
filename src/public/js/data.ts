@@ -50,7 +50,7 @@ for (const p of projectTotalsJson) {
     });
 }
 
-const sourceTotalsByDepartmentJson: any = require("./sourceTotalsByDepartment.json");
+const sourceTotalsByDepartmentJson: any = require("./departmentTotals.json");
 const sourceTotals: ISourceTotal[] = [];
 for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
 
