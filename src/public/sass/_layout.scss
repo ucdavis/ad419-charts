@@ -11,71 +11,31 @@ html {
   min-height: 100%;
   height: inherit;
 }
-
 body {
-  padding: 0;
-  margin: 0 0 145px;
+
 }
-
-
-.container {
-  padding: 0;
-  width: 95%;
-  max-width:1440px;
-  @include breakpoint (sm) {
-    width: 93%;
-    max-width:1440px;
-  }
-  @include breakpoint (md) {
-    width: 91%;
-    max-width:1440px;
-  }
-  @include breakpoint(lg) {
-    width: 90%;
-    max-width:1440px;
-  }
-  @include breakpoint(xl) {
-    width: 85%;
-    max-width:1440px;
-  }
-}
-
 header {
   // background-color: $primary-color;
-  background: url("/media/head-bg.png") center top/cover no-repeat;
-  padding: 2.5% 0;
-}
-
-.head_bleed {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1d3a5c+0,3e90a1+40,57a6a2+52,8eb172+61,a7b55b+78,b0b44f+83,daba54+100&0.8+0,0.8+100 */
-  background: -moz-linear-gradient(left, rgba(29,58,92,0.8) 0%, rgba(62,144,161,0.8) 40%, rgba(87,166,162,0.8) 52%, rgba(142,177,114,0.8) 61%, rgba(167,181,91,0.8) 78%, rgba(176,180,79,0.8) 83%, rgba(218,186,84,0.8) 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, rgba(29,58,92,0.8) 0%,rgba(62,144,161,0.8) 40%,rgba(87,166,162,0.8) 52%,rgba(142,177,114,0.8) 61%,rgba(167,181,91,0.8) 78%,rgba(176,180,79,0.8) 83%,rgba(218,186,84,0.8) 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, rgba(29,58,92,0.8) 0%,rgba(62,144,161,0.8) 40%,rgba(87,166,162,0.8) 52%,rgba(142,177,114,0.8) 61%,rgba(167,181,91,0.8) 78%,rgba(176,180,79,0.8) 83%,rgba(218,186,84,0.8) 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=  '#cc1d3a5c', endColorstr='#ccdaba54',GradientType=1 );
-  /* IE6-9 */
-}
-
-.lead_content {
-  background-color: $bg-color;
-  padding: 6rem 0rem;
+  background: url("/media/head-bg.jpg") center top/cover no-repeat;
+  color:#fff;
+  padding-top:5%;
+  padding-bottom:5%;
   h1 {
+    font-size: 4rem;
     font-family: $sans-bold;
-    font-size: 3.6rem;
-    color: $primary-font;
-    padding-right: 44px;
-    @include breakpoint(smmax) {
-      padding-right:16px;
-    }
+    color:#fff;
   }
+  h3 {
+    font-size:3rem;
+    font-family: $ryman;
+    color:#fff;
+  }
+}
+.intro-statement {
+  background-color: $bg-color;
+  padding: 3% 0;
   img {
     margin-right: 44px;
-    @include breakpoint(smmax) {
-      width:4%;
-      padding-right:0px;
-    }
   }
 
   p {

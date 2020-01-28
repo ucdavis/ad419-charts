@@ -17,29 +17,36 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'ryman';
+    src: url('../media/fonts/ryman-eco-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-$sans-italic:   "proxima-nova-i",serif;
-$sans-bold:     "proxima-nova-b",serif;
-$sans-reg:      "proxima-nova-r",serif;
+$sans-italic:   "proxima-nova-i",sans-serif;
+$sans-bold:     "proxima-nova-b",sans-serif;
+$sans-reg:      "proxima-nova-r",sans-serif;
+$ryman:         "ryman",serif;
 
 $primary-color:     #002855;
-$secondary-color:   #D2AC3A;
+$secondary-color:   #DAAA00;
 $tertiary-color:    transparentize($secondary-color, .80);
 
-$gold:              #D2AC3A;
-$blue:              #004987;
+$gold:              #DAAA00;
+$blue:              #002855;
 
 $accent:            #CCD4E0;
 
 $a-link:            transparentize($primary-color, .2);
 
-$primary-font: rgba(67,67,67,.99); //
-$secondary-font: rgba(67,67,67,.7); //
-$tertiary-font: rgba(67,67,67,.33); //
+$primary-font: rgba(31,31,31,.99); //
+$secondary-font: rgba(31,31,31,.80); //
+$tertiary-font: rgba(31,31,31,.40); //
 
 $dark: #252525;
 
-$bg-color: transparentize(#DDD9A8, .88); // background
+$bg-color: transparentize(#002855, .9); // background
 $borders: #C8C7CC; // border color
 
 $nav-active: #fff;
@@ -111,6 +118,28 @@ $box-shadow: 0 0 0 1px rgba(49,49,93,.03), 0 2px 5px 0 rgba(49,49,93,.1), 0 1px 
         }
     }
 }
+.container {
+  padding: 0;
+  width: 95%;
+  max-width:1440px;
+  @include breakpoint (sm) {
+    width: 93%;
+    max-width:1440px;
+  }
+  @include breakpoint (md) {
+    width: 91%;
+    max-width:1440px;
+  }
+  @include breakpoint(lg) {
+    width: 90%;
+    max-width:1440px;
+  }
+  @include breakpoint(xl) {
+    width: 85%;
+    max-width:1440px;
+  }
+}
+
 @mixin fader {
   -o-transition:.25s;
   -ms-transition:.25s;

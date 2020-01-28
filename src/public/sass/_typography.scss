@@ -78,11 +78,6 @@ p {
   font-size:1.6rem;
   font-family: $sans-reg;
   color:$primary-font;
-  // margin:1.2rem 0rem;
-  &.lead {
-    font-size:1.8rem;
-    margin-top:0px;
-  }
   footer & {
     color:rgba(255,255,255,.95);
     font-size:1.4rem;
@@ -122,4 +117,10 @@ h2 {
 }
 h3 {
   font-size: 2rem;
+}
+.lede {
+  color:#fff;
+  font-weight: 100;
+  font-size:1.8rem;
+  line-height: 3rem;
 }
