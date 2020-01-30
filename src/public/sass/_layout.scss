@@ -18,8 +18,8 @@ header {
   // background-color: $primary-color;
   background: url("/media/head-bg.jpg") center top/cover no-repeat;
   color:#fff;
-  padding-top:5%;
-  padding-bottom:5%;
+  padding-top:6%;
+  padding-bottom:6%;
   h1 {
     font-size: 4rem;
     font-family: $sans-bold;
@@ -29,6 +29,7 @@ header {
     font-size:3rem;
     font-family: $ryman;
     color:#fff;
+    margin-bottom:16px;
   }
 }
 .intro-statement {
@@ -332,7 +333,7 @@ padding:12rem 0rem;
 
 footer {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
   display: block;
   }
