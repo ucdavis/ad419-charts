@@ -74,8 +74,8 @@ p a.action-btn {
   }
   &.active {
     body[data-topic="AG"] & {
-      color: $sunny-grass;
-      background-color:transparentize($sunny-grass, .85);
+      color: $agsciences;
+      background-color:transparentize($agsciences, .85);
       transform: translateY(-1px);
     }
     & {
@@ -84,14 +84,14 @@ p a.action-btn {
     }
 
     body[data-topic="ENV"] & {
-      color: $sky-blue;
-      background-color:transparentize($sky-blue, .85);
+      color: $envsciences;
+      background-color:transparentize($envsciences, .85);
       transform: translateY(-1px);
     }
 
     body[data-topic="HUMAN"] & {
-      color: $golden-lupine;
-      background-color:transparentize($golden-lupine, .85);
+      color: $humansocialsciences;
+      background-color:transparentize($humansocialsciences, .85);
       transform: translateY(-1px);
     }
   }
@@ -351,57 +351,6 @@ table.dataTable tr.even td {
 .border-blue-right {
   border-right: 1px solid $accent;
 }
-.bg-unitrans {
-  background-color:$unitrans-red;
-}
-.bg-sunny-grass {
-  background-color: $sunny-grass;
-}
-.bg-golden-lupine {
-  background-color: $golden-lupine;
-}
-.bg-recpool {
-  background-color: $recpool-blue;
-}
-.bg-skyblue {
-  background-color: $sky-blue;
-}
-.bg-winegrape {
-  background-color:$wine-grape;
-}
-.border-unitrans {
-  border-color:$unitrans-red;
-}
-.border-skyblue {
-  border-color:$sky-blue;
-}
-.border-sunny-grass {
-  border-color:$sunny-grass;
-}
-.border-golden-lupine {
-  border-color:$golden-lupine;
-}
-.color-unitrans {
-  color:$unitrans-red !important;
-}
-.color-sunny-grass {
-  color:$sunny-grass;
-}
-.color-golden-lupine {
-  color:$golden-lupine;
-}
-.color-winegrape {
-  color: $wine-grape;
-}
-.color-western-redbud {
-  color:$western-redbud;
-}
-.color-poppy {
-  color:$california-poppy;
-}
-.color-skyblue {
-  color:$sky-blue;
-}
 .primary-color {
   color:$primary-color;
 }
@@ -422,39 +371,9 @@ table.dataTable tr.even td {
     margin-top:36px;
   }
 }
-//
-// .double-dot:after, .double-dot:before {
-//     content:"\A";
-//     width:8px;
-//     height:8px;
-//     border-radius:50%;
-//     background: #D8D8D8;
-//     display:inline-block;
-//     margin:0 24px;
-// }
-// .double-dot-after:after {
-//     content:"\A";
-//     width:8px;
-//     height:8px;
-//     border-radius:50%;
-//     background: #D8D8D8;
-//     display:inline-block;
-//     margin:0 24px;
-// }
-// .double-dot-before:before {
-//     content:"\A";
-//     width:8px;
-//     height:8px;
-//     border-radius:50%;
-//     background: #D8D8D8;
-//     display:inline-block;
-//     margin:0 24px;
-// }
 .chart {
   position: relative;
 }
-
-
 .sans-bold {
   font-family: $sans-bold;
 }
@@ -464,29 +383,29 @@ table.dataTable tr.even td {
 
 .topic-color-text {
   body[data-topic="AG"] & {
-    color: $sunny-grass;
+    color: $agsciences;
   }
 
   body[data-topic="ENV"] & {
-    color: $sky-blue;
+    color: $envsciences;
   }
 
   body[data-topic="HUMAN"] & {
-    color: $golden-lupine;
+    color: $humansocialsciences;
   }
 }
 
 .topic-border-color {
   body[data-topic="AG"] & {
-    border-color: $sunny-grass;
+    border-color: $agsciences;
   }
 
   body[data-topic="ENV"] & {
-    border-color: $sky-blue;
+    border-color: $envsciences;
   }
 
   body[data-topic="HUMAN"] & {
-    border-color: $golden-lupine;
+    border-color: $humansocialsciences;
   }
 }
 
@@ -591,17 +510,17 @@ table.dataTable tr.even td {
 
   &[data-topic="AG"] .total,
   &[data-topic="AG"] .director {
-    color: $sunny-grass;
+    color: $agsciences;
   }
 
   &[data-topic="ENV"] .total,
   &[data-topic="ENV"] .director {
-    color: $sky-blue;
+    color: $envsciences;
   }
 
   &[data-topic="HUMAN"] .total,
   &[data-topic="HUMAN"] .director {
-    color: $golden-lupine;
+    color: $humansocialsciences;
   }
 
   &:before {
@@ -670,4 +589,31 @@ table.dataTable tr.even td {
     display:flex;
     justify-content: space-between;
   }
+}
+.bg-envscience {
+  background-color: $envsciences;
+}
+.bg-agscience {
+  background-color: $agsciences;
+}
+.bg-humansocialscience {
+  background-color: $humansocialsciences;
+}
+.border-envscience {
+  border-color:$envsciences;
+}
+.color-envscience {
+  color:$envsciences;
+}
+.border-agscience {
+  border-color:$agsciences;
+}
+.color-agvscience {
+  color:$agsciences;
+}
+.border-humansocialscience {
+  border-color:$humansocialsciences;
+}
+.color-humansocialscience {
+  color:$humansocialsciences;
 }
