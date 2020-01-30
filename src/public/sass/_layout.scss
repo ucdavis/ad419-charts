@@ -37,7 +37,6 @@ header {
   img {
     margin-right: 44px;
   }
-
   p {
     font-family: $sans-bold;
     font-size: 1.8rem;
@@ -45,93 +44,63 @@ header {
     margin-bottom:0px;
   }
 }
-
-ul.topic-nav {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: top;
-}
-.helptext {
-  margin-bottom:12rem;
-}
-.department_intro {
-padding:12rem 0rem;
-
-  p {
-    font-size: 1.8rem;
-    font-family: $sans-bold;
-    margin-top: 8px;
-  }
-}
-
-.topic-picker {
-  text-align: right;
-
-  p {
-    font-size: 2.4rem;
-    font-family: $sans-bold;
-    border-bottom: 2px solid $borders;
-    margin-top: 10px;
-  }
-}
-.sticky-top {
-  top:-1;
-}
 .topics {
   text-align: center;
   box-shadow: 0 2px 1px rgba(0,40,85,0.15);
-  padding-top: 10px;
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   margin-top: 0;
   margin-bottom: 0;
   background-color: rgba(255,255,255,.98);
-  border-bottom: 4px solid rgba(255,255,255,.999);
+  border-bottom: 3px solid rgba(255,255,255,.999);
   transition: border 500ms;
-  width: 100%;
-  z-index: 1000;
-
+  z-index: 999;
+  top:0;
+  position: sticky;
   .topic-item {
     opacity: 0.25;
   }
-
   .topic-nav {
     margin: 0;
     padding: 0;
     width: 488px;
     margin-left: 52px;
   }
-
   .topic-title {
     margin-top: 8px;
     margin-bottom: 0;
   }
-
   .topics-container {
     width: 80%;
     margin: 0 auto;
   }
-
   .topic-button {
     cursor: pointer;
-
     &.active,
     &:hover {
       transition: all linear 100ms;
       opacity: 1;
 
       &[data-topic='AG'] .topic-title {
-        color: $sunny-grass;
+        color: $agsciences;
       }
 
       &[data-topic='ENV'] .topic-title {
-        color: $sky-blue;
+        color: $envsciences;
       }
 
       &[data-topic='HUMAN'] .topic-title {
-        color: $golden-lupine;
+        color: $humansocialsciences;
       }
     }
+  }
+}
+.department_intro {
+padding:12rem 0rem;
+  p {
+    font-size: 1.8rem;
+    font-family: $sans-bold;
+    margin-top: 8px;
   }
 }
 .chart-card {
@@ -159,7 +128,6 @@ padding:12rem 0rem;
     margin-left: 1rem;
   }
 }
-
 .left-portion {
   width:22%;
   @include breakpoint(mdmax) {
@@ -258,6 +226,14 @@ padding:12rem 0rem;
 .lead_carousel {
   margin-bottom: 64px;
   height: 200px;
+  object {
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: $box-shadow;
+  }
   .article_thumb_title {
     position: absolute;
     bottom:10px;
@@ -265,7 +241,7 @@ padding:12rem 0rem;
     padding-left:15px;
     h4 {
       color:#fff;
-      font-size:1.6rem;
+      font-size:1.8rem;
       font-family: $sans-bold;
       text-shadow: 1px 1px 1px #262626;
     }
