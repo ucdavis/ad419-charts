@@ -20,19 +20,12 @@ a {
       background-color:$bg-color;
     }
   }
-  footer p & {
-    color:rgba(255,255,255,0.95);
-    text-decoration: none;
-    &:hover {
-      color:#fff;
-    }
-  }
-}
-p a {
-  font-weight: 700;
-  text-decoration: underline;
-  &:hover {
+  p & {
+    font-weight: 700;
     text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 a.no-underline {
@@ -78,15 +71,11 @@ p {
   font-size:1.6rem;
   font-family: $sans-reg;
   color:$primary-font;
-  // margin:1.2rem 0rem;
-  &.lead {
-    font-size:1.8rem;
-    margin-top:0px;
-  }
   footer & {
     color:rgba(255,255,255,.95);
     font-size:1.4rem;
     font-family: $sans-bold;
+    margin-bottom:0;
   }
   &.topic-title  {
     font-size: 1.8rem;
@@ -122,4 +111,10 @@ h2 {
 }
 h3 {
   font-size: 2rem;
+}
+.lede {
+  color:#fff;
+  font-weight: 100;
+  font-size:1.8rem;
+  line-height: 3rem;
 }
