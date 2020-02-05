@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="37px" height="33px" viewBox="0 0 37 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+<svg width="43px" height="39px" viewBox="0 0 43 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
     <title>topic-all</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <filter x="-3.6%" y="-12.9%" width="107.2%" height="125.8%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.494924532   0 0 0 0 0.494924532   0 0 0 0 0.494924532  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="phase4-copy" transform="translate(-133.000000, -1292.000000)">
-            <g id="topic-all" transform="translate(133.000000, 1292.000000)">
-                <circle id="Oval-6" fill="#78BE20" cx="19" cy="5" r="5"></circle>
-                <circle id="Oval-6-Copy" fill="#00B5E2" cx="5" cy="28" r="5"></circle>
-                <circle id="Oval-6-Copy-3" fill="#D8D8D8" cx="12" cy="17" r="2"></circle>
-                <circle id="Oval-6-Copy-4" fill="#D8D8D8" cx="27" cy="17" r="2"></circle>
-                <circle id="Oval-6-Copy-5" fill="#D8D8D8" cx="19" cy="29" r="2"></circle>
-                <circle id="Oval-6-Copy-2" fill="#FFCD00" cx="32" cy="28" r="5"></circle>
+        <g id="phase-5-brand-2.0" transform="translate(-249.000000, -1063.000000)">
+            <g id="filters" transform="translate(231.000000, 1002.000000)">
+                <g id="content-header-copy-3" filter="url(#filter-1)" transform="translate(0.000000, 47.000000)">
+                    <g id="agriculture">
+                        <g id="view-all">
+                            <g id="topic-all" transform="translate(21.000000, 16.000000)">
+                                <circle id="Oval-6" fill="#43B02A" cx="19" cy="5" r="5"></circle>
+                                <circle id="Oval-6-Copy" fill="#0078FF" fill-rule="nonzero" cx="5" cy="28" r="5"></circle>
+                                <circle id="Oval-6-Copy-3" fill="#D8D8D8" cx="12" cy="17" r="2"></circle>
+                                <circle id="Oval-6-Copy-4" fill="#D8D8D8" cx="27" cy="17" r="2"></circle>
+                                <circle id="Oval-6-Copy-5" fill="#D8D8D8" cx="19" cy="29" r="2"></circle>
+                                <circle id="Oval-6-Copy-2" fill="#FFC72C" cx="32" cy="28" r="5"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </g>
             </g>
         </g>
     </g>
