@@ -2,19 +2,19 @@
   {
     "key": "AG",
     "name": "Agriculture",
-    "color": "#78be20",
-    "icon": "/media/seed-intro.svg"
+    "color": "#43B02A",
+    "icon": "/media/agsciences-icon.svg"
   },
   {
     "key": "ENV",
     "name": "Environment",
-    "color": "#00B5E2",
-    "icon": "/media/tree-intro.svg"
+    "color": "#0078FF",
+    "icon": "/media/envsciences-icon.svg"
   },
   {
     "key": "HUMAN",
     "name": "Human and Social",
-    "color": "#ffcd00",
-    "icon": "/media/brain-intro.svg"
+    "color": "#FFC72C",
+    "icon": "/media/humansocialsciences-icon.svg"
   }
 ]

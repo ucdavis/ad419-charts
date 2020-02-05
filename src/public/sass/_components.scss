@@ -551,13 +551,13 @@ table.dataTable tr.even td {
     transform: translate(-50%, 0);
   }
 }
-.justify-center {
-  justify-content: center;
-}
 .article {
   & + & {
     margin-top: 2.5rem;
   }
+}
+.article-link:focus {
+  outline: 0;
 }
 .citation {
   color:$secondary-font;

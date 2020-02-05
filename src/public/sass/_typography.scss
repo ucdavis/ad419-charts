@@ -20,19 +20,12 @@ a {
       background-color:$bg-color;
     }
   }
-  footer p & {
-    color:rgba(255,255,255,0.95);
-    text-decoration: none;
-    &:hover {
-      color:#fff;
-    }
-  }
-}
-p a {
-  font-weight: 700;
-  text-decoration: underline;
-  &:hover {
+  p & {
+    font-weight: 700;
     text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 a.no-underline {
@@ -82,6 +75,7 @@ p {
     color:rgba(255,255,255,.95);
     font-size:1.4rem;
     font-family: $sans-bold;
+    margin-bottom:0;
   }
   &.topic-title  {
     font-size: 1.8rem;
