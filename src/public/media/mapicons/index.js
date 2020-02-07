@@ -28,4 +28,5 @@ export default {
     fish: require('./fish.svg'),
     rain: require('./rain.svg'),
     bolt: require('./bolt.svg'),
+    rice: require('./rice.svg'),
 };
