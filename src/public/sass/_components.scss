@@ -560,9 +560,12 @@ table.dataTable tr.even td {
   outline: 0;
 }
 .citation {
-  color:$secondary-font;
+  color:$tertiary-font;
+  margin:0 auto;
+  margin-bottom:8px;
+  max-width:700px;
   a {
-    color:$secondary-font;
+    color:$tertiary-font;
     text-decoration: underline;
     font-weight:inherit;
     &:hover {
