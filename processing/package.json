@@ -1,0 +1,16 @@
+{
+  "name": "caes-ad419",
+  "version": "1.0.0",
+  "description": "1. AD419-generate-datafiles.ipynb",
+  "main": "analytics.js",
+  "scripts": {
+    "test": "node analytics.js ad419admin.csv allprojects.csv"
+  },
+  "author": "Kaelan Mikowicz",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^4.8.5",
+    "csv-stringify": "^5.3.6",
+    "parse-decimal-number": "^1.0.0"
+  }
+}
