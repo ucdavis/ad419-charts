@@ -1,154 +1,75 @@
 const path = require('path');
-// `CheckerPlugin` is optional. Use it if you want async error reporting.
-// We need this plugin to detect a `--watch` mode. It may be removed later
-// after https://github.com/webpack/webpack/issues/3460 will be resolved.
 const webpack = require('webpack');
-const { CheckerPlugin } = require('awesome-typescript-loader');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const assets = [
-];
+/*
+ * We've enabled MiniCssExtractPlugin for you. This allows your app to
+ * use css modules that will be moved into a separate CSS file instead of inside
+ * one of your module entries!
+ *
+ * https://github.com/webpack-contrib/mini-css-extract-plugin
+ *
+ */
 
-module.exports = (env) => {
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-  const isDevBuild = !(env && env.prod);
+/*
+ * We've enabled HtmlWebpackPlugin for you! This generates a html
+ * page for you when you compile webpack, which will make you start
+ * developing and prototyping faster.
+ *
+ * https://github.com/jantimon/html-webpack-plugin
+ *
+ */
 
-  const outputPath = isDevBuild
-    ? path.join(__dirname, './dist/public')
-    : path.join(__dirname, './docs');
+module.exports = {
+  mode: 'development',
+  entry: './src/app.ts',
 
-  return {
-    entry: {
-      app: './src/public/js/app.ts',
-      // work: './src/public/js/work.ts',
-    },
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new MiniCssExtractPlugin({ filename:'main.[contenthash].css' }),
+    new HtmlWebpackPlugin({
+              template: 'index.html'
+            })
+  ],
 
-    output: {
-      path: outputPath,
-      filename: 'js/[name].js',
-      publicPath: '/',
-    },
+  module: {
+    rules: [{
+      test: /.(sa|sc|c)ss$/,
 
-    // Currently we need to add '.ts' to the resolve.extensions array.
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      alias: {
-        jquery: 'jquery/src/jquery',
-      },
-    },
+      use: [{
+        loader: MiniCssExtractPlugin.loader
+      }, {
+        loader: "css-loader",
 
-    externals: [
-      (context, request, callback) => {
-        if (/^(jquery|\$)$/i.test(request)) {
-          return callback(null, 'jQuery');
+        options: {
+          sourceMap: true
         }
+      }, {
+        loader: "sass-loader",
 
-        if (/^(d3|d3-.*)$/i.test(request)) {
-          return callback(null, 'd3');
+        options: {
+          sourceMap: true
         }
-
-        if ('slick-carousel' === request) {
-          return callback(null, 'jQuery');
-        }
-
-        return callback();
-      },
+      }]
+    }]
+  },
+  resolve: {
+    fallback: {
+      net: false,
+      url: false,
+      fs: false,
+      buffer: false,
+      querystring: false,
+      crypto: false,
+      http: false,
+      zlib: false
+    },
+    modules: [
+      path.resolve('./app/bundles'),
+      'node_modules'
     ],
-
-    // Source maps support ('inline-source-map' also works)
-    devtool: 'source-map',
-
-    // Add the loader for .ts files.
-    module: {
-      loaders: [
-        {
-          test: /\.tsx?$/,
-          loader: 'awesome-typescript-loader',
-        }, {
-          test: /\.json$/,
-          loader: 'json-loader',
-        }, {
-          test: /\.scss$/,
-          use: ExtractTextPlugin.extract({
-            use: [{
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                minimize: true,
-                sourceMap: true,
-              },
-            }, {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-              },
-            }, {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true,
-              },
-            }],
-          }),
-        }, {
-          test: /\.(png|jpg)$/,
-          use: [{
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              mimetype: 'image/png',
-              fallback: {
-                loader: 'file-loader',
-                options: {
-                  name: '[name].[ext]?[hash]',
-                  outputPath: 'media/images/',
-                },
-              },
-            },
-          }],
-        }, {
-          test: /\.svg$/,
-          loader: 'svg-inline-loader',
-        }, {
-          test: /\.(woff|woff2)$/,
-          use: [{
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]?[hash]',
-              outputPath: 'media/fonts/',
-            },
-          }],
-        },
-      ],
-    },
-    plugins: [
-      new CheckerPlugin(),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        jquery: 'jquery',
-      }),
-      new CopyWebpackPlugin(
-        assets.map(a => {
-          return {
-            from: path.resolve(__dirname, `./node_modules/${a}`),
-            to: path.resolve(__dirname, './dist/lib'),
-          };
-        })
-      ),
-      new CopyWebpackPlugin([
-        { from: path.resolve(__dirname, './src/public') },
-      ]),
-      new ExtractTextPlugin({
-        filename: 'css/[name].css',
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false },
-        sourceMap: true,
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': isDevBuild ? '"development"' : '"production"',
-      }),
-    ],
-  };
-};
+    extensions: ['.js', '.jsx']
+  }
+}
