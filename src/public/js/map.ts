@@ -376,25 +376,27 @@ tooltip.append("div").attr("class", "project");
 tooltip.append("div").attr("class", "director");
 
 // mouse overs
-iconCircles
-  .selectAll("circle")
-  .on("mouseover", function () {
-    console.log("mouseover svg circle", this);
-
-    d3.select(this)
-      .transition()
-      .duration(100)
-      .attr("r", (r: any) => 23);
-  })
-  .on("mouseout", function (data, i) {
-    d3.select(this)
-      .transition()
-      .duration(100)
-      .attr("r", (r: any) => 20);
-  });
-
 icons.selectAll<SVGElement, IIconData>("svg")
     .on("mouseover", function (data, i) {
+        const iconGroup = this.parentNode?.parentNode;
+
+        if (iconGroup) {
+            d3.select(iconGroup.children[0].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor) / 2)
+                .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor) / 2)
+                .attr("width", iconCircleSize * zoomFactor)
+                .attr("height", iconCircleSize * zoomFactor);
+
+            d3.select(iconGroup.children[1].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - (iconSize * zoomFactor) / 2)
+                .attr("y", (d: any) => d.top - (iconSize * zoomFactor) / 2)
+                .attr("width", iconSize * zoomFactor)
+                .attr("height", iconSize * zoomFactor);
+        }
 
         // setup tooltip text
         tooltip.attr("data-topic", data.categoryKey);
@@ -433,6 +435,26 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
     })
     .on("mouseout", function(data, i) {
+        const iconGroup = this.parentNode?.parentNode;
+
+        if (iconGroup) {
+            d3.select(iconGroup.children[0].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - iconCircleSize / 2)
+                .attr("y", (d: any) => d.top - iconCircleSize / 2)
+                .attr("width", iconCircleSize)
+                .attr("height", iconCircleSize);
+
+            d3.select(iconGroup.children[1].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - iconSize / 2)
+                .attr("y", (d: any) => d.top - iconSize / 2)
+                .attr("width", iconSize)
+                .attr("height", iconSize);
+        }
+
         // hide tooltip
         tooltip
             .classed("hidden", true);
