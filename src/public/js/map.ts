@@ -376,8 +376,26 @@ tooltip.append("div").attr("class", "project");
 tooltip.append("div").attr("class", "director");
 
 // mouse overs
+iconCircles
+  .selectAll("circle")
+  .on("mouseover", function () {
+    console.log("mouseover svg circle", this);
+
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .attr("r", (r: any) => 23);
+  })
+  .on("mouseout", function (data, i) {
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .attr("r", (r: any) => 20);
+  });
+
 icons.selectAll<SVGElement, IIconData>("svg")
     .on("mouseover", function (data, i) {
+
         // setup tooltip text
         tooltip.attr("data-topic", data.categoryKey);
 
