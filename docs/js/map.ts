@@ -377,24 +377,7 @@ tooltip.append("div").attr("class", "director");
 
 // mouse overs
 icons.selectAll<SVGElement, IIconData>("svg")
-    .on("mouseover", function (data, i, groups) {
-
-        d3.select(groups[0])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor / 2))
-            .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor / 2))
-            .attr("width", iconCircleSize * zoomFactor)
-            .attr("height", iconCircleSize * zoomFactor);
-
-        d3.select(groups[1])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconSize * zoomFactor / 2))
-            .attr("y", (d: any) => d.top - (iconSize * zoomFactor / 2))
-            .attr("width", iconSize * zoomFactor)
-            .attr("height", iconSize * zoomFactor);
-
+    .on("mouseover", function (data, i) {
         // setup tooltip text
         tooltip.attr("data-topic", data.categoryKey);
 
@@ -431,24 +414,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .style("left", `${circlePosition.x}px`)
             .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
     })
-    .on("mouseout", function(data, i, groups) {
-
-        d3.select(groups[0])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconCircleSize / 2))
-            .attr("y", (d: any) => d.top - (iconCircleSize / 2))
-            .attr("width", iconCircleSize)
-            .attr("height", iconCircleSize);
-
-        d3.select(groups[1])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconSize / 2))
-            .attr("y", (d: any) => d.top - (iconSize / 2))
-            .attr("width", iconSize)
-            .attr("height", iconSize);
-
+    .on("mouseout", function(data, i) {
         // hide tooltip
         tooltip
             .classed("hidden", true);
