@@ -3,10 +3,8 @@ import * as geo from "d3-geo";
 import * as topojson from "topojson";
 import { GeometryCollection, Topology } from "topojson-specification";
 import { Polygon, Point } from "geojson";
-import { Selection } from "d3-selection";
-import { DragContainerElement } from "d3";
 
-import { getCategories, getSelectedCategory, onSelectedCategoryChanged, setSelectedCategory } from "./data";
+import { getCategories, onSelectedCategoryChanged, setSelectedCategory } from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
@@ -377,23 +375,27 @@ tooltip.append("div").attr("class", "director");
 
 // mouse overs
 icons.selectAll<SVGElement, IIconData>("svg")
-    .on("mouseover", function (data, i, groups) {
+    .on("mouseover", function (data, i) {
+        const iconGroup = this.parentNode?.parentNode;
 
-        d3.select(groups[0])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor / 2))
-            .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor / 2))
-            .attr("width", iconCircleSize * zoomFactor)
-            .attr("height", iconCircleSize * zoomFactor);
+        // This if block handles a mini zoom in when you hover over an icon
+        if (iconGroup) {
+            d3.select(iconGroup.children[0].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor) / 2)
+                .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor) / 2)
+                .attr("width", iconCircleSize * zoomFactor)
+                .attr("height", iconCircleSize * zoomFactor);
 
-        d3.select(groups[1])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconSize * zoomFactor / 2))
-            .attr("y", (d: any) => d.top - (iconSize * zoomFactor / 2))
-            .attr("width", iconSize * zoomFactor)
-            .attr("height", iconSize * zoomFactor);
+            d3.select(iconGroup.children[1].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - (iconSize * zoomFactor) / 2)
+                .attr("y", (d: any) => d.top - (iconSize * zoomFactor) / 2)
+                .attr("width", iconSize * zoomFactor)
+                .attr("height", iconSize * zoomFactor);
+        }
 
         // setup tooltip text
         tooltip.attr("data-topic", data.categoryKey);
@@ -431,23 +433,27 @@ icons.selectAll<SVGElement, IIconData>("svg")
             .style("left", `${circlePosition.x}px`)
             .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
     })
-    .on("mouseout", function(data, i, groups) {
+    .on("mouseout", function(data, i) {
+        const iconGroup = this.parentNode?.parentNode;
 
-        d3.select(groups[0])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconCircleSize / 2))
-            .attr("y", (d: any) => d.top - (iconCircleSize / 2))
-            .attr("width", iconCircleSize)
-            .attr("height", iconCircleSize);
+        // This if block handles a mini zoom out when you hover out an icon
+        if (iconGroup) {
+            d3.select(iconGroup.children[0].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - iconCircleSize / 2)
+                .attr("y", (d: any) => d.top - iconCircleSize / 2)
+                .attr("width", iconCircleSize)
+                .attr("height", iconCircleSize);
 
-        d3.select(groups[1])
-            .transition()
-            .duration(100)
-            .attr("x", (d: any) => d.left - (iconSize / 2))
-            .attr("y", (d: any) => d.top - (iconSize / 2))
-            .attr("width", iconSize)
-            .attr("height", iconSize);
+            d3.select(iconGroup.children[1].firstElementChild)
+                .transition()
+                .duration(100)
+                .attr("x", (d: any) => d.left - iconSize / 2)
+                .attr("y", (d: any) => d.top - iconSize / 2)
+                .attr("width", iconSize)
+                .attr("height", iconSize);
+        }
 
         // hide tooltip
         tooltip

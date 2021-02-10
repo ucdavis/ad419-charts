@@ -4,11 +4,11 @@ https://aes.ucdavis.edu/
 
 ## Run the website locally
 
-` yarn run debug `
+` npm run debug `
 
 ## Publish the website
 
-` yarn run publish `
+` npm run publish `
 
 # Yearly Data Update
 
