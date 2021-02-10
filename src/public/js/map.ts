@@ -3,10 +3,8 @@ import * as geo from "d3-geo";
 import * as topojson from "topojson";
 import { GeometryCollection, Topology } from "topojson-specification";
 import { Polygon, Point } from "geojson";
-import { Selection } from "d3-selection";
-import { DragContainerElement } from "d3";
 
-import { getCategories, getSelectedCategory, onSelectedCategoryChanged, setSelectedCategory } from "./data";
+import { getCategories, onSelectedCategoryChanged, setSelectedCategory } from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
@@ -380,6 +378,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
     .on("mouseover", function (data, i) {
         const iconGroup = this.parentNode?.parentNode;
 
+        // This if block handles a mini zoom in when you hover over an icon
         if (iconGroup) {
             d3.select(iconGroup.children[0].firstElementChild)
                 .transition()
@@ -437,6 +436,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
     .on("mouseout", function(data, i) {
         const iconGroup = this.parentNode?.parentNode;
 
+        // This if block handles a mini zoom out when you hover out an icon
         if (iconGroup) {
             d3.select(iconGroup.children[0].firstElementChild)
                 .transition()
