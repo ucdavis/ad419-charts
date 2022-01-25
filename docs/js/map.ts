@@ -454,7 +454,7 @@ icons.selectAll<SVGElement, IIconData>("svg")
                 .attr("width", iconSize)
                 .attr("height", iconSize);
         }
-        
+
         // hide tooltip
         tooltip
             .classed("hidden", true);
