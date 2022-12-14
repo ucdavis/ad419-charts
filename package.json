@@ -59,7 +59,7 @@
     "d3-sankey": "^0.12.3",
     "errorhandler": "^1.5.1",
     "es6-shim": "^0.35.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "innersvg-polyfill": "^0.0.5",
     "jquery": "^3.5.1",
     "slick-carousel": "^1.8.1",
