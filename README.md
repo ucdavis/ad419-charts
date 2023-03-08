@@ -2,6 +2,10 @@ AD419-Charts
 
 https://aes.ucdavis.edu/
 
+## Setup
+
+Run ` npm install ` in both the root directory and the ` processing ` directory.
+
 ## Run the website locally
 
 ` npm run debug `
@@ -9,6 +13,8 @@ https://aes.ucdavis.edu/
 ## Publish the website
 
 ` npm run publish `
+
+Publishes app to the repository's docs folder, which is deployed to GitHub Pages once merged to master.
 
 # Yearly Data Update
 
@@ -32,4 +38,5 @@ Obsolete Outputs:
 * caesgrouped.csv
 * sankey.json
 
-Add resulting JSON files to https://github.com/ucdavis/ad419-charts/tree/master/src/public/js, then update the year information in `index.html` and you are ready to debug and eventually publish.
+Add resulting JSON files to https://github.com/ucdavis/ad419-charts/tree/master/src/public/js, then update the year information in `index.html`, including
+incrementing the year for the `app.js` script reference `<script src="./js/app.js?v=2022"></script>`, and you are ready to debug and eventually publish.
