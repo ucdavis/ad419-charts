@@ -18,6 +18,9 @@ Publishes app to the repository's docs folder, which is deployed to GitHub Pages
 
 # Yearly Data Update
 
+Every year, the processing of the prior year's AD419 data should be completed by February 1st. After February 1st, 
+aes.ucdavis.edu needs to be updated to reflect the prior year's data.
+
 In the `processing` directory, import the following two files:
 
 Inputs:
