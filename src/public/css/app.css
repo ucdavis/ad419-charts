@@ -703,6 +703,13 @@ body[data-topic="HUMAN"] .topic-btn.active {
   width: 36px;
   height: 36px;
 }
+.topic-icon {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+}
 .btn {
   white-space: nowrap;
   display: inline-block;
