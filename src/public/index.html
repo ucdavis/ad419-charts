@@ -108,18 +108,32 @@
           <img src="/media/topic-all.svg">
           View All
         </button>
-        <button data-topic="AG" class="topic-btn m-l">
-          <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/agsciences-icon.svg"></object>
-          Agriculture
-        </button>
-        <button data-topic="ENV" class="topic-btn m-r m-l">
-          <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/envsciences-icon.svg"></object>
-          Environment
-        </button>
-        <button data-topic="HUMAN" class="topic-btn">
-          <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/humansocialsciences-icon.svg"></object>
-          Human and Social
-        </button>
+       <button data-topic="AG" class="topic-btn">
+        <img
+          src="/media/agsciences-icon.svg"
+          aria-hidden="true"
+          class="topic-icon"
+        />
+        Agriculture
+      </button>
+
+      <button data-topic="ENV" class="topic-btn m-r m-l">
+        <img
+          src="/media/envsciences-icon.svg"
+          aria-hidden="true"
+          class="topic-icon"
+        />
+        Environment
+      </button>
+
+      <button data-topic="HUMAN" class="topic-btn">
+        <img
+          src="/media/humansocialsciences-icon.svg"
+          aria-hidden="true"
+          class="topic-icon"
+        />
+        Human and Social
+      </button>
       </div>
   </div>
     <div class="funding">
@@ -149,15 +163,15 @@
               <p>Each circle represents a research project in a given topic.</p>
               <ul>
                 <li>
-                  <img src="/media/green-legend.svg" alt="green circle">
+                  <img src="/media/green-legend.svg" alt="" aria-hidden="true">
                   Agriculture
                 </li>
                 <li>
-                  <img src="/media/blue-legend.svg" alt="blue circle">
+                  <img src="/media/blue-legend.svg" alt="" aria-hidden="true">
                   Environment
                 </li>
                 <li>
-                  <img src="/media/yellow-legend.svg" alt="yellow circle">
+                  <img src="/media/yellow-legend.svg" alt="" aria-hidden="true">
                   Human and Social
                 </li>
               </ul>
@@ -250,112 +264,118 @@
             <div class="carousel_item bg-agscience">
               <a href="#article_crop_harvesting" class="article-link" data-topic="AG">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/agsciences-icon.svg"></object>
+                  <img src="/media/agsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Mechanical Crop Harvest</h4>
                 </div>
-                <img src="/media/articleshots/2022/mechanical-crop-harvesting.jpg" alt="A prototype helper robot transporting fresh-picked strawberries. " class="carousel-image">
-
+                <img src="/media/articleshots/2022/mechanical-crop-harvesting.jpg" alt="A prototype helper robot transporting fresh-picked strawberries." class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-agscience">
               <a href="#article_strawberry_breeding" class="article-link" data-topic="AG">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/agsciences-icon.svg"></object>
+                  <img src="/media/agsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Strawberry Breeding Program</h4>
                 </div>
                 <img src="/media/articleshots/2022/strawberry-breeding-program.jpg" alt="UC Davis “Valiant” strawberry among new varieties developed by the Strawberry Breeding Program" class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-humansocialscience">
               <a href="#article_beverage" class="article-link" data-topic="HUMAN">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/humansocialsciences-icon.svg"></object>
+                  <img src="/media/humansocialsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Beverage Consumption <br>Attitudes</h4>
                 </div>
                 <img src="/media/articleshots/2022/beverage-consumption-attitudes.jpg" alt="Student looks through the many choices of soft drink available at the Memorial Union" class="carousel-image">
-
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-envscience">
               <a href="#article_methane" class="article-link" data-topic="ENV">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/envsciences-icon.svg"></object>
+                  <img src="/media/envsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Reducing Cattle Methane <br>Emissions</h4>
                 </div>
-                <img src="/media/articleshots/2022/methane.jpg" alt="Cattle feed containing seaweed was given to dairy cows at UC Davis " class="carousel-image">
+                <img src="/media/articleshots/2022/methane.jpg" alt="Cattle feed containing seaweed was given to dairy cows at UC Davis" class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-envscience">
               <a href="#article_native_fish" class="article-link" data-topic="ENV">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/envsciences-icon.svg"></object>
+                  <img src="/media/envsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Cultural Biases Impact<br>Native Fish</h4>
                 </div>
                 <img src="/media/articleshots/2022/native-fish.jpg" alt="Bowfin fish are native to North America; photo credit: Solomon David, Nicholls State University" class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-agscience">
               <a href="#article_controlled_ag" class="article-link" data-topic="AG">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/agsciences-icon.svg"></object>
+                  <img src="/media/agsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Controlled Environment<br>Agriculture</h4>
                 </div>
                 <img src="/media/articleshots/2022/vertical-grow.jpg" alt="Department of Plant Sciences Chair Gail Taylor inside the school’s vertical farming laboratory." class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-humansocialscience">
               <a href="#article_sheep" class="article-link" data-topic="HUMAN">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/humansocialsciences-icon.svg"></object>
+                  <img src="/media/humansocialsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Managing Landscapes<br>with Sheep Mowers</h4>
                 </div>
                 <img src="/media/articleshots/2022/sheep-mowers.jpg" alt="Sheep graze on UC Davis campus." class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-agscience">
               <a href="#article_identify" class="article-link" data-topic="HUMAN">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/humansocialsciences-icon.svg"></object>
+                  <img src="/media/humansocialsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Identifying <br>Food Biomarkers</h4>
                 </div>
                 <img src="/media/articleshots/2022/identifying-food-biomarkers.jpg" alt="Students participating in a diet comparison project in the Nutrition department." class="carousel-image">
               </a>
             </div>
           </div>
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-agscience">
               <a href="#article_smoke" class="article-link" data-topic="AG">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/agsciences-icon.svg"></object>
+                  <img src="/media/agsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Smoke-Taint Research<br>During California Wildfires</h4>
                 </div>
                 <img src="/media/articleshots/2022/smoke-taint.jpg" alt="Anita Oberholster, a viticulture and enology professor of cooperative extension, samples grapes that have been tainted by smoke from wildfires." class="carousel-image">
               </a>
             </div>
           </div>
-     
+
           <div class="carousel-wrapper">
             <div class="carousel_item bg-envscience">
               <a href="#article_cubes" class="article-link" data-topic="ENV">
                 <div class="article_thumb_title">
-                  <object type="image/svg+xml" style="transform:scale(0.8)" data="/media/envsciences-icon.svg"></object>
+                  <img src="/media/envsciences-icon.svg" class="topic-icon" aria-hidden="true">
                   <h4>Innovative Cooling Cubes</h4>
                 </div>
-                <img src="/media/articleshots/2022/cooling-cubes.jpg" alt="Jiahan Zou, a Ph.D. graduate student in the Department of Food Science and Technology, holding a new form of ice cube that doesn't melt, is reusable, plastic-free and compostable." class="carousel-image">
+                <img src="/media/articleshots/2022/cooling-cubes.jpg" alt="Jiahan Zou holding a reusable, compostable cooling cube." class="carousel-image">
               </a>
             </div>
           </div>
