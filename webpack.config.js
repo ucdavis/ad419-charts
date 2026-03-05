@@ -69,7 +69,7 @@ module.exports = (env) => {
           test: /\.json$/,
           loader: 'json-loader',
         }, {
-          test: /\.scss$/,
+          test: /\.css$/,
           use: ExtractTextPlugin.extract({
             use: [{
               loader: 'css-loader',
@@ -80,11 +80,6 @@ module.exports = (env) => {
               },
             }, {
               loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-              },
-            }, {
-              loader: 'sass-loader',
               options: {
                 sourceMap: true,
               },
