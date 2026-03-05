@@ -3,7 +3,7 @@ import "innersvg-polyfill";
 import stickybits from "stickybits";
 stickybits(".sticky-top");
 
-import "../sass/app.scss";
+import "../css/app.css";
 
 import * as $ from "jquery";
 import "slick-carousel";
