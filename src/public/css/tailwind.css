@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@import "@ucdavis/gunrock-tailwind/imports.css";
+
+@source "../index.html";
+@source "../components/**/*.template.html";
+@source "../js/**/*.ts";
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ol,
+  ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+}
+
+@theme {
+  --color-primary: var(--color-ucd-gunrock);
+  --color-primary-content: var(--color-light-font);
+  --color-secondary: var(--color-ucd-sunflower);
+  --color-secondary-content: var(--color-dark-font);
+  --color-accent: var(--color-ucd-recpool);
+  --color-accent-content: var(--color-light-font);
+  --color-info: var(--color-ucd-tahoe);
+  --color-info-content: var(--color-light-font);
+  --color-success: var(--color-ucd-quad);
+  --color-success-content: var(--color-light-font);
+  --color-warning: var(--color-ucd-poppy);
+  --color-warning-content: var(--color-dark-font);
+  --color-error: var(--color-ucd-doubledecker);
+  --color-error-content: var(--color-light-font);
+}
+
+@import "./app.css" layer(base);

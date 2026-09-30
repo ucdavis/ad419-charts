@@ -1,52 +1,47 @@
-@font-face {
-  font-family: "proxima-nova-r";
-  src: url("../media/fonts/proximanova-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "proxima-nova-i";
-  src: url("../media/fonts/proximanova-regularit-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "proxima-nova-b";
-  src: url("../media/fonts/proximanova-bold-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "ryman";
-  src: url("../media/fonts/ryman-eco-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-.container {
+.site-container {
+  margin-right: auto;
+  margin-left: auto;
   padding: 0;
   width: 95%;
   max-width: 1440px;
 }
+
+site-hero,
+research-overview,
+topic-selector,
+funding-section,
+geography-section,
+contributors-section,
+spotlights-section,
+site-footer {
+  display: block;
+}
+
+/* Keep the topic bar in the page layout so its sticky boundary is the page,
+   rather than the short component wrapper. */
+topic-selector {
+  display: contents;
+}
 @media (min-width: 576px) {
-  .container {
+  .site-container {
     width: 93%;
     max-width: 1440px;
   }
 }
 @media (min-width: 768px) {
-  .container {
+  .site-container {
     width: 91%;
     max-width: 1440px;
   }
 }
 @media (min-width: 992px) {
-  .container {
+  .site-container {
     width: 90%;
     max-width: 1440px;
   }
 }
 @media (min-width: 1200px) {
-  .container {
+  .site-container {
     width: 85%;
     max-width: 1440px;
   }
@@ -60,7 +55,7 @@ html {
 }
 
 body {
-  font-family: "proxima-nova-r", sans-serif;
+  font-family: var(--font-sans);
 }
 
 a {
@@ -386,8 +381,32 @@ header h3 {
   padding: 6rem 0rem;
 }
 
-.geography {
-  padding: 6rem 0rem;
+#map #states,
+#map #counties {
+  fill: color-mix(in oklab, var(--color-ucd-tahoe) 52%, #fff);
+}
+
+#map #counties {
+  stroke: color-mix(in oklab, var(--color-ucd-gunrock) 18%, #fff);
+  stroke-opacity: 0.72;
+}
+
+#map #icons .map-marker {
+  cursor: pointer;
+  transition: opacity 180ms ease;
+}
+
+#map #icons .marker-disc {
+  stroke: #fff;
+  stroke-width: 2.5px;
+}
+
+#map #icons .map-marker--active .marker-disc {
+  stroke-width: 4px;
+}
+
+#map #icons .inactive {
+  opacity: 0.18;
 }
 
 .articles {
@@ -574,15 +593,6 @@ header h3 {
 .footer_divider {
   background: url("/media/gunrock_banner_final.svg") center top/cover no-repeat;
   padding: 8px 0;
-}
-
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-img.img-fluid {
-  max-width: 100%;
 }
 
 .img-onehundo {
@@ -1174,10 +1184,6 @@ body[data-topic="HUMAN"] .topic-border-color {
   font-family: "proxima-nova-r", sans-serif;
 }
 
-#map #icons .inactive {
-  opacity: 0.4;
-}
-
 @media (max-width: 768px) {
   .flex-md {
     display: flex;
@@ -1219,99 +1225,6 @@ body[data-topic="HUMAN"] .topic-border-color {
 
 .color-humansocialscience {
   color: #ffc72c;
-}
-
-.navbar-toggler img {
-  width: 30px;
-}
-.navbar-toggler p {
-  font-family: "proxima-nova-b", sans-serif;
-  color: #fff;
-  font-style: inherit;
-}
-
-.head-contents .navbar-toggler img {
-  width: 30px;
-  margin: 10px 0px;
-}
-.head-contents .navbar-toggler p {
-  font-family: "proxima-nova-b", sans-serif;
-  color: #fff;
-  font-size: 2.2rem;
-  margin-top: 16px;
-}
-
-.navbar {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-nav.navbar {
-  margin-left: -22px;
-}
-nav.navbar a.nav-link {
-  color: rgba(255, 255, 255, 0.98);
-  font-size: 1.8rem;
-  font-family: "proxima-nova-b", sans-serif;
-  padding: 1rem 1rem !important;
-}
-
-.head_bleed a.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.header-home a.nav-link:hover {
-  color: #daaa00;
-}
-
-.dropdown-toggle::after {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 0.155em;
-  vertical-align: 0.0955em;
-  content: "";
-  border-top: 0.3em solid;
-  border-right: 0.3em solid transparent;
-  border-left: 0.3em solid transparent;
-}
-
-.dropdown-menu {
-  font-size: 1.6rem;
-}
-
-.dropdown-item {
-  color: rgba(31, 31, 31, 0.99);
-}
-
-.dropdown-item:focus,
-.dropdown-item:hover {
-  background-color: #ccd4e0;
-}
-
-.dropdown-menu {
-  top: 96%;
-}
-
-#accordion .card {
-  margin-bottom: 8px;
-  border-color: #ccd4e0;
-}
-#accordion .card .card-header {
-  border-bottom: none;
-  background-color: #ccd4e0;
-}
-#accordion .card .card-header h3 {
-  margin-top: 8px;
-}
-#accordion .card .card-header h3 a {
-  color: #002855;
-}
-
-.col,
-.col-md,
-.col-sm {
-  padding: 0px;
 }
 
 .slick-prev:before,

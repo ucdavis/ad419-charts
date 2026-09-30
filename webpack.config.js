@@ -66,6 +66,9 @@ module.exports = (env) => {
           test: /\.tsx?$/,
           loader: 'awesome-typescript-loader',
         }, {
+          test: /\.template\.html$/,
+          loader: path.resolve(__dirname, './src/template-loader.js'),
+        }, {
           test: /\.json$/,
           loader: 'json-loader',
         }, {
@@ -132,7 +135,13 @@ module.exports = (env) => {
         })
       ),
       new CopyWebpackPlugin([
-        { from: path.resolve(__dirname, './src/public') },
+        {
+          from: path.resolve(__dirname, './src/public'),
+          ignore: [
+            'css/generated.css',
+            'css/tailwind.css',
+          ],
+        },
       ]),
       new ExtractTextPlugin({
         filename: 'css/[name].css',

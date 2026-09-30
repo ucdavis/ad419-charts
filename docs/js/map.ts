@@ -13,12 +13,12 @@ const counties_data = require("./map-counties-ca-topo.json") as Topology;
 const categories = getCategories();
 
 const chartSelector = "#map";
-const width = 800;
+const width = 700;
 const height = 800;
 
-const iconSize = 38;
-const iconCircleSize = 70;
-const zoomFactor = 1.1;
+const iconSize = 22;
+const markerRadius = 18;
+const zoomFactor = 1.18;
 
 interface IIconData {
     svg: string;
@@ -39,7 +39,7 @@ interface IIconData {
 const projection = geo.geoMercator()
     .center([-122, 38.5])
     .scale(3500)
-    .translate([175, 250]);
+    .translate([175, 306]);
 
 // setup icons
 const iconImages = require("../media/mapicons").default;
@@ -295,8 +295,10 @@ const chart = d3.select<HTMLDivElement, {}>(chartSelector);
 
 const svg = chart
     .append<SVGElement>("svg")
+    .attr("class", "mx-auto block h-auto w-full max-w-5xl")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("viewBox", `0 0 ${width} ${height}`);
 
 const states = svg.append("svg:g")
     .attr("id", "states")
@@ -313,19 +315,20 @@ const icons = svg.append("svg:g")
     .selectAll("g")
     .data(iconsData)
     .enter()
-    .append<SVGGElement>("svg:g");
-
-// icon circle shadow
-const iconCircles = icons
     .append<SVGGElement>("svg:g")
-    .html(iconImages.circle)
-    .select<SVGElement>("svg")
-    .attr("class", "circle")
-    .attr("x", d => (d.left || 0) - (iconCircleSize / 2))
-    .attr("y", d => (d.top || 0) - (iconCircleSize / 2))
-    .attr("width", iconCircleSize)
-    .attr("height", iconCircleSize)
-    .attr("fill", "#fff");
+    .attr("class", "map-marker")
+    .attr("role", "button")
+    .attr("tabindex", 0)
+    .attr("aria-label", d => `${d.title}, ${d.department}`);
+
+// Marker discs keep the geography legible while preserving a clear category signal.
+const iconCircles = icons
+    .append<SVGCircleElement>("svg:circle")
+    .attr("class", "marker-disc")
+    .attr("cx", d => d.left || 0)
+    .attr("cy", d => d.top || 0)
+    .attr("r", markerRadius)
+    .attr("fill", d => d.categoryColor || "none");
 
 // icon symbols
 const iconSvgs = icons
@@ -337,7 +340,7 @@ const iconSvgs = icons
     .attr("y", d => (d.top || 0) - (iconSize / 2))
     .attr("width", iconSize)
     .attr("height", iconSize)
-    .attr("fill", d => d.categoryColor || "none");
+    .attr("fill", "#fff");
 
 states.selectAll("path")
     .data([state_data] as any)
@@ -362,118 +365,109 @@ counties.selectAll("path")
     .duration(3000)
     .attr("stroke-dashoffset", 0);
 
-// mouse over tooltip
-const tooltip = chart
-  .append<HTMLElement>("div")
-  .attr("class", "chart-tooltip hidden")
-  .attr("dy", 1);
+const mapDetail = d3.select("#map-detail");
+const mapDetailIcon = d3.select<HTMLImageElement, {}>("#map-detail-icon");
+const mapDetailCategory = d3.select("#map-detail-category");
+const mapDetailTitle = d3.select("#map-detail-title");
+const mapDetailDepartment = d3.select("#map-detail-department");
+const mapDetailDirector = d3.select("#map-detail-director");
 
-// build tooltip
-tooltip.append("div").attr("class", "department");
-tooltip.append("div").attr("class", "project");
-tooltip.append("div").attr("class", "director");
+function setMarkerScale(marker: SVGGElement, scale: number) {
+    const selection = d3.select<SVGGElement, IIconData>(marker);
+    selection.select<SVGCircleElement>(".marker-disc")
+        .transition()
+        .duration(120)
+        .attr("r", markerRadius * scale);
 
-// mouse overs
-icons.selectAll<SVGElement, IIconData>("svg")
-    .on("mouseover", function (data, i) {
-        const iconGroup = this.parentNode?.parentNode;
+    selection.select<SVGElement>(".icon")
+        .transition()
+        .duration(120)
+        .attr("x", (d: IIconData) => (d.left || 0) - (iconSize * scale / 2))
+        .attr("y", (d: IIconData) => (d.top || 0) - (iconSize * scale / 2))
+        .attr("width", iconSize * scale)
+        .attr("height", iconSize * scale);
+}
 
-        // This if block handles a mini zoom in when you hover over an icon
-        if (iconGroup) {
-            d3.select(iconGroup.children[0].firstElementChild)
-                .transition()
-                .duration(100)
-                .attr("x", (d: any) => d.left - (iconCircleSize * zoomFactor) / 2)
-                .attr("y", (d: any) => d.top - (iconCircleSize * zoomFactor) / 2)
-                .attr("width", iconCircleSize * zoomFactor)
-                .attr("height", iconCircleSize * zoomFactor);
+function updateMapDetail(data: IIconData) {
+    const category = categories[data.categoryIndex || 0];
 
-            d3.select(iconGroup.children[1].firstElementChild)
-                .transition()
-                .duration(100)
-                .attr("x", (d: any) => d.left - (iconSize * zoomFactor) / 2)
-                .attr("y", (d: any) => d.top - (iconSize * zoomFactor) / 2)
-                .attr("width", iconSize * zoomFactor)
-                .attr("height", iconSize * zoomFactor);
-        }
+    mapDetail.attr("data-topic", data.categoryKey);
+    mapDetailIcon
+        .classed("hidden", false)
+        .attr("src", category.icon || "");
+    mapDetailCategory.text(category.name);
+    mapDetailTitle.text(data.title);
+    mapDetailDepartment.text(data.department);
+    mapDetailDirector.text(data.director);
+}
 
-        // setup tooltip text
-        tooltip.attr("data-topic", data.categoryKey);
+function updateMapOverview(categoryIndex: number) {
+    const category = categories[categoryIndex];
+    const isCategorySelected = categoryIndex >= 0 && !!category;
 
-        tooltip.select(".department")
-            .text(data.department);
+    mapDetail.attr("data-topic", isCategorySelected ? category.key : "");
+    mapDetailIcon
+        .classed("hidden", !isCategorySelected)
+        .attr("src", isCategorySelected ? category.icon || "" : "");
+    mapDetailCategory.text(isCategorySelected ? category.name : "Explore the map");
+    mapDetailTitle.text(isCategorySelected
+        ? `Explore ${category.name.toLowerCase()} research`
+        : "Discover research across California");
+    mapDetailDepartment.text(isCategorySelected
+        ? "Select a marker to learn about the people and departments behind this work."
+        : "Select a research marker to see the people and departments behind the work.");
+    mapDetailDirector.text("");
+}
 
-        tooltip.select(".project")
-            .text(data.title);
-
-        tooltip.select(".director")
-            .text(data.director);
-
-        // calculate tooltip position
-        const chartElement = chart.node();
-        let chartPosition = { left: 0, top: 0 };
-        if (!!chartElement) {
-          chartPosition = chartElement.getBoundingClientRect();
-        }
-
-        const svgElement = svg.node();
-        let svgPosition = { left: 0, top: 0 };
-        if (!!svgElement) {
-            svgPosition = svgElement.getBoundingClientRect();
-        }
-
-        const circlePosition = {
-            x: (data.left || 0) + svgPosition.left - chartPosition.left,
-            y: (data.top || 0) + svgPosition.top - chartPosition.top,
-        };
-
-        // move mouseover tooltip
-        tooltip
-            .classed("hidden", false)
-            .style("left", `${circlePosition.x}px`)
-            .style("top", `${circlePosition.y - (iconCircleSize / 2)}px`);
-    })
-    .on("mouseout", function(data, i) {
-        const iconGroup = this.parentNode?.parentNode;
-
-        // This if block handles a mini zoom out when you hover out an icon
-        if (iconGroup) {
-            d3.select(iconGroup.children[0].firstElementChild)
-                .transition()
-                .duration(100)
-                .attr("x", (d: any) => d.left - iconCircleSize / 2)
-                .attr("y", (d: any) => d.top - iconCircleSize / 2)
-                .attr("width", iconCircleSize)
-                .attr("height", iconCircleSize);
-
-            d3.select(iconGroup.children[1].firstElementChild)
-                .transition()
-                .duration(100)
-                .attr("x", (d: any) => d.left - iconSize / 2)
-                .attr("y", (d: any) => d.top - iconSize / 2)
-                .attr("width", iconSize)
-                .attr("height", iconSize);
-        }
-
-        // hide tooltip
-        tooltip
-            .classed("hidden", true);
+function setActiveMarker(marker: SVGGElement) {
+    icons.classed("map-marker--active", function() {
+        return this === marker;
     });
+}
 
-// click
-icons.selectAll("svg")
-    .on("click", function (d: any, i) {
-        setSelectedCategory(d.categoryKey);
+icons
+    .on("mouseenter", function(data: IIconData) {
+        setActiveMarker(this as SVGGElement);
+        setMarkerScale(this as SVGGElement, zoomFactor);
+        updateMapDetail(data);
+    })
+    .on("mouseleave", function() {
+        setMarkerScale(this as SVGGElement, 1);
+        icons.classed("map-marker--active", false);
+    })
+    .on("focus", function(data: IIconData) {
+        setActiveMarker(this as SVGGElement);
+        setMarkerScale(this as SVGGElement, zoomFactor);
+        updateMapDetail(data);
+    })
+    .on("blur", function() {
+        setMarkerScale(this as SVGGElement, 1);
+        icons.classed("map-marker--active", false);
+    })
+    .on("click", function(data: IIconData) {
+        setSelectedCategory(data.categoryKey);
+        setActiveMarker(this as SVGGElement);
+        updateMapDetail(data);
+    })
+    .on("keydown", function(data: IIconData) {
+        const event = (d3 as any).event as KeyboardEvent;
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setSelectedCategory(data.categoryKey);
+            setActiveMarker(this as SVGGElement);
+            updateMapDetail(data);
+        }
     });
 
 // category change
-const totalChart = d3.select("#map-summary-chart");
 onSelectedCategoryChanged((categoryIndex) => {
     if (categoryIndex < 0) {
         icons.classed("inactive", false);
+        updateMapOverview(categoryIndex);
         return;
     }
     icons.classed("inactive", d => d.categoryIndex !== categoryIndex);
+    updateMapOverview(categoryIndex);
 });
 
 // drag

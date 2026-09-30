@@ -17,7 +17,8 @@ const projects = getProjects();
 const sumTotal = projects.reduce((prev, d) => prev + d.total, 0);
 
 // category change
-const legends = d3.selectAll("#bubble-summary-legend, #map-summary-legend");
+const legends = d3.selectAll("#bubble-summary-legend");
+const mapProjectCount = d3.select("#map-metric-projects");
 onSelectedCategoryChanged(categoryIndex => {
   if (categoryIndex < 0) {
     // set new title
@@ -25,7 +26,7 @@ onSelectedCategoryChanged(categoryIndex => {
 
     // hide icon
     legends.select(".icon")
-      .classed("d-none", true);
+      .classed("hidden", true);
 
     // get totals, set text
     const total = projects.reduce((prev, p) => prev + p.total, 0);
@@ -34,11 +35,12 @@ onSelectedCategoryChanged(categoryIndex => {
     // get count, set text
     const count = projects.reduce((prev, p) => prev + 1, 0);
     legends.select(".count").text(count);
+    mapProjectCount.text(count);
 
     // hide departments
     legends
       .select(".departments")
-      .classed("d-none", true);
+      .classed("hidden", true);
 
     return;
   }
@@ -50,7 +52,7 @@ onSelectedCategoryChanged(categoryIndex => {
 
   // set icon or hide
   legends.select(".icon")
-    .classed("d-none", false)
+    .classed("hidden", false)
     .attr("src", category.icon || "");
 
   // get category total and set text
@@ -66,6 +68,7 @@ onSelectedCategoryChanged(categoryIndex => {
     0
   );
   legends.select(".count").text(count);
+  mapProjectCount.text(count);
 
   // remove all old departments
   legends
@@ -77,7 +80,7 @@ onSelectedCategoryChanged(categoryIndex => {
   const d = departments.filter(d => d.categoryIndex === categoryIndex);
   legends
     .select(".departments")
-      .classed("d-none", false)
+      .classed("hidden", false)
     .selectAll("p")
     .data(d)
     .enter()
