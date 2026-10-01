@@ -1,6 +1,18 @@
 import { groupBy } from "../utils/array";
 
-const categories: ICategory[] = require("./categories.json");
+const categoryJson: ICategory[] = require("./categories.json");
+const categoryThemeVariables: { [key: string]: string } = {
+    AG: "--color-ag",
+    ENV: "--color-env",
+    HUMAN: "--color-human",
+};
+const rootStyles = getComputedStyle(document.documentElement);
+const categories = categoryJson.map(category => {
+    const variableName = categoryThemeVariables[category.key];
+    const color = variableName ? rootStyles.getPropertyValue(variableName).trim() : "";
+
+    return color ? { ...category, color } : category;
+});
 
 // transform into array
 const departmentJson: any = require("./departments.json");

@@ -4,7 +4,14 @@ import * as topojson from "topojson";
 import { GeometryCollection, Topology } from "topojson-specification";
 import { Polygon, Point } from "geojson";
 
-import { getCategories, getDepartments, getProjects } from "./data";
+import {
+    getCategories,
+    getDepartments,
+    getProjects,
+    getSelectedCategory,
+    onSelectedCategoryChanged,
+    setSelectedCategory,
+} from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
@@ -387,13 +394,13 @@ const mapDetailCategory = d3.select("#map-detail-category");
 const mapDetailTotal = d3.select("#map-detail-total");
 const mapDetailProjectCount = d3.select("#map-detail-project-count");
 const mapDetailDepartments = d3.select("#map-detail-departments");
+const mapTotal = d3.select("#map-total");
+const mapProjectMetric = d3.select("#map-metric-projects");
 const mapPanel = d3.select<HTMLElement, {}>("#map-panel");
 const mapTooltip = d3.select<HTMLDivElement, {}>("#map-tooltip");
 const mapTooltipDepartment = d3.select("#map-tooltip-department");
 const mapTooltipTitle = d3.select("#map-tooltip-title");
 const mapTooltipDirector = d3.select("#map-tooltip-director");
-
-let activeMarker: SVGGElement | null = null;
 
 function setMarkerScale(marker: SVGGElement, scale: number) {
     const selection = d3.select<SVGGElement, IIconData>(marker);
@@ -412,7 +419,6 @@ function setMarkerScale(marker: SVGGElement, scale: number) {
 }
 
 function showMapTooltip(data: IIconData) {
-    const category = categories[data.categoryIndex || 0];
     const mapPanelElement = mapPanel.node();
     const svgElement = svg.node();
     const mapTooltipElement = mapTooltip.node();
@@ -424,9 +430,7 @@ function showMapTooltip(data: IIconData) {
         .attr("data-topic", data.categoryKey);
     mapTooltipDepartment.text(data.department);
     mapTooltipTitle.text(data.title);
-    mapTooltipDirector
-        .text(data.director)
-        .style("color", category.color || "");
+    mapTooltipDirector.text(data.director);
 
     const mapPanelBounds = mapPanelElement.getBoundingClientRect();
     const svgBounds = svgElement.getBoundingClientRect();
@@ -436,30 +440,53 @@ function showMapTooltip(data: IIconData) {
         + ((data.left || 0) / width) * svgBounds.width;
     const markerTop = svgBounds.top - mapPanelBounds.top
         + ((data.top || 0) / height) * svgBounds.height;
-    const tooltipLeft = Math.max(12, Math.min(
-        markerLeft - (tooltipWidth / 2),
-        mapPanelElement.clientWidth - tooltipWidth - 12
+    const tooltipLeft = Math.max(tooltipWidth / 2 + 12, Math.min(
+        markerLeft,
+        mapPanelElement.clientWidth - tooltipWidth / 2 - 12
     ));
     const spaceAboveMarker = markerTop - tooltipHeight - 16;
     const markerRadiusInPixels = markerRadius * (svgBounds.width / width) * zoomFactor;
-    const tooltipTop = spaceAboveMarker >= 12
-        ? spaceAboveMarker
-        : Math.max(12, Math.min(
+    const showBelow = spaceAboveMarker < 12;
+    const tooltipTop = showBelow
+        ? Math.max(12, Math.min(
             markerTop + markerRadiusInPixels + 16,
             mapPanelElement.clientHeight - tooltipHeight - 12
-        ));
+        ))
+        : markerTop - 16;
 
     mapTooltip
+        .classed("chart-tooltip--below", showBelow)
         .style("left", `${tooltipLeft}px`)
         .style("top", `${tooltipTop}px`);
 }
 
 function hideMapTooltip() {
-    mapTooltip.classed("hidden", true);
+    mapTooltip
+        .classed("hidden", true)
+        .classed("chart-tooltip--below", false);
+}
+
+function updateMapMetrics(categoryIndex: number) {
+    const category = categories[categoryIndex];
+    const displayedProjects = category === undefined
+        ? projects
+        : projects.filter(project => project.categoryIndex === categoryIndex);
+    const total = displayedProjects.reduce((sum, project) => sum + project.total, 0);
+    const color = category?.color || null;
+
+    mapTotal.text(`$${(total / 1000000).toFixed(1)} million`);
+    mapProjectMetric.text(displayedProjects.length);
+
+    if (color) {
+        mapTotal.style("color", color);
+        mapProjectMetric.style("color", color);
+    } else {
+        mapTotal.style("color", null);
+        mapProjectMetric.style("color", null);
+    }
 }
 
 function resetMapSelection() {
-    activeMarker = null;
     icons
         .classed("inactive", false)
         .classed("map-marker--active", false)
@@ -470,24 +497,27 @@ function resetMapSelection() {
     mapDetailHeader.style("border-color", null);
     mapDetailEmpty.classed("hidden", false);
     mapDetailSummary.classed("hidden", true);
+    updateMapMetrics(-1);
 }
 
-function updateMapSummary(marker: SVGGElement, data: IIconData) {
-    const categoryIndex = data.categoryIndex || 0;
+function updateMapSummary(categoryIndex: number) {
     const category = categories[categoryIndex];
+
+    if (category === undefined) {
+        resetMapSelection();
+        return;
+    }
+
     const categoryProjects = projects.filter(project => project.categoryIndex === categoryIndex);
     const categoryTotal = categoryProjects.reduce((total, project) => total + project.total, 0);
     const categoryDepartments = departments.filter(department => department.categoryIndex === categoryIndex);
 
-    activeMarker = marker;
     icons
         .classed("inactive", icon => icon.categoryIndex !== categoryIndex)
         .classed("map-marker--active", icon => icon.categoryIndex === categoryIndex)
-        .attr("aria-pressed", function() {
-            return this === marker ? "true" : "false";
-        });
+        .attr("aria-pressed", icon => icon.categoryIndex === categoryIndex ? "true" : "false");
 
-    mapDetail.attr("data-topic", data.categoryKey);
+    mapDetail.attr("data-topic", category.key);
     if (category.color) {
         mapDetail.style("border-top-color", category.color);
         mapDetailHeader.style("border-color", category.color);
@@ -515,6 +545,24 @@ function updateMapSummary(marker: SVGGElement, data: IIconData) {
         .text(department => department.name);
     mapDetailEmpty.classed("hidden", true);
     mapDetailSummary.classed("hidden", false);
+    updateMapMetrics(categoryIndex);
+}
+
+function updateMapSelection(categoryIndex: number) {
+    if (categoryIndex < 0) {
+        resetMapSelection();
+        return;
+    }
+
+    updateMapSummary(categoryIndex);
+}
+
+function toggleMapTopic(data: IIconData) {
+    const categoryIndex = data.categoryIndex;
+
+    if (categoryIndex === undefined) return;
+
+    setSelectedCategory(getSelectedCategory() === categoryIndex ? "" : data.categoryKey);
 }
 
 icons
@@ -535,23 +583,18 @@ icons
         hideMapTooltip();
     })
     .on("click", function(data: IIconData) {
-        if (activeMarker === this) {
-            resetMapSelection();
-            return;
-        }
-        updateMapSummary(this as SVGGElement, data);
+        toggleMapTopic(data);
     })
     .on("keydown", function(data: IIconData) {
         const event = (d3 as any).event as KeyboardEvent;
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            if (activeMarker === this) {
-                resetMapSelection();
-                return;
-            }
-            updateMapSummary(this as SVGGElement, data);
+            toggleMapTopic(data);
         }
     });
+
+onSelectedCategoryChanged(updateMapSelection);
+updateMapSelection(getSelectedCategory());
 
 // drag
 // icons.call(

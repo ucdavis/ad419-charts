@@ -7,6 +7,9 @@
   --color-light-bg-200: #fafafa;
   --color-light-bg-300: #e9e9e9;
   --color-main-border: #dfdfdf;
+  --color-ag: #43b02a;
+  --color-env: #0078ff;
+  --color-human: #ffc72c;
 
   --font-proxima-bold: "proxima-nova-b", sans-serif;
 
@@ -14,9 +17,6 @@
   --color-secondary-color: var(--color-ucd-gold);
   --color-accent-color: var(--color-ucd-poppy);
   --color-error-color: var(--color-ucd-doubledecker);
-  --color-info-color: var(--color-ucd-putahcreek);
-  --color-success-color: var(--color-ucd-quad);
-  --color-warning-color: #cd9400;
 }
 
 @plugin "daisyui/theme" {
@@ -35,16 +35,16 @@
   --color-error: var(--color-error-color);
   --color-error-content: var(--color-light-font);
 
-  --color-info: var(--color-info-color);
+  --color-info: var(--color-env);
   --color-info-content: var(--color-light-font);
 
   --color-accent: var(--color-accent-color);
   --color-accent-content: var(--color-light-font);
 
-  --color-success: var(--color-success-color);
+  --color-success: var(--color-ag);
   --color-success-content: var(--color-light-font);
 
-  --color-warning: var(--color-warning-color);
+  --color-warning: var(--color-human);
   --color-warning-content: var(--color-light-font);
 }
 
@@ -63,6 +63,7 @@
 
   site-hero,
   research-overview,
+  topic-selector,
   funding-section,
   geography-section,
   contributors-section,
@@ -150,22 +151,6 @@
     margin: 4px 0px;
     font-family: "proxima-nova-r", sans-serif;
     color: rgba(31, 31, 31, 0.99);
-  }
-  .legend-topic ul,
-  .legend-topic ol {
-    list-style-type: none;
-    margin-left: 0px;
-    padding-left: 0px;
-  }
-  .legend-topic ul li,
-  .legend-topic ol li {
-    color: rgba(31, 31, 31, 0.99);
-    font-family: "proxima-nova-r", sans-serif;
-    margin: 8px 0px;
-  }
-  .legend-topic ul li img,
-  .legend-topic ol li img {
-    margin-right: 4px;
   }
   ul.funding-list,
   ol.funding-list {
@@ -285,63 +270,6 @@
   .department_intro p {
     font-family: "proxima-nova-b", sans-serif;
     margin-top: 8px;
-  }
-
-  .chart-card {
-    box-shadow:
-      0 0 0 1px rgba(49, 49, 93, 0.03),
-      0 2px 5px 0 rgba(49, 49, 93, 0.1),
-      0 1px 2px 0 rgba(0, 0, 0, 0.08);
-    margin-bottom: 36px;
-    padding: 18px 24px 16px 24px;
-    font-family: "proxima-nova-b", sans-serif;
-    display: inline-block;
-    max-width: 316px;
-    text-align: left;
-    opacity: 1;
-    transition: opacity 250ms;
-  }
-  .chart-card h3 {
-    margin-bottom: 10px;
-    margin-top: 20px;
-  }
-  .chart-card p {
-    line-height: 1;
-  }
-  .chart-card.opaque {
-    opacity: 0;
-    transition: opacity 250ms;
-  }
-  .chart-card + .chart-card {
-    margin-left: 1rem;
-  }
-
-  .left-portion {
-    width: 22%;
-  }
-  @media (max-width: 768px) {
-    .left-portion {
-      width: 100%;
-    }
-    .left-portion .legend-topic {
-      width: 33%;
-    }
-    .left-portion .legend-size {
-      width: 30%;
-    }
-    .left-portion .chart-card {
-      width: 30%;
-    }
-  }
-
-  .right-portion {
-    width: 78%;
-    text-align: center;
-  }
-  @media (max-width: 768px) {
-    .right-portion {
-      width: 100%;
-    }
   }
 
   .funding {
@@ -511,19 +439,6 @@
     text-shadow: none;
   }
 
-  .legend-topic {
-    margin-bottom: 32px;
-  }
-
-  .legend-size svg {
-    margin-top: 16px;
-    margin-left: -54px;
-  }
-  .legend-size svg text {
-    color: rgba(31, 31, 31, 0.99);
-    font-family: "proxima-nova-r", sans-serif;
-  }
-
   .section-intro {
     border-bottom: 1px solid var(--color-main-border);
     margin-bottom: 32px;
@@ -648,37 +563,6 @@
     height: 36px;
     padding: 8px;
   }
-  .btn {
-    white-space: nowrap;
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 20px;
-    box-shadow:
-      0 -3px 0 rgba(0, 0, 0, 0.15) inset,
-      0 1px 3px rgba(0, 0, 0, 0.08);
-    background: #002855;
-    border-radius: 2px;
-    letter-spacing: 0.025em;
-    color: #fff !important;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    border: none;
-    font-family: "proxima-nova-b", sans-serif;
-  }
-  .btn:active,
-  .btn:focus {
-    background-color: #001c3c;
-  }
-  .btn:hover {
-    color: #fff !important;
-    transform: translateY(-1px);
-    box-shadow:
-      0 -3px 0 rgba(0, 0, 0, 0.15) inset,
-      0 3px 6px rgba(0, 0, 0, 0.08);
-    background-color: #00346f;
-  }
-
   .btn-border {
     border: 2px solid var(--color-main-border);
     padding: 8px 16px;
@@ -920,6 +804,10 @@
     position: relative;
   }
 
+  #topic-bar .topic-selector-control:is(.btn-success, .btn-info, .btn-warning) img {
+    filter: brightness(0) invert(1);
+  }
+
   .sans-bold {
     font-family: "proxima-nova-b", sans-serif;
   }
@@ -929,23 +817,23 @@
   }
 
   body[data-topic="AG"] .topic-color-text {
-    color: #43b02a;
+    color: var(--color-ag);
   }
   body[data-topic="ENV"] .topic-color-text {
-    color: #0078ff;
+    color: var(--color-env);
   }
   body[data-topic="HUMAN"] .topic-color-text {
-    color: #ffc72c;
+    color: var(--color-human);
   }
 
   body[data-topic="AG"] .topic-border-color {
-    border-color: #43b02a;
+    border-color: var(--color-ag);
   }
   body[data-topic="ENV"] .topic-border-color {
-    border-color: #0078ff;
+    border-color: var(--color-env);
   }
   body[data-topic="HUMAN"] .topic-border-color {
-    border-color: #ffc72c;
+    border-color: var(--color-human);
   }
 
   #sources {
@@ -1029,15 +917,15 @@
   }
   .chart-tooltip[data-topic="AG"] .total,
   .chart-tooltip[data-topic="AG"] .director {
-    color: #43b02a;
+    color: var(--color-ag);
   }
   .chart-tooltip[data-topic="ENV"] .total,
   .chart-tooltip[data-topic="ENV"] .director {
-    color: #0078ff;
+    color: var(--color-env);
   }
   .chart-tooltip[data-topic="HUMAN"] .total,
   .chart-tooltip[data-topic="HUMAN"] .director {
-    color: #ffc72c;
+    color: var(--color-human);
   }
   .chart-tooltip:before {
     content: "";
@@ -1064,6 +952,21 @@
     border-right: 10px solid transparent;
     border-top: 10px solid rgba(255, 255, 255, 0.95);
     transform: translate(-50%, 0);
+  }
+  .chart-tooltip.chart-tooltip--below {
+    transform: translate(-50%, 0);
+  }
+  .chart-tooltip.chart-tooltip--below:before {
+    top: -10px;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 10px solid var(--color-main-border);
+  }
+  .chart-tooltip.chart-tooltip--below:after {
+    top: -9px;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 10px solid rgba(255, 255, 255, 0.95);
   }
 
   .article + .article {
@@ -1103,42 +1006,6 @@
       display: flex;
       justify-content: space-between;
     }
-  }
-
-  .bg-envscience {
-    background-color: #0078ff;
-  }
-
-  .bg-agscience {
-    background-color: #43b02a;
-  }
-
-  .bg-humansocialscience {
-    background-color: #ffc72c;
-  }
-
-  .border-envscience {
-    border-color: #0078ff;
-  }
-
-  .color-envscience {
-    color: #0078ff;
-  }
-
-  .border-agscience {
-    border-color: #43b02a;
-  }
-
-  .color-agscience {
-    color: #43b02a;
-  }
-
-  .border-humansocialscience {
-    border-color: #ffc72c;
-  }
-
-  .color-humansocialscience {
-    color: #ffc72c;
   }
 
   .slick-prev:before,

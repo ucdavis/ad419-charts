@@ -64,8 +64,8 @@
             Explore research by topic
           </h2>
           <p class="mt-4 mb-0 text-base leading-relaxed">
-            Select a marker to see funding totals, project counts, and
-            departments for its research area.
+            Choose a topic or select a marker to see funding totals, project
+            counts, and departments for its research area.
           </p>
         </div>
         <div id="map-detail-summary" class="hidden">
@@ -107,21 +107,12 @@
         <div id="map" class="chart mx-auto max-w-xl"></div>
         <div
           id="map-tooltip"
-          class="pointer-events-none absolute z-10 hidden w-80 border border-main-border bg-base-100 p-5 text-center shadow-xl"
+          class="chart-tooltip pointer-events-none z-10 hidden w-80"
           role="tooltip"
         >
-          <p
-            id="map-tooltip-department"
-            class="mb-4 border-b border-main-border pb-3 text-sm font-medium tracking-wide text-base-content/65 uppercase"
-          ></p>
-          <p
-            id="map-tooltip-title"
-            class="mb-2 text-xl font-semibold leading-tight text-base-content"
-          ></p>
-          <p
-            id="map-tooltip-director"
-            class="mb-0 text-base font-semibold italic"
-          ></p>
+          <p id="map-tooltip-department" class="department"></p>
+          <p id="map-tooltip-title" class="project"></p>
+          <p id="map-tooltip-director" class="director"></p>
         </div>
       </div>
     </div>

@@ -1,137 +1,104 @@
 import * as d3 from "d3";
-import {
-  onSelectedCategoryChanged,
-  getCategories,
-  getProjects,
-  getDepartments
-} from "./data";
 
-import { scale as bubbleScale, getCircleRadius as getBubbleCircleRadius } from "./bubble";
-import { scale as sourceScale } from "./sources";
+import {
+  getCategories,
+  getDepartments,
+  getSelectedCategory,
+  getProjects,
+  onSelectedCategoryChanged,
+  setSelectedCategory
+} from "./data";
 
 const categories = getCategories();
 const departments = getDepartments();
 const projects = getProjects();
 
-const sumTotal = projects.reduce((prev, d) => prev + d.total, 0);
+const topicControls = Array.from(
+  document.querySelectorAll<HTMLButtonElement>("#topic-bar [data-topic]")
+);
+const topicButtonVariants: { [topic: string]: string } = {
+  AG: "btn-success",
+  ENV: "btn-info",
+  HUMAN: "btn-warning"
+};
+const bubbleDetail = d3.select("#bubble-detail");
+const bubbleDetailEmpty = d3.select("#bubble-detail-empty");
+const bubbleDetailSummary = d3.select("#bubble-detail-summary");
+const bubbleDetailHeader = d3.select("#bubble-detail-header");
+const bubbleDetailCategory = d3.select("#bubble-detail-category");
+const bubbleDetailIcon = d3.select<HTMLImageElement, {}>("#bubble-detail-icon");
+const bubbleDetailTotal = d3.select("#bubble-detail-total");
+const bubbleDetailProjectCount = d3.select("#bubble-detail-project-count");
+const bubbleDetailDepartments = d3.select("#bubble-detail-departments");
 
-// category change
-const legends = d3.selectAll("#bubble-summary-legend");
-const mapProjectCount = d3.select("#map-metric-projects");
-const mapResearchTotal = d3.select("#map-total");
+topicControls.forEach(control => {
+  control.addEventListener("click", () => {
+    const currentCategory = categories[getSelectedCategory()];
+    const selectedTopic = currentCategory ? currentCategory.key : "";
+    const topic = control.dataset.topic || "";
 
-mapResearchTotal.text(`$${(sumTotal / 1000000).toFixed(1)} million`);
-mapProjectCount.text(projects.length);
+    setSelectedCategory(topic === selectedTopic ? "" : topic);
+  });
+});
 
-onSelectedCategoryChanged(categoryIndex => {
-  if (categoryIndex < 0) {
-    // set new title
-    legends.select(".title").text("CAES Research");
+function updateTopicControls(categoryIndex: number) {
+  const category = categories[categoryIndex];
 
-    // hide icon
-    legends.select(".icon")
-      .classed("hidden", true);
+  topicControls.forEach(control => {
+    const isSelected = category !== undefined
+      ? control.dataset.topic === category.key
+      : control.dataset.topic === "";
+    const variant = topicButtonVariants[control.dataset.topic || ""];
 
-    // get totals, set text
-    const total = projects.reduce((prev, p) => prev + p.total, 0);
-    legends.select(".total").text(`$${(total / 1000000).toFixed(1)}M`);
+    control.setAttribute("aria-pressed", isSelected ? "true" : "false");
+    control.classList.toggle("btn-active", isSelected);
+    if (variant) {
+      control.classList.toggle(variant, isSelected);
+    }
+  });
+}
 
-    // get count, set text
-    const count = projects.reduce((prev, p) => prev + 1, 0);
-    legends.select(".count").text(count);
+function updateBubbleDetail(categoryIndex: number) {
+  const category = categories[categoryIndex];
 
-    // hide departments
-    legends
-      .select(".departments")
-      .classed("hidden", true);
-
+  if (category === undefined) {
+    bubbleDetail.attr("data-topic", null);
+    bubbleDetailHeader.style("border-color", null);
+    bubbleDetailEmpty.classed("hidden", false);
+    bubbleDetailSummary.classed("hidden", true);
     return;
   }
 
-  const category = categories[categoryIndex];
+  const categoryProjects = projects.filter(project => project.categoryIndex === categoryIndex);
+  const categoryTotal = categoryProjects.reduce((total, project) => total + project.total, 0);
+  const categoryDepartments = departments.filter(department => department.categoryIndex === categoryIndex);
 
-  // set new title
-  legends.select(".title").text(category.name);
-
-  // set icon or hide
-  legends.select(".icon")
-    .classed("hidden", false)
-    .attr("src", category.icon || "");
-
-  // get category total and set text
-  const total = projects.reduce(
-    (prev, p) => (p.categoryIndex !== categoryIndex ? prev : prev + p.total),
-    0
-  );
-  legends.select(".total").text(`$${(total / 1000000).toFixed(1)}M`);
-
-  // get category count and set text
-  const count = projects.reduce(
-    (prev, p) => (p.categoryIndex !== categoryIndex ? prev : prev + 1),
-    0
-  );
-  legends.select(".count").text(count);
-
-  // remove all old departments
-  legends
-    .select(".departments")
-    .selectAll("p")
+  bubbleDetail.attr("data-topic", category.key);
+  bubbleDetailHeader.style("border-color", category.color);
+  bubbleDetailCategory
+    .text(category.name)
+    .style("color", category.color);
+  bubbleDetailIcon.attr("src", category.icon || "");
+  bubbleDetailTotal
+    .text(`$${(categoryTotal / 1000000).toFixed(1)}M`)
+    .style("color", category.color);
+  bubbleDetailProjectCount
+    .text(categoryProjects.length)
+    .style("color", category.color);
+  bubbleDetailDepartments
+    .selectAll("li")
     .remove();
-
-  // show department container and add departments
-  const d = departments.filter(d => d.categoryIndex === categoryIndex);
-  legends
-    .select(".departments")
-      .classed("hidden", false)
-    .selectAll("p")
-    .data(d)
+  bubbleDetailDepartments
+    .selectAll("li")
+    .data(categoryDepartments)
     .enter()
-    .append("p")
-      .text(d => d.name);
+    .append("li")
+    .text(department => department.name);
+  bubbleDetailEmpty.classed("hidden", true);
+  bubbleDetailSummary.classed("hidden", false);
+}
+
+onSelectedCategoryChanged(categoryIndex => {
+  updateTopicControls(categoryIndex);
+  updateBubbleDetail(categoryIndex);
 });
-
-// setup circle scale legends
-const bubbleScaleLegend = d3.select<SVGElement, {}>("#bubble-legend-scale");
-
-const bottom = 100;
-const lineHeight = 10;
-const textLeftPadding = 6;
-
-const radius50 = getBubbleCircleRadius(5000000);
-bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-50")
-  .attr("r", radius50)
-  .attr("cx", 100)
-  .attr("cy", bottom - radius50);
-
-bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-50-label")
-  .attr("x", 150 + textLeftPadding + radius50)
-  .attr("y", bottom - (radius50 * 2) + (lineHeight / 2));
-
-bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-50-path")
-  .attr("d", `M 100 ${bottom - (radius50 * 2)} L ${150 + radius50} ${bottom - (radius50 * 2)}`);
-
-const radius15 = getBubbleCircleRadius(1500000);
-bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-15")
-  .attr("r", radius15)
-  .attr("cx", 100)
-  .attr("cy", bottom - radius15);
-
-bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-15-label")
-  .attr("x", 150 + textLeftPadding + radius50)
-  .attr("y", bottom - (radius15 * 2) + (lineHeight / 2));
-
-bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-15-path")
-  .attr("d", `M 100 ${bottom - (radius15 * 2)} L ${150 + radius50} ${bottom - (radius15 * 2)}`);
-
-const radius02 = getBubbleCircleRadius(200000);
-bubbleScaleLegend.select<SVGCircleElement>("#bubble-legend-scale-02")
-  .attr("r", radius02)
-  .attr("cx", 100)
-  .attr("cy", bottom - radius02);
-
-bubbleScaleLegend.select<SVGTextElement>("#bubble-legend-scale-02-label")
-  .attr("x", 150 + textLeftPadding + radius50)
-  .attr("y", bottom - (radius02 * 2) + (lineHeight / 2));
-
-bubbleScaleLegend.select<SVGPathElement>("#bubble-legend-scale-02-path")
-  .attr("d", `M 100 ${bottom - (radius02 * 2)} L ${150 + radius50} ${bottom - (radius02 * 2)}`);

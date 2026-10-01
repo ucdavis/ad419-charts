@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="75px" height="75px" viewBox="0 0 75 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>favicon</title>
+    <defs>
+        <path d="M0,0 L75,0 L75,75 L0,75 Z" id="path-1"></path>
+    </defs>
+    <g id="favicon" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd">
+        <use fill="#FFFFFF" xlink:href="#path-1"></use>
+        <g id="caes-wordmark-copy" stroke-width="1" transform="translate(-1, -1.4014)">
+            <path d="M52.630017,29.2583374 C53.1204862,20.5228053 51.4828525,12.1700235 48.1901417,4.67817347 C47.4841943,3.07021167 46.6746123,1.52073987 45.8209085,0 L0,0 L0,78 L13.1995738,78 C34.848968,72.0873798 51.2971309,52.9006091 52.630017,29.2583374" id="Fill-1" fill="#FFBF00"></path>
+            <path d="M51.1380875,0 C55.8919452,6.57653296 59.3755081,14.2233302 61.1044635,22.6910397 C65.4017128,43.7515425 57.8907613,64.4703406 43.1202494,78 L78,78 L78,0 L51.1380875,0" id="Fill-2" fill="#002855"></path>
+        </g>
+    </g>
+</svg>

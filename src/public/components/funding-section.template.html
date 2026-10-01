@@ -1,68 +1,87 @@
-    <div class="funding">
-      <div class="site-container">
-        <div class="section-intro">
-          <h1>Research Projects</h1>
-          <h2><span id="spend-total" class="total-span topic-color-text">$-.- Million</span> - Expenditures</h2>
-          <p>Research conducted with Agricultural Experiment Station funding at the UC Davis College of Agricultural and Environmental Sciences touches the people of California and the world beyond. Projects range widely from topics such as ‘applied freshwater predator-prey ecology’ to ‘designing healthy youth environments.’ <b>Hover over the circles to view details about project titles, funding and associated departments.</b></p>
-        </div>
+<div class="py-28">
+  <div class="site-container">
+    <div class="max-w-7xl">
+      <p
+        class="mb-1 text-sm font-semibold tracking-widest text-base-content/70 uppercase"
+      >
+        Agricultural Experiment Station
+      </p>
+      <h1
+        class="mb-5 text-3xl leading-none font-bold tracking-tight text-base-content"
+      >
+        Research projects
+      </h1>
+      <p class="max-w-prose text-xl mb-4">
+        Research conducted with Agricultural Experiment Station funding at the
+        UC Davis College of Agricultural and Environmental Sciences touches the
+        people of California and the world beyond. Projects range widely from
+        applied freshwater predator-prey ecology to designing healthy youth
+        environments.
+      </p>
+    </div>
 
-        <div class="flex flex-wrap items-center justify-between">
-          <div id="bubble-summary-legend" class="left-portion flex-md">
-            <div class="chart-card legend">
-              <div class="cardheader flex topic-border-color">
-                <h2 class="topic-header topic-color-text title">Agriculture</h2>
-                <img src="/media/seed-intro.svg" class="icon" alt="icon">
-              </div>
-              <h3>Funding Information</h3>
-              <p>Total Funding: <span class="sans-bold topic-color-text total">$- Million</span>
-              <p># of Projects: <span class="sans-bold topic-color-text count">-</span></p>
-              <div class="departments">
-                <h3>Departments</h3>
-              </div>
-            </div>
-            <div class="legend-topic">
-              <h3>Legend</h3>
-              <p>Each circle represents a research project in a given topic.</p>
-              <ul>
-                <li>
-                  <img src="/media/green-legend.svg" alt="" aria-hidden="true">
-                  Agriculture
-                </li>
-                <li>
-                  <img src="/media/blue-legend.svg" alt="" aria-hidden="true">
-                  Environment
-                </li>
-                <li>
-                  <img src="/media/yellow-legend.svg" alt="" aria-hidden="true">
-                  Human and Social
-                </li>
-              </ul>
-            </div>
-            <div class="legend-size">
-              <p>Size of each circle correlates to the funding that a project receives.</p>
-              <svg id="bubble-legend-scale" width="400" height="200">
-                <g>
-                  <circle id="bubble-legend-scale-50" fill="none" stroke="rgb(61, 61, 61)" stroke-width="1" stroke-dasharray="2,2" ></circle>
-                  <path id="bubble-legend-scale-50-path" stroke="rgb(61, 61, 61)" stroke-width="1"></path>
-                  <text id="bubble-legend-scale-50-label" class="scale-label" text-anchor="start">$5 Million</text>
-                </g>
-                <g>
-                  <circle id="bubble-legend-scale-15" r="0" cx="0" cy="0" fill="none" stroke="rgb(61, 61, 61)" stroke-width="1" stroke-dasharray="2,2" ></circle>
-                  <path id="bubble-legend-scale-15-path" stroke="rgb(61, 61, 61)" stroke-width="1"></path>
-                  <text id="bubble-legend-scale-15-label" class="scale-label" text-anchor="start">$1.5 Million</text>
-                </g>
-                <g>
-                  <circle id="bubble-legend-scale-02" r="0" cx="0" cy="0" fill="none" stroke="rgb(61, 61, 61)" stroke-width="1" stroke-dasharray="2,2" ></circle>
-                  <path id="bubble-legend-scale-02-path" stroke="rgb(61, 61, 61)" stroke-width="1"></path>
-                  <text id="bubble-legend-scale-02-label" class="scale-label" text-anchor="start">$0.2 Million</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <div class="mx-auto right-portion">
-            <div id="bubble" class="chart"></div>
-          </div>
+    <div class="grid items-start gap-8 lg:grid-cols-4">
+      <aside
+        id="bubble-detail"
+        class="self-start bg-base-100 p-7 shadow-lg lg:col-span-1"
+        aria-live="polite"
+      >
+        <div id="bubble-detail-empty">
+          <h2 class="text-xl leading-tight font-bold">
+            Explore research by topic
+          </h2>
+          <p class="mt-4 mb-0 text-base leading-relaxed">
+            Choose a topic to bring its projects together and see its funding
+            and departments.
+          </p>
+          <p class="mt-2 mb-0 text-base leading-relaxed">
+            Hover over the circles to view project titles, funding, and
+            associated departments.
+          </p>
         </div>
-
+        <div id="bubble-detail-summary" class="hidden">
+          <div
+            id="bubble-detail-header"
+            class="mb-6 flex items-center justify-between border-b pb-3"
+          >
+            <h2
+              id="bubble-detail-category"
+              class="text-2xl leading-none font-bold"
+            ></h2>
+            <img
+              id="bubble-detail-icon"
+              class="h-12 w-12 object-contain"
+              src=""
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+          <h3 class="text-xl font-bold text-base-content">
+            Funding information
+          </h3>
+          <p class="mt-2 mb-1 text-lg">
+            Total funding:
+            <span id="bubble-detail-total" class="font-semibold"></span>
+          </p>
+          <p class="mb-6 text-lg">
+            # of projects:
+            <span id="bubble-detail-project-count" class="font-semibold"></span>
+          </p>
+          <h3 class="mb-2 text-xl font-bold text-base-content">Departments</h3>
+          <ul
+            id="bubble-detail-departments"
+            class="space-y-1 text-lg leading-relaxed"
+          ></ul>
+        </div>
+      </aside>
+      <div class="min-w-0 lg:col-span-3">
+        <div id="bubble" class="chart mx-auto max-w-4xl"></div>
+        <p
+          class="mt-4 text-center text-sm font-semibold tracking-wide text-base-content/70 uppercase"
+        >
+          Circle size represents total project funding
+        </p>
       </div>
     </div>
+  </div>
+</div>
