@@ -394,14 +394,6 @@
   .research-details .article-department {
     font-family: "proxima-nova-b", sans-serif;
   }
-  .research-details .article-caption {
-    margin-top: 0.5rem;
-    color: color-mix(in oklab, var(--color-base-content) 68%, transparent);
-    font-size: 0.875rem;
-    font-style: italic;
-    line-height: 1.4;
-  }
-
   .story-picker {
     display: grid;
     grid-auto-columns: minmax(14rem, 17rem);
@@ -760,22 +752,6 @@
     border-right: 1px solid #ccd4e0;
   }
 
-  .primary-color {
-    color: #002855;
-  }
-
-  .secondary-color {
-    color: #daaa00;
-  }
-
-  .accent-color {
-    color: #ccd4e0;
-  }
-
-  .a-color {
-    color: rgba(0, 40, 85, 0.8);
-  }
-
   .topic-spacer {
     margin-right: 22px;
   }
@@ -790,10 +766,6 @@
 
   #topic-bar .topic-selector-control:is(.btn-success, .btn-info, .btn-warning) img {
     filter: brightness(0) invert(1);
-  }
-
-  .secondary-font {
-    color: rgba(31, 31, 31, 0.8);
   }
 
   body[data-topic="AG"] .topic-color-text {
@@ -944,10 +916,6 @@
   .citation a:hover {
     color: #002855;
     text-decoration: underline;
-  }
-
-  .tertiary-font {
-    color: rgba(31, 31, 31, 0.4);
   }
 
   .sans-reg {
