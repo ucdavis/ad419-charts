@@ -1,7 +1,6 @@
 const templates: { [tagName: string]: string } = {
   "site-hero": require("./site-hero.template.html"),
   "research-overview": require("./research-overview.template.html"),
-  "topic-selector": require("./topic-selector.template.html"),
   "funding-section": require("./funding-section.template.html"),
   "geography-section": require("./geography-section.template.html"),
   "contributors-section": require("./contributors-section.template.html"),

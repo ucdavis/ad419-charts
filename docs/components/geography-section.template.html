@@ -2,114 +2,127 @@
   <div class="site-container">
     <div class="max-w-7xl">
       <p
-        class="mb-3 text-xl font-semibold tracking-widest text-base-content/50 uppercase"
+        class="mb-3 text-sm font-semibold tracking-widest text-base-content/70 uppercase"
       >
         California research footprint
       </p>
       <h1
-        class="mb-5 text-5xl leading-none font-bold tracking-tight text-base-content md:text-6xl"
+        class="mb-5 text-3xl leading-none font-bold tracking-tight text-base-content"
       >
         Geographical Impact
       </h1>
-      <p
-        class="text-3xl leading-snug font-semibold text-base-content md:text-4xl"
-      >
+      <p class="text-xl max-w-prose">
         UC Davis researchers are solving California’s challenges in sustainable
         agriculture, environmental conservation, nutritious food, clean water
         and human health.
       </p>
     </div>
     <div
-      class="my-10 grid grid-cols-1 gap-px overflow-hidden rounded-box border border-primary/15 bg-primary/15 sm:grid-cols-3"
+      class="my-10 py-3 grid grid-cols-1 gap-px overflow-hidden border-t border-b border-main-border sm:grid-cols-3"
       aria-label="California research impact metrics"
     >
-      <div class="flex flex-col gap-1 bg-base-100 px-6 py-5">
+      <div class="flex flex-col gap-1 bg-base-100 py-5">
         <span
           id="map-total"
-          class="total-span topic-color-text text-4xl leading-none font-bold text-base-content md:text-5xl"
+          class="text-2xl leading-none font-bold text-base-content"
           >$-.- million</span
         >
         <span
-          class="text-xl font-semibold tracking-wider text-base-content/70 uppercase"
+          class="text-base font-semibold tracking-wider text-base-content/70 uppercase"
           >Research investment</span
         >
       </div>
       <div class="flex flex-col gap-1 bg-base-100 px-6 py-5">
         <span
           id="map-metric-projects"
-          class="text-4xl leading-none font-bold text-base-content md:text-5xl"
+          class="text-2xl leading-none font-bold text-base-content"
           >-</span
         >
         <span
-          class="text-lg font-semibold tracking-wider text-base-content/70 uppercase"
+          class="text-base font-semibold tracking-wider text-base-content/70 uppercase"
           >Research projects</span
         >
       </div>
       <div class="flex flex-col gap-1 bg-base-100 px-6 py-5">
-        <span
-          class="text-4xl leading-none font-bold text-base-content md:text-5xl"
+        <span class="text-2xl leading-none font-bold text-base-content"
           >300+</span
         >
         <span
-          class="text-lg font-semibold tracking-wider text-base-content/70 uppercase"
+          class="text-base font-semibold tracking-wider text-base-content/70 uppercase"
           >Faculty represented</span
         >
       </div>
     </div>
-    <div class="grid items-stretch gap-8 lg:grid-cols-3">
+    <div class="grid items-start gap-8 lg:grid-cols-4">
       <aside
         id="map-detail"
-        class="flex min-h-full flex-col rounded-box border border-primary/15 border-t-8 border-t-primary bg-base-100 p-7 shadow-xl lg:col-span-1"
+        class="self-start bg-base-100 p-7 shadow-lg lg:col-span-1"
         aria-live="polite"
       >
-        <div
-          class="text-lg font-semibold tracking-wider text-base-content/70 uppercase"
-        >
-          California research
+        <div id="map-detail-empty">
+          <h2 class="text-xl leading-tight font-bold">
+            Explore research by topic
+          </h2>
+          <p class="mt-4 mb-0 text-base leading-relaxed">
+            Select a marker to see funding totals, project counts, and
+            departments for its research area.
+          </p>
         </div>
-        <div
-          class="mt-5 mb-7 flex items-center gap-3 text-2xl font-bold text-base-content"
-        >
-          <img
-            id="map-detail-icon"
-            class="h-12 w-12 object-contain"
-            src="/media/seed-intro.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span id="map-detail-category">Explore the map</span>
+        <div id="map-detail-summary" class="hidden">
+          <div
+            id="map-detail-header"
+            class="mb-6 flex items-center justify-between border-b pb-3"
+          >
+            <h2
+              id="map-detail-category"
+              class="text-2xl leading-none font-bold"
+            ></h2>
+            <img
+              id="map-detail-icon"
+              class="h-12 w-12 object-contain"
+              src=""
+              alt=""
+              aria-hidden="true"
+            />
+          </div>
+          <h3 class="text-xl font-bold text-base-content">
+            Funding information
+          </h3>
+          <p class="mb-1 text-lg">
+            Total Funding:
+            <span id="map-detail-total" class="font-semibold"></span>
+          </p>
+          <p class="mb-6 text-lg">
+            # of Projects:
+            <span id="map-detail-project-count" class="font-semibold"></span>
+          </p>
+          <h3 class="mb-2 text-xl font-bold text-base-content">Departments</h3>
+          <ul
+            id="map-detail-departments"
+            class="space-y-1 text-lg leading-relaxed"
+          ></ul>
         </div>
-        <h2
-          id="map-detail-title"
-          class="mb-4 text-4xl leading-tight font-bold text-base-content"
-        >
-          Discover research across California
-        </h2>
-        <p
-          id="map-detail-department"
-          class="mb-4 text-3xl leading-relaxed text-base-content"
-        >
-          Select a research marker to see the people and departments behind the
-          work.
-        </p>
-        <p
-          id="map-detail-director"
-          class="mb-4 text-3xl font-bold text-base-content/75"
-        ></p>
-        <p
-          class="mt-auto border-t border-primary/15 pt-6 text-xl leading-relaxed text-base-content/70"
-        >
-          Hover over a marker to preview it. Select one to filter the page by
-          research area.
-        </p>
       </aside>
-      <div class="min-w-0 pt-1 lg:col-span-2">
+      <div id="map-panel" class="relative min-w-0 pt-1 lg:col-span-3">
+        <div id="map" class="chart mx-auto max-w-xl"></div>
         <div
-          class="mb-4 text-center text-lg font-semibold tracking-wider text-base-content/70 uppercase"
+          id="map-tooltip"
+          class="pointer-events-none absolute z-10 hidden w-80 border border-main-border bg-base-100 p-5 text-center shadow-xl"
+          role="tooltip"
         >
-          Explore the research being done across California
+          <p
+            id="map-tooltip-department"
+            class="mb-4 border-b border-main-border pb-3 text-sm font-medium tracking-wide text-base-content/65 uppercase"
+          ></p>
+          <p
+            id="map-tooltip-title"
+            class="mb-2 text-xl font-semibold leading-tight text-base-content"
+          ></p>
+          <p
+            id="map-tooltip-director"
+            class="mb-0 text-base font-semibold italic"
+          ></p>
         </div>
-        <div id="map" class="chart"></div>
       </div>
     </div>
   </div>

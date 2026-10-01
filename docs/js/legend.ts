@@ -1,7 +1,6 @@
 import * as d3 from "d3";
 import {
   onSelectedCategoryChanged,
-  getSelectedCategory,
   getCategories,
   getProjects,
   getDepartments
@@ -19,6 +18,11 @@ const sumTotal = projects.reduce((prev, d) => prev + d.total, 0);
 // category change
 const legends = d3.selectAll("#bubble-summary-legend");
 const mapProjectCount = d3.select("#map-metric-projects");
+const mapResearchTotal = d3.select("#map-total");
+
+mapResearchTotal.text(`$${(sumTotal / 1000000).toFixed(1)} million`);
+mapProjectCount.text(projects.length);
+
 onSelectedCategoryChanged(categoryIndex => {
   if (categoryIndex < 0) {
     // set new title
@@ -35,7 +39,6 @@ onSelectedCategoryChanged(categoryIndex => {
     // get count, set text
     const count = projects.reduce((prev, p) => prev + 1, 0);
     legends.select(".count").text(count);
-    mapProjectCount.text(count);
 
     // hide departments
     legends
@@ -68,7 +71,6 @@ onSelectedCategoryChanged(categoryIndex => {
     0
   );
   legends.select(".count").text(count);
-  mapProjectCount.text(count);
 
   // remove all old departments
   legends

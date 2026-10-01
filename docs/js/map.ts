@@ -4,20 +4,22 @@ import * as topojson from "topojson";
 import { GeometryCollection, Topology } from "topojson-specification";
 import { Polygon, Point } from "geojson";
 
-import { getCategories, onSelectedCategoryChanged, setSelectedCategory } from "./data";
+import { getCategories, getDepartments, getProjects } from "./data";
 
 const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
 const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
 const counties_data = require("./map-counties-ca-topo.json") as Topology;
 
 const categories = getCategories();
+const departments = getDepartments();
+const projects = getProjects();
 
 const chartSelector = "#map";
 const width = 700;
 const height = 800;
 
-const iconSize = 22;
-const markerRadius = 18;
+const iconSize = 24;
+const markerRadius = 20;
 const zoomFactor = 1.18;
 
 interface IIconData {
@@ -319,6 +321,7 @@ const icons = svg.append("svg:g")
     .attr("class", "map-marker")
     .attr("role", "button")
     .attr("tabindex", 0)
+    .attr("aria-pressed", "false")
     .attr("aria-label", d => `${d.title}, ${d.department}`);
 
 // Marker discs keep the geography legible while preserving a clear category signal.
@@ -366,11 +369,21 @@ counties.selectAll("path")
     .attr("stroke-dashoffset", 0);
 
 const mapDetail = d3.select("#map-detail");
+const mapDetailEmpty = d3.select("#map-detail-empty");
+const mapDetailSummary = d3.select("#map-detail-summary");
+const mapDetailHeader = d3.select("#map-detail-header");
 const mapDetailIcon = d3.select<HTMLImageElement, {}>("#map-detail-icon");
 const mapDetailCategory = d3.select("#map-detail-category");
-const mapDetailTitle = d3.select("#map-detail-title");
-const mapDetailDepartment = d3.select("#map-detail-department");
-const mapDetailDirector = d3.select("#map-detail-director");
+const mapDetailTotal = d3.select("#map-detail-total");
+const mapDetailProjectCount = d3.select("#map-detail-project-count");
+const mapDetailDepartments = d3.select("#map-detail-departments");
+const mapPanel = d3.select<HTMLElement, {}>("#map-panel");
+const mapTooltip = d3.select<HTMLDivElement, {}>("#map-tooltip");
+const mapTooltipDepartment = d3.select("#map-tooltip-department");
+const mapTooltipTitle = d3.select("#map-tooltip-title");
+const mapTooltipDirector = d3.select("#map-tooltip-director");
+
+let activeMarker: SVGGElement | null = null;
 
 function setMarkerScale(marker: SVGGElement, scale: number) {
     const selection = d3.select<SVGGElement, IIconData>(marker);
@@ -388,87 +401,149 @@ function setMarkerScale(marker: SVGGElement, scale: number) {
         .attr("height", iconSize * scale);
 }
 
-function updateMapDetail(data: IIconData) {
+function showMapTooltip(data: IIconData) {
     const category = categories[data.categoryIndex || 0];
+    const mapPanelElement = mapPanel.node();
+    const svgElement = svg.node();
+    const mapTooltipElement = mapTooltip.node();
+
+    if (!mapPanelElement || !svgElement || !mapTooltipElement) return;
+
+    mapTooltip
+        .classed("hidden", false)
+        .attr("data-topic", data.categoryKey);
+    mapTooltipDepartment.text(data.department);
+    mapTooltipTitle.text(data.title);
+    mapTooltipDirector
+        .text(data.director)
+        .style("color", category.color || "");
+
+    const mapPanelBounds = mapPanelElement.getBoundingClientRect();
+    const svgBounds = svgElement.getBoundingClientRect();
+    const tooltipWidth = mapTooltipElement.offsetWidth;
+    const tooltipHeight = mapTooltipElement.offsetHeight;
+    const markerLeft = svgBounds.left - mapPanelBounds.left
+        + ((data.left || 0) / width) * svgBounds.width;
+    const markerTop = svgBounds.top - mapPanelBounds.top
+        + ((data.top || 0) / height) * svgBounds.height;
+    const tooltipLeft = Math.max(12, Math.min(
+        markerLeft - (tooltipWidth / 2),
+        mapPanelElement.clientWidth - tooltipWidth - 12
+    ));
+    const spaceAboveMarker = markerTop - tooltipHeight - 16;
+    const markerRadiusInPixels = markerRadius * (svgBounds.width / width) * zoomFactor;
+    const tooltipTop = spaceAboveMarker >= 12
+        ? spaceAboveMarker
+        : Math.max(12, Math.min(
+            markerTop + markerRadiusInPixels + 16,
+            mapPanelElement.clientHeight - tooltipHeight - 12
+        ));
+
+    mapTooltip
+        .style("left", `${tooltipLeft}px`)
+        .style("top", `${tooltipTop}px`);
+}
+
+function hideMapTooltip() {
+    mapTooltip.classed("hidden", true);
+}
+
+function resetMapSelection() {
+    activeMarker = null;
+    icons
+        .classed("inactive", false)
+        .classed("map-marker--active", false)
+        .attr("aria-pressed", "false");
+
+    mapDetail.attr("data-topic", null);
+    mapDetail.style("border-top-color", null);
+    mapDetailHeader.style("border-color", null);
+    mapDetailEmpty.classed("hidden", false);
+    mapDetailSummary.classed("hidden", true);
+}
+
+function updateMapSummary(marker: SVGGElement, data: IIconData) {
+    const categoryIndex = data.categoryIndex || 0;
+    const category = categories[categoryIndex];
+    const categoryProjects = projects.filter(project => project.categoryIndex === categoryIndex);
+    const categoryTotal = categoryProjects.reduce((total, project) => total + project.total, 0);
+    const categoryDepartments = departments.filter(department => department.categoryIndex === categoryIndex);
+
+    activeMarker = marker;
+    icons
+        .classed("inactive", icon => icon.categoryIndex !== categoryIndex)
+        .classed("map-marker--active", function() {
+            return this === marker;
+        })
+        .attr("aria-pressed", function() {
+            return this === marker ? "true" : "false";
+        });
 
     mapDetail.attr("data-topic", data.categoryKey);
+    if (category.color) {
+        mapDetail.style("border-top-color", category.color);
+        mapDetailHeader.style("border-color", category.color);
+    } else {
+        mapDetail.style("border-top-color", null);
+        mapDetailHeader.style("border-color", null);
+    }
     mapDetailIcon
-        .classed("hidden", false)
         .attr("src", category.icon || "");
     mapDetailCategory.text(category.name);
-    mapDetailTitle.text(data.title);
-    mapDetailDepartment.text(data.department);
-    mapDetailDirector.text(data.director);
-}
-
-function updateMapOverview(categoryIndex: number) {
-    const category = categories[categoryIndex];
-    const isCategorySelected = categoryIndex >= 0 && !!category;
-
-    mapDetail.attr("data-topic", isCategorySelected ? category.key : "");
-    mapDetailIcon
-        .classed("hidden", !isCategorySelected)
-        .attr("src", isCategorySelected ? category.icon || "" : "");
-    mapDetailCategory.text(isCategorySelected ? category.name : "Explore the map");
-    mapDetailTitle.text(isCategorySelected
-        ? `Explore ${category.name.toLowerCase()} research`
-        : "Discover research across California");
-    mapDetailDepartment.text(isCategorySelected
-        ? "Select a marker to learn about the people and departments behind this work."
-        : "Select a research marker to see the people and departments behind the work.");
-    mapDetailDirector.text("");
-}
-
-function setActiveMarker(marker: SVGGElement) {
-    icons.classed("map-marker--active", function() {
-        return this === marker;
-    });
+    mapDetailTotal
+        .text(`$${(categoryTotal / 1000000).toFixed(1)}M`)
+        .style("color", category.color || "");
+    mapDetailProjectCount
+        .text(categoryProjects.length)
+        .style("color", category.color || "");
+    mapDetailDepartments
+        .selectAll("li")
+        .remove();
+    mapDetailDepartments
+        .selectAll("li")
+        .data(categoryDepartments)
+        .enter()
+        .append("li")
+        .text(department => department.name);
+    mapDetailEmpty.classed("hidden", true);
+    mapDetailSummary.classed("hidden", false);
 }
 
 icons
     .on("mouseenter", function(data: IIconData) {
-        setActiveMarker(this as SVGGElement);
         setMarkerScale(this as SVGGElement, zoomFactor);
-        updateMapDetail(data);
+        showMapTooltip(data);
     })
     .on("mouseleave", function() {
         setMarkerScale(this as SVGGElement, 1);
-        icons.classed("map-marker--active", false);
+        hideMapTooltip();
     })
     .on("focus", function(data: IIconData) {
-        setActiveMarker(this as SVGGElement);
         setMarkerScale(this as SVGGElement, zoomFactor);
-        updateMapDetail(data);
+        showMapTooltip(data);
     })
     .on("blur", function() {
         setMarkerScale(this as SVGGElement, 1);
-        icons.classed("map-marker--active", false);
+        hideMapTooltip();
     })
     .on("click", function(data: IIconData) {
-        setSelectedCategory(data.categoryKey);
-        setActiveMarker(this as SVGGElement);
-        updateMapDetail(data);
+        if (activeMarker === this) {
+            resetMapSelection();
+            return;
+        }
+        updateMapSummary(this as SVGGElement, data);
     })
     .on("keydown", function(data: IIconData) {
         const event = (d3 as any).event as KeyboardEvent;
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            setSelectedCategory(data.categoryKey);
-            setActiveMarker(this as SVGGElement);
-            updateMapDetail(data);
+            if (activeMarker === this) {
+                resetMapSelection();
+                return;
+            }
+            updateMapSummary(this as SVGGElement, data);
         }
     });
-
-// category change
-onSelectedCategoryChanged((categoryIndex) => {
-    if (categoryIndex < 0) {
-        icons.classed("inactive", false);
-        updateMapOverview(categoryIndex);
-        return;
-    }
-    icons.classed("inactive", d => d.categoryIndex !== categoryIndex);
-    updateMapOverview(categoryIndex);
-});
 
 // drag
 // icons.call(

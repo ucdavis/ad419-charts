@@ -3,8 +3,6 @@ import "../css/generated.css";
 
 import "es6-shim";
 import "innersvg-polyfill";
-import stickybits from "stickybits";
-stickybits(".sticky-top");
 
 import * as $ from "jquery";
 import "slick-carousel";
@@ -15,21 +13,9 @@ import "./map";
 import "./sources";
 import "./totals";
 
-import { setSelectedCategory, getSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
+import { setSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
 
-const $topicBar = $("#topic-bar");
 const $root = $("html body");
-function smoothScroll(href: string) {
-    const target = ($(href).offset() || { top: 0 }).top;
-    const offset = $topicBar.height() || 0;
-    const margin = 50;
-
-    $root.animate({
-        scrollTop: target - offset - margin
-    }, 500, function () {
-        // window.location.hash = href;
-    });
-}
 
 const categories = getCategories();
 function handleTopicChanged(categoryIndex: number) {
@@ -42,45 +28,10 @@ function handleTopicChanged(categoryIndex: number) {
     // decorate body
     $root.attr("data-topic", topic);
 
-    // decorate topic button
-    $(".topic-btn").each(function() {
-        const t = $(this).data("topic");
-        if (t === topic) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
-    });
-
     // set selected article
     showRandomArticle(topic);
 }
 onSelectedCategoryChanged(handleTopicChanged);
-
-function setupTopicSelector() {
-    // attach listeners
-    $(".topic-btn").click(function() {
-        const categoryIndex = getSelectedCategory();
-        let selectedTopic = "";
-        const category = categories[categoryIndex];
-        if (category) {
-            selectedTopic = category.key;
-        }
-
-        const topic = $(this).data("topic");
-        if (topic === selectedTopic) {
-            setSelectedCategory("");
-        } else {
-            setSelectedCategory(topic);
-        }
-
-    });
-
-    $(".topic-all").click(function(e) {
-        e.preventDefault();
-        setSelectedCategory("");
-    });
-}
 
 const $carousel = $(".lead_carousel");
 function setupSlideshow() {
@@ -154,7 +105,6 @@ function setArticle(href: string) {
 }
 
 $().ready(() => {
-    setupTopicSelector();
     setupSlideshow();
     setupArticleSelect();
 
