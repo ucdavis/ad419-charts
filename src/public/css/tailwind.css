@@ -276,10 +276,6 @@
     padding: 6rem 0rem;
   }
 
-  .sources {
-    padding: 6rem 0rem;
-  }
-
   #map #states,
   #map #counties {
     fill: color-mix(in oklab, var(--color-ucd-tahoe) 52%, #fff);
@@ -834,37 +830,6 @@
   }
   body[data-topic="HUMAN"] .topic-border-color {
     border-color: var(--color-human);
-  }
-
-  #sources {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;
-    align-content: flex-start;
-    margin: 0 auto;
-  }
-  #sources .chart-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-  }
-  #sources .chart-container .chart {
-    flex: 1;
-  }
-
-  .chart-label {
-    font-family: "proxima-nova-b", sans-serif;
-    text-align: center;
-    opacity: 1;
-    transition: opacity 250ms;
-    color: rgba(31, 31, 31, 0.99);
-  }
-  .chart-label.opaque {
-    opacity: 0;
   }
 
   .legend.hidden {
