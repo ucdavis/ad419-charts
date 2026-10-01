@@ -324,6 +324,16 @@ const icons = svg.append("svg:g")
     .attr("aria-pressed", "false")
     .attr("aria-label", d => `${d.title}, ${d.department}`);
 
+// The glow sits beneath the marker disc so an active selection can breathe without
+// animating the icon itself.
+icons
+    .append<SVGCircleElement>("svg:circle")
+    .attr("class", "marker-glow")
+    .attr("cx", d => d.left || 0)
+    .attr("cy", d => d.top || 0)
+    .attr("r", markerRadius + 5)
+    .attr("fill", d => d.categoryColor || "none");
+
 // Marker discs keep the geography legible while preserving a clear category signal.
 const iconCircles = icons
     .append<SVGCircleElement>("svg:circle")
@@ -365,7 +375,7 @@ counties.selectAll("path")
 // load in animation
 counties.selectAll("path")
     .transition()
-    .duration(3000)
+    .duration(1400)
     .attr("stroke-dashoffset", 0);
 
 const mapDetail = d3.select("#map-detail");
@@ -472,9 +482,7 @@ function updateMapSummary(marker: SVGGElement, data: IIconData) {
     activeMarker = marker;
     icons
         .classed("inactive", icon => icon.categoryIndex !== categoryIndex)
-        .classed("map-marker--active", function() {
-            return this === marker;
-        })
+        .classed("map-marker--active", icon => icon.categoryIndex === categoryIndex)
         .attr("aria-pressed", function() {
             return this === marker ? "true" : "false";
         });

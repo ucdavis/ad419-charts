@@ -358,13 +358,33 @@
   }
 
   #map #counties {
-    stroke: color-mix(in oklab, var(--color-ucd-gunrock) 18%, #fff);
-    stroke-opacity: 0.72;
+    stroke: #fff;
+    stroke-opacity: 0.95;
+    stroke-width: 2px;
   }
 
   #map #icons .map-marker {
     cursor: pointer;
     transition: opacity 180ms ease;
+  }
+
+  #map #icons .map-marker:focus {
+    outline: none;
+  }
+
+  #map #icons .map-marker:focus-visible .marker-disc {
+    stroke: var(--color-base-content);
+    stroke-width: 4px;
+  }
+
+  #map #icons .marker-glow {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  #map #icons .map-marker--active .marker-glow {
+    animation: map-marker-glow-pulse 2.8s ease-out infinite;
   }
 
   #map #icons .marker-disc {
@@ -378,6 +398,19 @@
 
   #map #icons .inactive {
     opacity: 0.18;
+  }
+
+  @keyframes map-marker-glow-pulse {
+    0%,
+    100% {
+      opacity: 0.16;
+      transform: scale(0.92);
+    }
+
+    55% {
+      opacity: 0.48;
+      transform: scale(1.28);
+    }
   }
 
   .articles {
