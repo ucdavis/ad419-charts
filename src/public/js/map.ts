@@ -3,6 +3,10 @@ import * as geo from "d3-geo";
 import * as topojson from "topojson";
 import { GeometryCollection, Topology } from "topojson-specification";
 import { Polygon, Point } from "geojson";
+import mapData from "./map-data.json";
+import stateData from "./map-geo.json";
+import countiesData from "./map-counties-ca-topo.json";
+import iconImages from "./mapicons";
 
 import {
     getCategories,
@@ -13,9 +17,9 @@ import {
     setSelectedCategory,
 } from "./data";
 
-const data = require("./map-data.json") as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
-const state_data = require("./map-geo.json") as geo.ExtendedFeature<Polygon, any>;
-const counties_data = require("./map-counties-ca-topo.json") as Topology;
+const data = mapData as geo.ExtendedFeatureCollection<geo.ExtendedFeature<Point, any>>;
+const state_data = stateData as geo.ExtendedFeature<Polygon, any>;
+const counties_data = countiesData as Topology;
 
 const categories = getCategories();
 const departments = getDepartments();
@@ -51,7 +55,6 @@ const projection = geo.geoMercator()
     .translate([175, 306]);
 
 // setup icons
-const iconImages = require("../media/mapicons").default;
 const iconsData: IIconData[] = [
     {
         svg: iconImages.bigwater,

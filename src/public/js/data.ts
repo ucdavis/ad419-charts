@@ -1,6 +1,11 @@
 import { groupBy } from "../utils/array";
+import categoryJson from "./categories.json";
+import departmentJson from "./departments.json";
+import sourceJson from "./sources.json";
+import projectJson from "./projects.json";
+import projectTotalsJson from "./projectTotals.json";
+import sourceTotalsByDepartmentJson from "./departmentTotals.json";
 
-const categoryJson: ICategory[] = require("./categories.json");
 const categoryThemeVariables: { [key: string]: string } = {
     AG: "--color-ag",
     ENV: "--color-env",
@@ -15,7 +20,6 @@ const categories = categoryJson.map(category => {
 });
 
 // transform into array
-const departmentJson: any = require("./departments.json");
 const departments: IDepartment[] = Object.keys(departmentJson).map((k) => {
     const categoryKey = departmentJson[k].category;
     const categoryIndex = categories.findIndex(c => c.key === categoryKey);
@@ -28,7 +32,6 @@ const departments: IDepartment[] = Object.keys(departmentJson).map((k) => {
 }).filter(d => d.categoryIndex > -1);
 
 // transform into array
-const sourceJson: any = require("./sources.json");
 const sources: ISource[] = Object.keys(sourceJson).map((k) => {
     return {
         key: k,
@@ -38,8 +41,6 @@ const sources: ISource[] = Object.keys(sourceJson).map((k) => {
 });
 
 // parse projects
-const projectJson: any = require("./projects.json");
-const projectTotalsJson: any[] = require("./projectTotals.json");
 const projects: IProject[] = [];
 for (const p of projectTotalsJson) {
     const project = projectJson[p.project];
@@ -62,7 +63,6 @@ for (const p of projectTotalsJson) {
     });
 }
 
-const sourceTotalsByDepartmentJson: any = require("./departmentTotals.json");
 const sourceTotals: ISourceTotal[] = [];
 for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
 
@@ -70,7 +70,7 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
     const source = sources.find(s => s.key === sourceKey);
 
     if (source === undefined) {
-        if (process.env.NODE_ENV === "development") {
+        if (import.meta.env.DEV) {
             console.info("Could not find source: ", sourceKey);
         }
         continue;
@@ -88,7 +88,7 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
     for (const departmentKey of Object.keys(totals)) {
         const department = departments.find(d => d.key === departmentKey);
         if (department === undefined) {
-            if (process.env.NODE_ENV === "development") {
+            if (import.meta.env.DEV) {
                 console.info("Could not find department: ", departmentKey);
             }
             continue;
@@ -110,7 +110,7 @@ for (const sourceKey of Object.keys(sourceTotalsByDepartmentJson)) {
         // find and update category entry
         const category = result.byCategory.find(c => c.key === department.categoryKey);
         if (category === undefined) {
-            if (process.env.NODE_ENV === "development") {
+            if (import.meta.env.DEV) {
                 console.info("Could not find category: ", department.categoryKey);
             }
             continue;

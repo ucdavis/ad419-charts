@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import * as force from "d3-force";
-import * as Color from "color";
+import Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 
 import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject, setSelectedCategory } from "./data";

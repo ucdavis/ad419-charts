@@ -1,10 +1,9 @@
 import "../components";
-import "../css/generated.css";
+import "../css/tailwind.css";
 
-import "es6-shim";
 import "innersvg-polyfill";
 
-import * as $ from "jquery";
+import $ from "jquery";
 
 import "./bubble";
 import "./legend";
@@ -108,6 +107,11 @@ function setArticle(href: string) {
 
 $().ready(() => {
     setupArticleSelect();
+
+    const copyrightYear = document.getElementById("copywrite-year");
+    if (copyrightYear) {
+        copyrightYear.textContent = String(new Date().getFullYear());
+    }
 
     setSelectedCategory("");
 });
