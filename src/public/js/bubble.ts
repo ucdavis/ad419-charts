@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import * as force from "d3-force";
-import * as Color from "color";
+import Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 
 import { getProjects, getCategories, getSelectedCategory, onSelectedCategoryChanged, IProject, setSelectedCategory } from "./data";
@@ -87,8 +87,10 @@ const chart = d3.select<HTMLDivElement, {}>(chartSelector);
 
 const svg = chart
   .append<SVGElement>("svg")
+  .attr("class", "mx-auto block h-auto w-full max-w-4xl")
   .attr("width", width)
-  .attr("height", height);
+  .attr("height", height)
+  .attr("viewBox", `0 0 ${width} ${height}`);
 
 // initial setup
 const circles = svg
@@ -146,20 +148,16 @@ circles
 
       // calculate tooltip position
       const chartElement = chart.node();
-      let chartPosition = { left: 0, top: 0 };
-      if (!!chartElement) {
-        chartPosition = chartElement.getBoundingClientRect();
-      }
+      if (!chartElement) return;
+      const chartPosition = chartElement.getBoundingClientRect();
 
       const svgElement = svg.node();
-      let svgPosition = { left: 0, top: 0 };
-      if (!!svgElement) {
-          svgPosition = svgElement.getBoundingClientRect();
-      }
+      if (!svgElement) return;
+      const svgPosition = svgElement.getBoundingClientRect();
 
       const circlePosition = {
-          x: circleX + svgPosition.left - chartPosition.left,
-          y: circleY + svgPosition.top - chartPosition.top,
+          x: ((circleX / width) * svgPosition.width) + svgPosition.left - chartPosition.left,
+          y: ((circleY / height) * svgPosition.height) + svgPosition.top - chartPosition.top,
       };
 
       // move mouseover tooltip

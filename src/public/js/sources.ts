@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import * as force from "d3-force";
-import * as Color from "color";
+import Color from "color";
 import { SimulationNodeDatum, DragContainerElement, interval, sum, timer, timeout } from "d3";
 import { debounce } from "../utils/common";
 import { getSources, getCategories, getSelectedCategory, onSelectedCategoryChanged, ISourceTotal, ICategory, getSourceTotals, ICategoryTotal } from "./data";
@@ -16,10 +16,10 @@ interface ICategoryDatam extends ICategoryTotal, SimulationNodeDatum {
 }
 
 // prepare data
-let sources = getSourceTotals();
-sources = sources.filter(s => s.total > 0);
-sources.sort((a, b) => b.total - a.total);
-sources = sources.slice(0, 15);
+const sourceTotals = getSourceTotals()
+  .filter(source => source.total > 0)
+  .sort((a, b) => b.total - a.total);
+const sources = sourceTotals.slice(0, 15);
 
 const sumTotal = sources.reduce((prev, d) => prev + d.total, 0);
 const maxTotal = sources.reduce((prev, d) => Math.max(prev, d.total), 0);
@@ -44,7 +44,7 @@ function getCircleColor(index: number): string {
   return defaultColor;
 }
 
-function getSelectedTotal(source: ISourceDatam): number {
+function getSelectedTotal(source: ISourceTotal): number {
   const selectedCategory = getSelectedCategory();
   if (selectedCategory < 0) {
     return source.total;
@@ -58,9 +58,36 @@ function getTotalLabelColor(): string {
     return "inherit";
   }
 
-  return Color(categories[selectedCategory].color)
-    .darken(0.5)
-    .hex();
+  return categories[selectedCategory].color;
+}
+
+interface IContributorSummary {
+  name: string;
+  total: number;
+}
+
+const sourceContributorNames = d3.selectAll("#source-top-contributors .source-contributor-name-text");
+const sourceContributorTotals = d3.selectAll("#source-top-contributors .source-contributor-total");
+const sourceTotal = d3.select("#source-total");
+
+function updateTopContributors() {
+  const contributors: IContributorSummary[] = sourceTotals
+    .map(source => ({
+      name: source.source.name,
+      total: getSelectedTotal(source),
+    }))
+    .filter(source => source.total > 0)
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 3);
+
+  sourceContributorNames
+    .data(contributors)
+    .text(contributor => contributor.name);
+  sourceContributorTotals
+    .data(contributors)
+    .text(contributor => `$${(contributor.total / 1000000).toFixed(1)}M`)
+    .style("color", getTotalLabelColor());
+  sourceTotal.style("color", getTotalLabelColor());
 }
 
 function getCircleStroke(index: number): string {
@@ -109,7 +136,7 @@ const charts = svg
   .data(data)
   .enter()
   .append<HTMLDivElement>("div")
-  .attr("class", "chart-container");
+  .attr("class", "chart-container relative flex min-h-56 min-w-0 flex-col justify-between bg-base-100 px-5 pt-5 pb-4");
 
 
 
@@ -125,7 +152,7 @@ charts.each(function(sourceTotal) {
   // add labels
   const label = chart
     .append<HTMLDivElement>("div")
-    .attr("class", "chart-label")
+    .attr("class", "chart-label text-center text-base font-semibold tracking-wide text-base-content")
     .text(sourceTotal.source.name);
 
   // add totals
@@ -134,14 +161,15 @@ charts.each(function(sourceTotal) {
     .data([sourceTotal])
     .enter()
     .append<HTMLDivElement>("div")
-    .attr("class", "total-label")
+    .attr("class", "total-label mt-1 text-2xl leading-none font-bold")
     .text(`$${ (getSelectedTotal(sourceTotal) / 1000000).toFixed(1) }M`);
 
   // create svg element
   const svg = chart.append<SVGElement>("svg")
-    .attr("class", "chart")
+    .attr("class", "chart mx-auto block h-auto max-w-full")
     .attr("width", sourceTotal.width)
-    .attr("style", `min-height:${sourceTotal.height}px; min-width:${sourceTotal.width}px`);
+    .attr("height", sourceTotal.height)
+    .attr("viewBox", `0 0 ${sourceTotal.width} ${sourceTotal.height}`);
 
   // setup circles
   const circles = svg
@@ -202,9 +230,10 @@ charts.each(function(sourceTotal) {
         svgPosition = svgElement.getBoundingClientRect();
       }
 
+      const circle = this as SVGCircleElement;
       const circlePosition = {
-        x: (category.x || 0) + svgPosition.left - chartPosition.left,
-        y: (category.y || 0) + svgPosition.top - chartPosition.top,
+        x: circle.cx.baseVal.value + svgPosition.left - chartPosition.left,
+        y: circle.cy.baseVal.value + svgPosition.top - chartPosition.top,
       };
 
       // move mouseover tooltip
@@ -236,41 +265,47 @@ const buildSimulation = debounce(() => {
   charts.each(function(source) {
 
     const chart = d3.select<HTMLDivElement, ISourceDatam>(this);
-    const label = chart.select<HTMLDivElement>(".chart-label");
-    const svg = chart.select<SVGElement>("svg");
 
-    // fetch category so we can "lift" active bubbles
+    // Keep every bubble inside the SVG itself, rather than using the card's
+    // total height (which also includes the source label).
     const selectedCategory = getSelectedCategory();
-
-    const labelElement = label.node();
-    let labelHeight = 0;
-    if (!!labelElement) {
-      labelHeight = labelElement.clientHeight;
-    }
-
-    // calculate height from container div
-    const height = this.clientHeight;
     const center = {
       x: (source.width / 2),
-      y: ((height - labelHeight) / 2),
+      y: (source.height / 2),
     };
+    const chartPadding = 4;
+
+    function getBoundedX(category: ICategoryDatam) {
+      const radius = getCircleRadius(category.total) + chartPadding;
+      return Math.max(radius, Math.min(source.width - radius, category.x as number));
+    }
+
+    function getBoundedY(category: ICategoryDatam) {
+      const radius = getCircleRadius(category.total) + chartPadding;
+      return Math.max(radius, Math.min(source.height - radius, category.y as number));
+    }
 
     // build forces
     const simulation = force
       .forceSimulation(source.byCategory)
       .force("collision", force.forceCollide((d: ICategoryDatam) => getCircleRadius(d.total) * 0.95).strength(0.3).iterations(3))
       .force("x", force.forceX(center.x))
-      .force("y", force.forceY((d: ICategoryDatam) => d.categoryIndex === selectedCategory ? center.y * 0.5 : center.y));
+      .force("y", force.forceY((d: ICategoryDatam) => {
+        if (d.categoryIndex !== selectedCategory) return center.y;
+
+        const radius = getCircleRadius(d.total) + chartPadding;
+        return Math.max(radius, center.y * 0.5);
+      }));
 
     // listen to ticks
     const circles = chart.selectAll<Element, ICategoryDatam>(".circle");
     simulation.on("tick", () => {
       circles
         .attr("cx", (d) => {
-          return d.x as number;
+          return getBoundedX(d);
         })
         .attr("cy", (d) => {
-          return d.y as number;
+          return getBoundedY(d);
         });
     });
 
@@ -298,6 +333,7 @@ const buildSimulation = debounce(() => {
 
 
 timeout(buildSimulation, 500);
+updateTopContributors();
 
 window.addEventListener("resize", buildSimulation);
 
@@ -309,9 +345,11 @@ onSelectedCategoryChanged(() => {
 
   // re-colorize labels
   charts
-    .selectAll<SVGTSpanElement, ISourceDatam>(".total-label")
-    .attr("fill", getTotalLabelColor)
+    .selectAll<HTMLDivElement, ISourceDatam>(".total-label")
+    .style("color", getTotalLabelColor)
     .text((d) => `$${ (getSelectedTotal(d) / 1000000).toFixed(1) }M`);
+
+  updateTopContributors();
 
   // move bubbles a bit
   buildSimulation();

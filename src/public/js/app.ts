@@ -1,12 +1,9 @@
-import "es6-shim";
+import "../components";
+import "../css/tailwind.css";
+
 import "innersvg-polyfill";
-import stickybits from "stickybits";
-stickybits(".sticky-top");
 
-import "../css/app.css";
-
-import * as $ from "jquery";
-import "slick-carousel";
+import $ from "jquery";
 
 import "./bubble";
 import "./legend";
@@ -14,21 +11,9 @@ import "./map";
 import "./sources";
 import "./totals";
 
-import { setSelectedCategory, getSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
+import { setSelectedCategory, onSelectedCategoryChanged, getCategories } from "./data";
 
-const $topicBar = $("#topic-bar");
 const $root = $("html body");
-function smoothScroll(href: string) {
-    const target = ($(href).offset() || { top: 0 }).top;
-    const offset = $topicBar.height() || 0;
-    const margin = 50;
-
-    $root.animate({
-        scrollTop: target - offset - margin
-    }, 500, function () {
-        // window.location.hash = href;
-    });
-}
 
 const categories = getCategories();
 function handleTopicChanged(categoryIndex: number) {
@@ -41,61 +26,16 @@ function handleTopicChanged(categoryIndex: number) {
     // decorate body
     $root.attr("data-topic", topic);
 
-    // decorate topic button
-    $(".topic-btn").each(function() {
-        const t = $(this).data("topic");
-        if (t === topic) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
-    });
-
     // set selected article
     showRandomArticle(topic);
 }
 onSelectedCategoryChanged(handleTopicChanged);
 
-function setupTopicSelector() {
-    // attach listeners
-    $(".topic-btn").click(function() {
-        const categoryIndex = getSelectedCategory();
-        let selectedTopic = "";
-        const category = categories[categoryIndex];
-        if (category) {
-            selectedTopic = category.key;
-        }
-
-        const topic = $(this).data("topic");
-        if (topic === selectedTopic) {
-            setSelectedCategory("");
-        } else {
-            setSelectedCategory(topic);
-        }
-
-    });
-
-    $(".topic-all").click(function(e) {
-        e.preventDefault();
-        setSelectedCategory("");
-    });
-}
-
-const $carousel = $(".lead_carousel");
-function setupSlideshow() {
-    $carousel.slick({
-        variableWidth: true,
-        arrows: true,
-        dots: true,
-        autoplay: false,
-        autoplaySpeed: 3000,
-        swipeToSlide: true,
-    });
-}
+const $storyPicker = $(".story-picker");
 
 const $articles = $(".article");
 function setupArticleSelect() {
-    $(".lead_carousel").on("click", ".article-link", function(e) {
+    $storyPicker.on("click", ".article-link", function(e) {
         e.preventDefault();
 
         // show single article
@@ -136,14 +76,27 @@ function setArticle(href: string) {
     // lock article change for 200 ms
     _articleLock = setTimeout(() => { _articleLock = undefined; }, 200);
 
-    // find all article links (new ones are created as the carousel moves)
-    const $articleLinks = $(".lead_carousel .article-link");
+    // Find every story card before updating the active selection.
+    const $articleLinks = $(".story-picker .article-link");
 
     // remove all active
-    $articleLinks.removeClass("active");
+    $articleLinks
+        .removeClass("active")
+        .attr("aria-current", "false");
 
-    // set matching slides as active
-    $carousel.find(`[href='${href}']`).addClass("active");
+    // Set the matching story as active and bring it into the visible rail.
+    const $matchingLinks = $storyPicker.find(`[href='${href}']`);
+    $matchingLinks
+        .addClass("active")
+        .attr("aria-current", "true");
+
+    const storyPicker = $storyPicker.get(0);
+    const activeCard = $matchingLinks.first().closest(".carousel-wrapper").get(0);
+    if (storyPicker && activeCard) {
+        const scrollLeft = activeCard.offsetLeft
+            - ((storyPicker.clientWidth - activeCard.clientWidth) / 2);
+        storyPicker.scrollTo({ left: Math.max(0, scrollLeft), behavior: "smooth" });
+    }
 
     // hide all articles
     $articles.hide();
@@ -153,9 +106,12 @@ function setArticle(href: string) {
 }
 
 $().ready(() => {
-    setupTopicSelector();
-    setupSlideshow();
     setupArticleSelect();
+
+    const copyrightYear = document.getElementById("copywrite-year");
+    if (copyrightYear) {
+        copyrightYear.textContent = String(new Date().getFullYear());
+    }
 
     setSelectedCategory("");
 });
